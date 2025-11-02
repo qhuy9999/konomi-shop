@@ -1,0 +1,68 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgres"
+  url      = env("DATABASE_URL")
+}
+
+// Converted from your Mongoose `userSchema`.
+model User {
+  id             Int      @id @default(autoincrement())
+  username       String   @unique @db.VarChar(255)
+  email          String   @unique @db.VarChar(255)
+  password       String
+  firstName      String   @db.VarChar(255)
+  lastName       String   @db.VarChar(255)
+  emailVerified  Boolean  @default(false)
+  avatarUrl      String?
+  avatarId       String?  @db.VarChar(255)
+  bio            String?  @db.VarChar(500)
+  phone          String?  @unique @db.VarChar(20)
+
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  // relations
+  otp           OTP[]
+  session       Session[]
+}
+
+model Session {
+  id           Int      @id @default(autoincrement())
+  userId       Int
+  refreshToken String   @unique
+  expiresAt    DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([expiresAt])
+  @@index([userId])
+}
+
+model OTP {
+  id         Int       @id @default(autoincrement())
+  userId     Int
+  email      String?   @db.VarChar(255) // optional: gửi tới email
+  phone      String?   @db.VarChar(20)  // optional: gửi tới phone
+  code       String    @db.VarChar(128) // nếu hash thì cần dài hơn
+  type       String    @db.VarChar(50)
+  attempts   Int       @default(0)      // số lần thử (tăng khi verify fail)
+  expiresAt  DateTime
+  usedAt     DateTime?
+  createdAt  DateTime  @default(now())
+
+  user       User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}

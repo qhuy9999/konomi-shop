@@ -1,0 +1,47 @@
+/* Tailwind */
+@import "tailwindcss";
+
+/* Color Variables */
+:root {
+  --primary-color: #06462c;
+  --secondary-color: #38a3a5;
+  --accent-color: #d4af37;
+  --neutral-color: #4a4a4a;
+  --text-color: #2b1805;
+  --bg-color: #ffffff;
+  --tertiary-color1: #e63946;
+  --tertiary-color2: #80ed99;
+  --tertiary-color3: #f9fcfc;
+  /* --primary-color: 6, 70, 44;
+  --secondary-color: 56, 163, 165;
+  --accent-color: 212, 175, 55;
+  --neutral-color: 74, 74, 74;
+  --text-color: 43, 24, 5;
+  --bg-color: 255, 255, 255;
+  --tertiary-color1: 230, 57, 70;
+  --tertiary-color2: 128, 237, 153; */
+}
+
+/* base.css - basic styles for the entire project */
+html {
+  font-size: 16px; /* 1rem = 16px */
+  box-sizing: border-box;
+}
+
+body {
+  font-family:
+    "Noto Serif",
+    "Almendra Display",
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    "Helvetica Neue",
+    Arial,
+    sans-serif;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  line-height: 1.5;
+  min-height: 100vh;
+}
