@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  modules: ["@pinia/nuxt", "nuxt-simple-sitemap"],
+  modules: ["@pinia/nuxt"],
   css: ["@/assets/css/main.css"],
 
   components: [
@@ -81,7 +81,9 @@ export default defineNuxtConfig({
     REFRESH_TOKEN_KEY: process.env.REFRESH_TOKEN_KEY,
     DATABASE_URL: process.env.DATABASE_URL,
     nodemailer: {
-      from: '"Konomi Shop App" <noreply@app.com>',
+      from: `"Konomi Shop" <${
+        process.env.MAILTRAP_FROM_EMAIL || "noreply@konomi-shop.com"
+      }>`,
       host: process.env.MAILTRAP_HOST,
       port: Number(process.env.MAILTRAP_PORT),
       secure: false,
