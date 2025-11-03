@@ -65,6 +65,8 @@ export default defineNuxtConfig({
         types: ["@types/node", "nuxt"],
         esModuleInterop: true,
         strict: true,
+        sourceMap: true,
+        sourceRoot: "/"
       },
       include: ["**/*.ts", "**/*.d.ts", "**/*.tsx", "**/*.vue"],
       exclude: ["node_modules"],

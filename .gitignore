@@ -28,3 +28,6 @@ logs
 #GitHub
 .github/
 docs/
+
+# VSCode
+.vscode/
