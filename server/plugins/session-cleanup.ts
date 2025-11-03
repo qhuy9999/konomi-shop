@@ -1,4 +1,4 @@
-import prisma from '@@/prisma/prisma'
+import prisma from '../../prisma/prisma'
 
 export default defineNitroPlugin((nitroApp) => {
   console.log('[PLUGIN] Session cleanup scheduler initialized')

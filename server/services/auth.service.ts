@@ -1,4 +1,4 @@
-import prisma from '@@/prisma/prisma'
+import prisma from '../../prisma/prisma'
 import * as argon2 from 'argon2'
 import jwt from 'jsonwebtoken'
 import crypto from 'crypto'
@@ -9,6 +9,9 @@ import { createAndSendOTP, checkAndResendOTP } from './otp.service'
 const JWT_ACCESS_EXPIRES_IN = process.env.JWT_ACCESS_EXPIRES_IN || '15m'
 const JWT_REFRESH_EXPIRES_IN = process.env.JWT_REFRESH_EXPIRES_IN || '7d'
 
+if (!process.env.JWT_ACCESS_SECRET) {
+  throw new Error('JWT_ACCESS_SECRET is required but not configured')
+}
 interface SignUpInput {
   username: string
   password: string
@@ -51,38 +54,39 @@ export const signUp = async (data: SignUpInput) => {
     // Hash password
     const hashedPassword = await argon2.hash(data.password, {
       type: argon2.argon2id,
-      memoryCost: 4096,
+      memoryCost: 12288,
       timeCost: 3,
-    });
-
-    // Create user (emailVerified = false by default)
-    const user = await prisma.user.create({
+    })
+    
+    // Create user (without transaction - createAndSendOTP handles its own transaction)
+    const newUser = await prisma.user.create({
       data: {
         username: data.username,
         password: hashedPassword,
         email: data.email,
         firstName: data.firstName,
         lastName: data.lastName,
-        emailVerified: false, // Start as unverified
+        emailVerified: false,
       },
     })
 
-    // Create and send OTP
-    await createAndSendOTP(user.id, user.email)
+    // Create and send OTP (with its own transaction)
+    // If this fails, user is already created but unverified (acceptable)
+    await createAndSendOTP(newUser.id, newUser.email)
 
     return {
       success: true,
       message: 'Sign up successful. Please check your email to verify',
-      userId: user.id,
-      email: user.email,
+      userId: newUser.id,
+      email: newUser.email,
       requiresEmailVerification: true,
       user: {
-      id: user.id,
-      username: user.username,
-      email: user.email,
-      firstName: user.firstName,
-      lastName: user.lastName,
-      emailVerified: false,
+        id: newUser.id,
+        username: newUser.username,
+        email: newUser.email,
+        firstName: newUser.firstName,
+        lastName: newUser.lastName,
+        emailVerified: false,
       },
     }
   } catch (error: unknown) {
@@ -133,10 +137,16 @@ export const signIn = async (data: SignInInput) => {
       throw new Error('Username or password is incorrect')
     }
 
+    // Validate JWT_ACCESS_SECRET is defined
+    const jwtAccessSecret = process.env.JWT_ACCESS_SECRET
+    if (!jwtAccessSecret) {
+      throw new Error('JWT_ACCESS_SECRET environment variable is not defined. Cannot create access token.')
+    }
+
     // Create access token
     const accessToken = jwt.sign(
       { userId: user.id },
-      process.env.JWT_ACCESS_SECRET as string,
+      jwtAccessSecret,
       { expiresIn: JWT_ACCESS_EXPIRES_IN } as jwt.SignOptions
     )
 

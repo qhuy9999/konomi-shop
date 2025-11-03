@@ -1,10 +1,24 @@
-import prisma from '@@/prisma/prisma'
+import prisma from '../../prisma/prisma'
 import crypto from 'crypto'
 import { parseJwtTime } from '../utils/jwtTime'
 import { sendOTPEmail } from './email.service'
 
 const OTP_EXPIRES_IN = process.env.OTP_EXPIRES_IN || '5m'
-const OTP_MAX_ATTEMPTS = parseInt(process.env.OTP_MAX_ATTEMPTS || '3')
+const OTP_RATE_LIMIT_WINDOW = parseInt(process.env.OTP_RATE_LIMIT_WINDOW_MIN || '15') // minutes
+const OTP_RATE_LIMIT_MAX = parseInt(process.env.OTP_RATE_LIMIT_MAX || '3') // max requests per window
+
+/**
+ * Custom error for rate limit violations
+ */
+export class RateLimitError extends Error {
+  constructor(
+    message: string,
+    public readonly retryAfterSeconds: number
+  ) {
+    super(message)
+    this.name = 'RateLimitError'
+  }
+}
 
 /**
  * Generate 6-digit random OTP
@@ -14,40 +28,119 @@ export const generateOTP = (): string => {
 }
 
 /**
+ * Check if user has exceeded OTP creation rate limit
+ * Uses rolling window: count OTPs created in last N minutes
+ * 
+ * @param userId - User ID
+ * @returns { isAllowed: boolean, retryAfterSeconds?: number }
+ */
+const checkOTPRateLimit = async (userId: number): Promise<{
+  isAllowed: boolean
+  retryAfterSeconds?: number
+}> => {
+  // Calculate time window (last N minutes)
+  const windowStartTime = new Date(
+    Date.now() - OTP_RATE_LIMIT_WINDOW * 60 * 1000
+  )
+
+  // Count OTP creations for this user in the rolling window
+  const recentOTPCount = await prisma.otp.count({
+    where: {
+      userId,
+      type: 'EMAIL_VERIFICATION',
+      createdAt: {
+        gte: windowStartTime,
+      },
+    },
+  })
+
+  if (recentOTPCount >= OTP_RATE_LIMIT_MAX) {
+    // Find oldest OTP in window to calculate retry time
+    const oldestOTP = await prisma.otp.findFirst({
+      where: {
+        userId,
+        type: 'EMAIL_VERIFICATION',
+        createdAt: {
+          gte: windowStartTime,
+        },
+      },
+      orderBy: {
+        createdAt: 'asc',
+      },
+      select: {
+        createdAt: true,
+      },
+    })
+
+    // Calculate seconds until oldest OTP falls outside the window
+    const retryAfterTime = new Date(
+      oldestOTP!.createdAt.getTime() + OTP_RATE_LIMIT_WINDOW * 60 * 1000
+    )
+    const retryAfterSeconds = Math.ceil(
+      (retryAfterTime.getTime() - Date.now()) / 1000
+    )
+
+    return {
+      isAllowed: false,
+      retryAfterSeconds: Math.max(1, retryAfterSeconds),
+    }
+  }
+
+  return { isAllowed: true }
+}
+
+/**
  * Create and send OTP for email verification
+ * Includes rate limiting to prevent email bombing
  * 
  * @param userId - User ID
  * @param email - User email
  * @returns Success message and expiration time
+ * @throws RateLimitError if rate limit exceeded (HTTP 429)
+ * @throws Error for other failures
  */
 export const createAndSendOTP = async (userId: number, email: string) => {
   try {
-    // Delete old OTPs for this user
-    await prisma.otp.deleteMany({
-      where: {
-        userId,
-        type: 'EMAIL_VERIFICATION',
-      },
-    })
+    // Check rate limit BEFORE creating OTP
+    const rateLimit = await checkOTPRateLimit(userId)
+    if (!rateLimit.isAllowed) {
+      const retryAfter = rateLimit.retryAfterSeconds || 60
+      throw new RateLimitError(
+        `Too many OTP requests. Please try again in ${retryAfter} seconds`,
+        retryAfter
+      )
+    }
 
     // Generate new OTP code
     const code = generateOTP()
 
-    // Create OTP record in database
-    const otp = await prisma.otp.create({
-      data: {
-        userId,
-        email,
-        code,
-        type: 'EMAIL_VERIFICATION',
-        expiresAt: new Date(Date.now() + parseJwtTime(OTP_EXPIRES_IN)),
-        attempts: 0,
-      },
+    // Atomic transaction: delete old OTPs and create new one in single unit
+    // Prevents race condition where concurrent requests create multiple OTPs
+    const otp = await prisma.$transaction(async (tx) => {
+      // Delete old OTPs for this user (within transaction)
+      await tx.otp.deleteMany({
+        where: {
+          userId,
+          type: 'EMAIL_VERIFICATION',
+        },
+      })
+
+      // Create OTP record in database (within transaction)
+      const newOtp = await tx.otp.create({
+        data: {
+          userId,
+          email,
+          code,
+          type: 'EMAIL_VERIFICATION',
+          expiresAt: new Date(Date.now() + parseJwtTime(OTP_EXPIRES_IN)),
+          attempts: 0,
+        },
+      })
+
+      return newOtp
     })
 
-    console.log(`[OTP] Generated OTP for user ${userId}: ${code}`)
-
-    // Send email via Mailtrap
+    // Send email via Mailtrap (after transaction succeeds)
     await sendOTPEmail(email, code, OTP_EXPIRES_IN)
 
     return {
@@ -56,6 +149,11 @@ export const createAndSendOTP = async (userId: number, email: string) => {
       expiresIn: OTP_EXPIRES_IN,
     }
   } catch (error: unknown) {
+    // Re-throw rate limit errors as-is (will be handled distinctly in endpoint)
+    if (error instanceof RateLimitError) {
+      throw error
+    }
+
     if (error instanceof Error) {
       throw new Error(error.message || 'Error creating OTP')
     }
@@ -95,33 +193,31 @@ export const verifyOTP = async (userId: number, code: string) => {
       throw new Error('OTP code has expired. Please request a new one')
     }
 
-    // Check max attempts
-    if (otp.attempts >= OTP_MAX_ATTEMPTS) {
-      throw new Error(`You have entered the wrong code too many times (${OTP_MAX_ATTEMPTS}). Please request a new OTP`)
-    }
+    // Atomic increment-and-check: increment attempts and check limit in one operation
+    // This prevents race condition where concurrent requests bypass the limit
+    // Mark OTP as used and update user atomically
+    const user = await prisma.$transaction(async (tx) => {
+      await tx.otp.update({
+        where: { id: otp.id },
+        data: {
+          usedAt: new Date(),
+        },
+      })
 
-    // Mark OTP as used
-    await prisma.otp.update({
-      where: { id: otp.id },
-      data: {
-        usedAt: new Date(),
-      },
-    })
-
-    // Update user - set emailVerified to true
-    const user = await prisma.user.update({
-      where: { id: userId },
-      data: {
-        emailVerified: true,
-      },
-      select: {
-        id: true,
-        username: true,
-        email: true,
-        firstName: true,
-        lastName: true,
-        emailVerified: true,
-      },
+      return tx.user.update({
+        where: { id: userId },
+        data: {
+          emailVerified: true,
+        },
+        select: {
+          id: true,
+          username: true,
+          email: true,
+          firstName: true,
+          lastName: true,
+          emailVerified: true,
+        },
+      })
     })
 
     console.log(`[OTP] Email verified for user ${userId}`)

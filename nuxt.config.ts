@@ -107,5 +107,12 @@ export default defineNuxtConfig({
         },
       ],
     },
+
+    // public keys: available on both client and server
+    public: {
+      appUrl: process.env.NUXT_PUBLIC_APP_URL || "http://localhost:3000",
+      // or
+      NUXT_PUBLIC_APP_URL: process.env.NUXT_PUBLIC_APP_URL,
+    },
   },
 });

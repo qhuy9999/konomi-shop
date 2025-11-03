@@ -11,16 +11,32 @@ import nodemailer from 'nodemailer'
  * 5. Copy Host, Port, User, Password
  */
 
-const config = useRuntimeConfig()
+// Cached transporter instance
+let cachedTransporter: nodemailer.Transporter | null = null
 
-const transporter = nodemailer.createTransport({
-  host: config.nodemailer.host || 'smtp.mailtrap.io',
-  port: config.nodemailer.port || 2525,
-  auth: {
-    user: config.nodemailer.auth.user,
-    pass: config.nodemailer.auth.pass,
-  },
-})
+/**
+ * Get or create nodemailer transporter with lazy initialization
+ * Calls useRuntimeConfig() inside function (not at module level)
+ * Caches transporter after first initialization
+ */
+const getTransporter = () => {
+  if (cachedTransporter) {
+    return cachedTransporter
+  }
+
+  const config = useRuntimeConfig()
+
+  cachedTransporter = nodemailer.createTransport({
+    host: config.nodemailer.host || 'smtp.mailtrap.io',
+    port: config.nodemailer.port || 2525,
+    auth: {
+      user: config.nodemailer.auth.user,
+      pass: config.nodemailer.auth.pass,
+    },
+  })
+
+  return cachedTransporter
+}
 
 /**
  * Send OTP verification email
@@ -35,6 +51,9 @@ export const sendOTPEmail = async (
   expiresIn: string
 ) => {
   try {
+    const config = useRuntimeConfig()
+    const transporter = getTransporter()
+
     const mailOptions = {
       from: config.nodemailer.from,
       to: toEmail,
@@ -44,9 +63,8 @@ export const sendOTPEmail = async (
 
     const result = await transporter.sendMail(mailOptions)
 
-    console.log(`✅ Email sent to ${toEmail}`)
+    console.log(`✅ Email sent successfully`)
     console.log(`📧 Message ID: ${result.messageId}`)
-
     return { success: true, messageId: result.messageId }
   } catch (error) {
     console.error('❌ Error sending OTP email:', error)
@@ -166,8 +184,7 @@ const generateOTPEmailTemplate = (otp: string, expiresIn: string): string => {
             <ul>
               <li>Do not share this OTP code with anyone</li>
               <li>Konomi Shop will never request OTP via email</li>
-              <li>If you did not request this verification email, please disregard this message</li>
-            </ul>
+              <li>Konomi Shop will never ask you to provide your OTP via email or phone</li>            </ul>
           </div>
 
           <p>If you encounter any issues, please contact us at:</p>
@@ -195,7 +212,16 @@ export const sendPasswordResetEmail = async (
   resetToken: string
 ) => {
   try {
-    const resetLink = `${process.env.NUXT_PUBLIC_APP_URL}/reset-password?token=${resetToken}`
+    const config = useRuntimeConfig()
+    const transporter = getTransporter()
+
+    // Get app URL from runtime config (consistent with runtime loading)
+    const appUrl = config.public.appUrl || config.public.NUXT_PUBLIC_APP_URL
+    if (!appUrl) {
+      throw new Error('APP_URL (public.appUrl) is not defined in runtime config')
+    }
+
+    const resetLink = `${appUrl}/reset-password?token=${resetToken}`
 
     const mailOptions = {
       from: config.nodemailer.from,
@@ -209,8 +235,7 @@ export const sendPasswordResetEmail = async (
     }
 
     const result = await transporter.sendMail(mailOptions)
-    console.log(`✅ Password reset email sent to ${toEmail}`)
-
+    console.log(`✅ Password reset email sent successfully`)
     return { success: true, messageId: result.messageId }
   } catch (error) {
     console.error('❌ Error sending password reset email:', error)
@@ -223,6 +248,7 @@ export const sendPasswordResetEmail = async (
  */
 export const verifyMailtrapConnection = async () => {
   try {
+    const transporter = getTransporter()
     await transporter.verify()
     console.log('✅ Mailtrap connection verified')
     return { success: true, message: 'Connected to Mailtrap' }

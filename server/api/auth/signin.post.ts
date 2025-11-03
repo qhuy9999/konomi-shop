@@ -1,28 +1,37 @@
 import { signIn } from '../../services/auth.service'
+import { signInSchema, validateRequest } from '../../../shared/schemas/auth'
 import { defineEventHandler, readBody, createError, setCookie } from 'h3'
-import {parseJwtTime} from '../../utils/jwtTime'
+import { parseJwtTime } from '../../utils/jwtTime'
+
+/**
+ * ValidationError class - same as in shared/schemas/auth
+ * Used to distinguish validation errors from other errors
+ * Returns 400 Bad Request instead of 500 Internal Server Error
+ */
+class ValidationError extends Error {
+  constructor(message: string) {
+    super(message)
+    this.name = 'ValidationError'
+  }
+}
 
 export default defineEventHandler(async (event) => {
   try {
-    // Get Input - validate JSON body first
+    // Get & validate input
     let body
     try {
       body = await readBody(event)
     } catch {
-      throw new Error('Invalid JSON format in request data')
+      throw new Error('Invalid JSON format in request body')
     }
 
-    // Validate required fields
-    if (!body || typeof body !== 'object') {
-      throw new Error('Request body must be an object')
-    }
+    // Validate request body với Zod schema
+    // - Kiểm tra username: non-empty
+    // - Kiểm tra password: non-empty
+    const validatedData = validateRequest(signInSchema, body)
 
-    if (!body.username || !body.password) {
-      throw new Error('Missing username or password')
-    }
-    
     // Logic for sign in and compare the passwords
-    const result = await signIn(body)
+    const result = await signIn(validatedData)
 
     // Check if email verification is required
     if (!result.success && result.requiresEmailVerification) {
@@ -70,15 +79,38 @@ export default defineEventHandler(async (event) => {
       user: result.user,
     }
   } catch (error: unknown) {
-    if (error instanceof Error) {
-      throw createError({
-        statusCode: 400,
-        message: error.message,
-      })
+    // Determine status code based on error type
+    let statusCode = 500
+    let message = 'Sign in failed'
+
+    // Validation errors → 400 Bad Request
+    if (error instanceof ValidationError) {
+      statusCode = 400
+      message = (error as Error).message
     }
+    // JSON parse errors → 400 Bad Request
+    else if (error instanceof SyntaxError) {
+      statusCode = 400
+      message = 'Invalid JSON format in request body'
+    }
+    // HTTP errors from createError() - pass through
+    else if (error instanceof Error && 'statusCode' in error) {
+      throw error
+    }
+    // Other known errors → 500 Internal Server Error
+    else if (error instanceof Error) {
+      statusCode = 500
+      message = error.message
+    }
+    // Unknown errors → 500 Internal Server Error
+    else {
+      statusCode = 500
+      message = 'An unexpected error occurred'
+    }
+
     throw createError({
-      statusCode: 400,
-      message: 'Sign in failed',
+      statusCode,
+      message,
     })
   }
 })

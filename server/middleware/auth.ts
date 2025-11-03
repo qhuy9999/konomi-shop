@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken'
 import { defineEventHandler, createError, getHeader } from 'h3'
-import prisma  from '@@/prisma/prisma'
+import prisma from '../../prisma/prisma'
 
 interface DecodedToken {
   userId: number
