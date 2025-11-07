@@ -1,9 +1,19 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
-  devtools: { enabled: true },
-  modules: ["@pinia/nuxt"],
+  devtools: { enabled: true },  // ✅ Keep this for Nuxt DevTools
+  modules: ["@pinia/nuxt", "@nuxt/ui", "@nuxt/image"],
   css: ["@/assets/css/main.css"],
+
+  icon: {
+    mode: "svg",
+    customCollections: [
+      {
+        prefix: "custom",
+        dir: "./app/assets/icons",
+      },
+    ],
+  },
 
   components: [
     {
@@ -66,11 +76,19 @@ export default defineNuxtConfig({
         esModuleInterop: true,
         strict: true,
         sourceMap: true,
-        sourceRoot: "/"
+        sourceRoot: "/",
       },
       include: ["**/*.ts", "**/*.d.ts", "**/*.tsx", "**/*.vue"],
       exclude: ["node_modules"],
     },
+  },
+
+  // ✅ Auto-import composables
+  imports: {
+    dirs: [
+      "composables", // composables/*.ts
+      "composables/**", // composables/**/*.ts
+    ],
   },
 
   pinia: {
