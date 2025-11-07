@@ -387,9 +387,9 @@ const featureRows = computed(() => {
                 <div class="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-300" />
 
                 <!-- Content: Icon + Title + Description -->
-                <div class="absolute inset-0 h-full flex flex-col items-center justify-center px-6 text-center text-white">
+                <div class="absolute inset-0 h-full flex flex-col items-center px-6 text-center text-white">
                   <!-- Icon + Title (Co lại + lên trên khi hover) -->
-                  <div class="feature-header relative flex flex-col items-center justify-center transition-all duration-500 ease-out">
+                  <div class="feature-header absolute top-1/2 left-0 right-0 flex flex-col items-center justify-center transition-all duration-500 ease-out">
                     <UIcon
                       :name="feature.icon"
                       class="w-12 h-12 text-primary-300 mb-2 transition-all duration-500"
@@ -431,9 +431,9 @@ const featureRows = computed(() => {
                 <div class="absolute inset-0 bg-black/40 group-hover:bg-black/30 transition-colors duration-300" />
 
                 <!-- Content: Icon + Title + Description -->
-                <div class="absolute inset-0 h-full flex flex-col items-center justify-center px-6 text-center text-white">
+                <div class="absolute inset-0 h-full flex flex-col items-center px-6 text-center text-white">
                   <!-- Icon + Title (Co lại + lên trên khi hover) -->
-                  <div class="feature-header relative flex flex-col items-center justify-center transition-all duration-500 ease-out">
+                  <div class="feature-header absolute top-1/2 left-0 right-0 flex flex-col items-center justify-center transition-all duration-500 ease-out">
                     <UIcon
                       :name="feature.icon"
                       class="w-12 h-12 text-primary-300 mb-2 transition-all duration-500"
@@ -513,14 +513,14 @@ const featureRows = computed(() => {
   /* Feature header - positioned to allow transform */
   .feature-header {
     will-change: transform;
-    position: relative;
     z-index: 10;
+    transform: translateY(-50%);
   }
 
   /* Hover animations */
   /* Icon & Title: Co nhỏ + lên trên */
   .feature-card-pentagon:hover .feature-header {
-    transform: translateY(-24px) scale(0.9) !important;
+    transform: translateY(calc(-50% - 24px)) scale(0.9) !important;
   }
 
   /* Description styling */
@@ -565,14 +565,14 @@ const featureRows = computed(() => {
   /* Feature header - positioned to allow transform */
   .feature-header {
     will-change: transform;
-    position: relative;
     z-index: 10;
+    transform: translateY(-50%);
   }
 
   /* Hover animations - More dramatic on desktop */
   /* Icon & Title: Co nhỏ + lên trên nhiều hơn */
   .feature-card-pentagon:hover .feature-header {
-    transform: translateY(-36px) scale(0.85) !important;
+    transform: translateY(calc(-50% - 36px)) scale(0.85) !important;
   }
 
   /* Description styling */
