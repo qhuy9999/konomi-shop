@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref } from "vue";
 
 // Mobile menu state
-const mobileMenuOpen = ref(false)
+const mobileMenuOpen = ref(false);
 
 // Navigation links
 const navLinks = [
-  { label: 'Trang Chủ', href: '/' },
-  { label: 'Sản Phẩm', href: '#products' },
-  { label: 'Về Chúng Tôi', href: '#about' },
-  { label: 'Liên Hệ', href: '#contact' },
-]
+  { label: "Trang Chủ", href: "/" },
+  { label: "Sản Phẩm", href: "#products" },
+  { label: "Về Chúng Tôi", href: "#about" },
+  { label: "Liên Hệ", href: "#contact" },
+];
 
 // Close menu when clicking a link
 const closeMenu = () => {
-  mobileMenuOpen.value = false
-}
+  mobileMenuOpen.value = false;
+};
 </script>
 
 <template>
   <div class="min-h-screen flex flex-col">
     <!-- Header -->
     <header class="sticky top-0 z-50 bg-white shadow-md shadow-accent-100">
-      <div class="flex items-center justify-between">
+      <div class="flex items-center justify-between px-4 md:px-8">
         <!-- Logo -->
         <div class="flex items-center justify-center py-4">
           <NuxtImg src="images/logo.png" alt="logo" class="w-16 h-16" />
@@ -32,7 +32,9 @@ const closeMenu = () => {
         </div>
 
         <!-- Desktop Navigation (md+) -->
-        <nav class="hidden md:flex items-center gap-8">
+        <nav
+          class="hidden md:flex md:text-sm md:text-base items-center gap-6 md:gap-8 pr-4"
+        >
           <NuxtLink
             v-for="link in navLinks"
             :key="link.href"
@@ -45,12 +47,13 @@ const closeMenu = () => {
 
         <!-- Mobile Menu Button (sm only) -->
         <button
-          class="md:hidden p-2 text-neutral-700 hover:text-primary-600 transition-colors"
+          class="md:hidden px-0 py-0 border-0 p-2 text-neutral-700 hover:text-primary-600 transition-colors"
           @click="mobileMenuOpen = !mobileMenuOpen"
           aria-label="Toggle menu"
         >
           <UIcon
-            :name="mobileMenuOpen ? 'i-lucide-x' : 'i-custom-menu-icon'"
+            :name="mobileMenuOpen ? 'i-lucide-x' : 'i-lucide-menu'"
+            class="w-12 h-12"
           />
         </button>
       </div>

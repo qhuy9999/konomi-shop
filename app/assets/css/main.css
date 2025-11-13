@@ -1,8 +1,6 @@
-/* === Tailwind CSS 4 === */
 @import "tailwindcss";
-/* @import "@nuxt/ui"; */
+@import "@nuxt/ui";
 
-/** === Theme === **/
 @theme {
   /* Primary Color: Emerald (50-1000) */
   --color-primary-50: #f0fdf4;
@@ -124,18 +122,23 @@
   --color-neutral-975: #453f3a;
   --color-neutral-1000: #3a3530;
 
-  /* Secondary & Neutral (Keep existing) */
-  --color-secondary: #38a3a5;
-  --color-tertiary-1: #e63946;
-  --color-tertiary-2: #80ed99;
-  --color-tertiary-3: #f9fcfc;
-
-  /* Screens */
+  /* Screens - Breakpoints Definition */
+  /* xs: 320px - 479px (Very small phones, 1 column layout) */
+  --breakpoint-xs: 20rem; /*320px*/
+  /* sm: 480px - 624px (Small phones, 1 column layout) */
   --breakpoint-sm: 30rem; /*480px*/
+  /* sm-md: 625px - 767px (Medium phones, 1 column layout) */
+  --breakpoint-sm-md: 43rem; /*625px*/
+  /* md: 768px - 1023px (Tablets, 3-2 grid with normal spacing) */
   --breakpoint-md: 48rem; /*768px*/
-  --breakpoint-lg: 80rem; /*1280px*/
-  --breakpoint-xl: 87.5rem; /*1400px*/
-  --breakpoint-2xl: 96rem; /*1536px*/
+  /* lg: 1024px - 1279px (Small laptops, 3-2 grid with comfortable spacing) */
+  --breakpoint-lg: 64rem; /*1024px*/
+  /* xl: 1280px - 1399px (Desktops, full width layout) */
+  --breakpoint-xl: 80rem; /*1280px*/
+  /* 2xl: 1400px - 1535px (Large desktops) */
+  --breakpoint-2xl: 87.5rem; /*1400px*/
+  /* 3xl: 1536px+ (Extra large screens) */
+  --breakpoint-3xl: 96rem; /*1536px*/
 
   /* Fonts */
   --font-lobster: "Lobster", serif;
@@ -172,7 +175,7 @@
 
   /* Reset & defaults */
   html {
-    @apply text-base box-border scroll-smooth;
+    @apply text-base box-border scroll-smooth font-serif;
   }
 
   *,
@@ -182,7 +185,7 @@
   }
 
   body {
-    @apply text-neutral-975 font-serif overflow-x-clip;
+    @apply bg-white text-neutral-975 overflow-x-clip;
   }
 
   p {
@@ -196,35 +199,6 @@
   a {
     @apply text-secondary hover:text-primary-500 transition-colors;
   }
-
-  /* Headings */
-   /* h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    @apply font-lobster font-semibold text-neutral-1000;
-  } */
- /* h1 {
-    @apply text-4xl md:text-5xl;
-  }
-  h2 {
-    @apply text-3xl md:text-4xl;
-  }
-  h3 {
-    @apply text-2xl md:text-3xl;
-  } */
-
-  /* Forms */
-  /* input,
-  textarea,
-  select {
-    @apply font-sans;
-  }
-  button {
-    @apply font-medium focus:outline-none;
-  } */
 }
 
 /* === Components layer - Reusable patterns === */
@@ -240,76 +214,10 @@
     -webkit-text-fill-color: transparent;
   }
 
-  /* Headings */
-  .sub_heading {
-    @apply text-xs font-medium uppercase text-primary-900;
-  }
-  .main_heading {
-    @apply mt-2 text-2xl tracking-wider capitalize font-lobster lg:text-3xl;
-  }
-
   /* Buttons */
   .btn {
     @apply flex items-center justify-center gap-2 px-4 py-2 text-sm tracking-wider text-accent-200 bg-primary-925 hover:bg-primary-700 border border-primary-925 transition-colors duration-500 lg:py-3 lg:px-9;
   }
-  /* .btn {
-    @apply inline-flex items-center justify-center px-4 py-2 rounded-lg 
-           font-semibold transition-all duration-250 focus:ring-2 
-           focus:ring-secondary focus:ring-offset-2;
-  }
-  .btn-primary {
-    @apply btn bg-primary text-white hover:bg-opacity-90 active:scale-95;
-  }
-  .btn-secondary {
-    @apply btn bg-secondary text-white hover:bg-opacity-90;
-  }
-  .btn-outline {
-    @apply btn border-2 border-secondary text-secondary hover:bg-secondary hover:text-white;
-  } */
-
-  /* Forms */
-  /* .label-base {
-    @apply block text-sm font-medium text-neutral mb-2;
-  }
-  .input-base {
-    @apply w-full px-4 py-2 rounded-lg border-2 border-gray-200 
-           bg-white text-neutral transition-all duration-200
-           focus:outline-none focus:border-secondary focus:shadow-lg;
-  }
-  .input-error {
-    @apply border-tertiary-1 focus:border-tertiary-1;
-  }
-  .error-text {
-    @apply block text-xs font-medium text-tertiary-1 mt-1;
-  }
-  .success-text {
-    @apply block text-xs font-medium text-tertiary-2 mt-1;
-  } */
-
-  /* Cards */
-  /* .card {
-    @apply bg-white rounded-lg border border-gray-200 p-6 
-           shadow-sm hover:shadow-md transition-all duration-300;
-  } */
-
-  /* Containers */
-  /* .container-base {
-    @apply mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
-  } */
-
-  /* Badges */
-  /* .badge {
-    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-medium;
-  }
-  .badge-primary {
-    @apply badge bg-primary bg-opacity-10 text-primary;
-  }
-  .badge-success {
-    @apply badge bg-tertiary-2 bg-opacity-20 text-tertiary-2;
-  }
-  .badge-error {
-    @apply badge bg-tertiary-1 bg-opacity-20 text-tertiary-1;
-  } */
 }
 
 /* === Utilities layer - Custom helpers === */
@@ -343,58 +251,162 @@
     }
   }
 
-  /* Shadow */
-  /* Header Shadow - Phía dưới (normal) */
-  /* .shadow-header {
-    box-shadow: 0 4px 6px rgba(253, 230, 138, 0.5);
-  } */
-
   /* Footer Shadow - Phía trên (reversed) */
   .shadow-footer {
     box-shadow: 0 -4px 6px rgba(253, 230, 138, 0.5);
     /* 0 -4px = Phía trên (negative Y offset) */
   }
 
-  /* Flexbox helpers */
-  /* .flex-center {
-    @apply flex items-center justify-center;
+  /* Heading */
+  .sub_heading {
+    @apply text-sm md:text-base font-medium uppercase text-primary-850;
   }
-  .flex-between {
-    @apply flex items-center justify-between;
+  .main_heading {
+    @apply text-2xl md:text-3xl lg:text-4xl font-lobster capitalize font-semibold text-neutral-1000;
   }
-  .flex-col-center {
-    @apply flex flex-col items-center justify-center;
-  } */
 
-  /* Text utilities */
-  /* .text-truncate {
-    @apply truncate;
-  }
-  .line-clamp-1 {
-    @apply line-clamp-1;
-  }
-  .line-clamp-2 {
-    @apply line-clamp-2;
-  }
-  .line-clamp-3 {
-    @apply line-clamp-3;
-  } */
+  /* ==================== SCROLL ANIMATIONS ==================== */
 
-  /* Positioning */
-  /* .absolute-center {
-    @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2;
-  } */
-
-  /* Visibility */
-  /* .hidden-mobile {
-    @apply hidden md:block;
+  /* Fade In */
+  .animate-fadeIn {
+    animation: fadeIn 2s ease-out forwards;
+    opacity: 0;
   }
-  .hidden-desktop {
-    @apply md:hidden;
-  } */
 
-  /* Effects */
-  /* .glass {
-    @apply bg-white bg-opacity-10 backdrop-blur-md border border-white border-opacity-20;
-  } */
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  /* Slide Up */
+  .animate-slideUp {
+    animation: slideUp 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Slide Down */
+  .animate-slideDown {
+    animation: slideDown 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+
+  @keyframes slideDown {
+    from {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Slide Left */
+  .animate-slideLeft {
+    animation: slideLeft 0.6s ease-out forwards;
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+
+  @keyframes slideLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Slide Right */
+  .animate-slideRight {
+    animation: slideRight 2s ease-out forwards;
+    opacity: 0;
+    transform: translateX(20px);
+  }
+
+  @keyframes slideRight {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  /* Scale Up */
+  .animate-scaleUp {
+    animation: scaleUp 0.5s ease-out forwards;
+    opacity: 0;
+    transform: scale(0.95);
+  }
+
+  @keyframes scaleUp {
+    from {
+      opacity: 0;
+      transform: scale(0.95);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Pop (Scale + Bounce) */
+  .animate-pop {
+    animation: pop 1.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  }
+
+  @keyframes pop {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.02);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  /* Zoom In */
+  .animate-zoomIn {
+    animation: zoomIn 1.3s ease-out forwards;
+    opacity: 0.7;
+    transform: scale(0.7);
+  }
+
+  @keyframes zoomIn {
+    0% {
+      opacity: 0.5;
+      transform: scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
 }
