@@ -1,3 +1,7 @@
+<script setup lang="ts">
+// Landing page
+</script>
+
 <template>
   <Hero />
   <PartnerLogo />

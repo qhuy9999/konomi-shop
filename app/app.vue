@@ -1,6 +1,6 @@
 <template>
   <UApp>
-    <!-- Toast Notifications -->
+      <!-- Toast Notifications -->
     <ToastNotification />
 
     <!-- OTP Verification Modal -->

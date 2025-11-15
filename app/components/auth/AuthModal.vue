@@ -231,7 +231,8 @@ const handleSignIn = async () => {
       // Reset session state
       sessionStore.resetAuthModal()
 
-      // TODO: Redirect to dashboard
+      // Redirect to profile page
+      await navigateTo('/user/profile')
     }
   } catch (error: any) {
     // Handle 403: Email not verified - show OTP verification

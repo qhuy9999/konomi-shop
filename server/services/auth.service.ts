@@ -228,6 +228,18 @@ export const signIn = async (data: SignInInput) => {
         email: user.email,
         firstName: user.firstName,
         lastName: user.lastName,
+        emailVerified: user.emailVerified,
+        phoneNumber: user.phone,
+        billingStreet: user.billingStreet,
+        billingCity: user.billingCity,
+        billingProvince: user.billingProvince,
+        billingZipCode: user.billingZipCode,
+        billingCountry: user.billingCountry,
+        deliveryStreet: user.deliveryStreet,
+        deliveryCity: user.deliveryCity,
+        deliveryProvince: user.deliveryProvince,
+        deliveryZipCode: user.deliveryZipCode,
+        deliveryCountry: user.deliveryCountry,
       },
     }
   } catch (error: unknown) {

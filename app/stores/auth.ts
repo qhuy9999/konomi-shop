@@ -22,6 +22,17 @@ export const useAuthStore = defineStore('auth', () => {
     firstName: string
     lastName: string
     emailVerified: boolean
+    phoneNumber?: string
+    billingStreet?: string
+    billingCity?: string
+    billingProvince?: string
+    billingZipCode?: string
+    billingCountry?: string
+    deliveryStreet?: string
+    deliveryCity?: string
+    deliveryProvince?: string
+    deliveryZipCode?: string
+    deliveryCountry?: string
   } | null>(null)
 
   // ============ Computed ============
