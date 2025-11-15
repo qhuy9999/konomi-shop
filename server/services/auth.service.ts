@@ -229,7 +229,7 @@ export const signIn = async (data: SignInInput) => {
         firstName: user.firstName,
         lastName: user.lastName,
         emailVerified: user.emailVerified,
-        phoneNumber: user.phone,
+        phone: user.phone,
         billingStreet: user.billingStreet,
         billingCity: user.billingCity,
         billingProvince: user.billingProvince,

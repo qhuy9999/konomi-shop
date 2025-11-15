@@ -16,9 +16,67 @@
     <main class="flex-1">
       <slot />
     </main>
-    <footer class="bg-gray-900 text-gray-200 py-8 mt-16">
-      <div class="max-w-7xl mx-auto px-4 text-center text-sm">
-        <p>&copy; 2025 Konomi Shop</p>
+<!-- Footer -->
+    <footer class="bg-white shadow-footer z-50 border-t border-neutral-200">
+      <div class="container mx-auto px-4 py-12">
+        <!-- Footer Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+          <!-- Liên Hệ -->
+          <div>
+            <h4 class="font-semibold text-gray-900 mb-4">📞 Liên Hệ</h4>
+            <ul class="space-y-2 text-sm text-gray-600">
+              <li><a href="tel:+84123456789" class="hover:text-blue-600">Hotline: +84 (0)123 456 789</a></li>
+              <li><a href="mailto:support@konomi.com" class="hover:text-blue-600">Email: support@konomi.com</a></li>
+              <li><a href="#" class="hover:text-blue-600">Văn phòng: 123 Đường ABC, Tp. HCM</a></li>
+              <li><a href="#" class="hover:text-blue-600">Giờ làm việc: 8:00 - 22:00 hàng ngày</a></li>
+            </ul>
+          </div>
+
+          <!-- Hướng Dẫn Mua Hàng -->
+          <div>
+            <h4 class="font-semibold text-gray-900 mb-4">🛒 Hướng Dẫn Mua Hàng</h4>
+            <ul class="space-y-2 text-sm text-gray-600">
+              <li><a href="#" class="hover:text-blue-600">Cách tìm kiếm sản phẩm</a></li>
+              <li><a href="#" class="hover:text-blue-600">Cách đặt hàng</a></li>
+              <li><a href="#" class="hover:text-blue-600">Phương thức thanh toán</a></li>
+              <li><a href="#" class="hover:text-blue-600">Các khuyến mãi & ưu đãi</a></li>
+            </ul>
+          </div>
+
+          <!-- Giao Hàng & Hoàn Trả -->
+          <div>
+            <h4 class="font-semibold text-gray-900 mb-4">📦 Giao Hàng & Hoàn Trả</h4>
+            <ul class="space-y-2 text-sm text-gray-600">
+              <li><a href="#" class="hover:text-blue-600">Chính sách giao hàng</a></li>
+              <li><a href="#" class="hover:text-blue-600">Phí vận chuyển</a></li>
+              <li><a href="#" class="hover:text-blue-600">Chính sách hoàn trả & đổi trả</a></li>
+              <li><a href="#" class="hover:text-blue-600">Theo dõi đơn hàng</a></li>
+            </ul>
+          </div>
+
+          <!-- Điều Khoản & Chính Sách -->
+          <div>
+            <h4 class="font-semibold text-gray-900 mb-4">📋 Điều Khoản & Chính Sách</h4>
+            <ul class="space-y-2 text-sm text-gray-600">
+              <li><a href="#" class="hover:text-blue-600">Điều khoản sử dụng</a></li>
+              <li><a href="#" class="hover:text-blue-600">Chính sách bảo mật</a></li>
+              <li><a href="#" class="hover:text-blue-600">Chính sách cookies</a></li>
+              <li><a href="#" class="hover:text-blue-600">Về chúng tôi</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Divider -->
+        <div class="border-t border-neutral-200 pt-8">
+          <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
+            <p>&copy; 2025 Konomi Shop. All rights reserved.</p>
+            <div class="flex gap-6 mt-4 md:mt-0">
+              <a href="#" class="hover:text-blue-600">Facebook</a>
+              <a href="#" class="hover:text-blue-600">Twitter</a>
+              <a href="#" class="hover:text-blue-600">Instagram</a>
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
   </div>
