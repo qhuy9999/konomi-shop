@@ -1,0 +1,65 @@
+{
+  "common": {
+    "welcome": "Chào mừng đến Konomi Shop",
+    "language": "Ngôn ngữ",
+    "home": "Trang chủ",
+    "products": "Sản phẩm",
+    "cart": "Giỏ hàng",
+    "account": "Tài khoản",
+    "logout": "Đăng xuất",
+    "login": "Đăng nhập",
+    "signup": "Đăng ký"
+  },
+  "hero": {
+    "title": "Chào mừng đến Konomi Shop",
+    "subtitle": "Mua sắm các sản phẩm chất lượng cao với giá tốt nhất",
+    "cta": "Mua ngay"
+  },
+  "nav": {
+    "home": "Trang chủ",
+    "products": "Sản phẩm",
+    "about": "Về chúng tôi",
+    "contact": "Liên hệ",
+    "profile": "Hồ sơ",
+    "orders": "Đơn hàng",
+    "settings": "Cài đặt"
+  },
+  "footer": {
+    "contact": "Liên hệ",
+    "hotline": "Hotline",
+    "email": "Email",
+    "office": "Văn phòng",
+    "hours": "Giờ làm việc",
+    "guide": "Hướng dẫn mua hàng",
+    "search": "Cách tìm kiếm sản phẩm",
+    "order": "Cách đặt hàng",
+    "payment": "Phương thức thanh toán",
+    "promotions": "Các khuyến mãi & ưu đãi",
+    "shipping": "Giao hàng & hoàn trả",
+    "policy": "Chính sách giao hàng",
+    "fees": "Phí vận chuyển",
+    "returns": "Chính sách hoàn trả & đổi trả",
+    "tracking": "Theo dõi đơn hàng",
+    "terms": "Điều khoản & chính sách",
+    "termsOfUse": "Điều khoản sử dụng",
+    "privacy": "Chính sách bảo mật",
+    "cookies": "Chính sách cookies",
+    "about": "Về chúng tôi",
+    "copyright": "Bản quyền 2025 Konomi Shop. Tất cả các quyền được bảo lưu."
+  },
+  "auth": {
+    "signin": "Đăng nhập",
+    "signup": "Đăng ký",
+    "email": "Email",
+    "username": "Username",
+    "password": "Mật khẩu",
+    "confirmPassword": "Xác nhận mật khẩu",
+    "firstName": "Tên",
+    "lastName": "Họ",
+    "phoneNumber": "Số điện thoại",
+    "forgotPassword": "Quên mật khẩu?",
+    "rememberMe": "Ghi nhớ tôi",
+    "noAccount": "Chưa có tài khoản?",
+    "haveAccount": "Đã có tài khoản?"
+  }
+}

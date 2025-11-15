@@ -21,7 +21,7 @@ const editForm = reactive({
   email: currentUser.value?.email || '',
   firstName: currentUser.value?.firstName || '',
   lastName: currentUser.value?.lastName || '',
-  phoneNumber: currentUser.value?.phoneNumber || '',
+  phoneNumber: currentUser.value?.phone || '',
   billingStreet: currentUser.value?.billingStreet || '',
   billingCity: currentUser.value?.billingCity || '',
   billingProvince: currentUser.value?.billingProvince || '',
@@ -48,7 +48,7 @@ const handleEnterEditMode = (): void => {
     editForm.email = currentUser.value.email
     editForm.firstName = currentUser.value.firstName
     editForm.lastName = currentUser.value.lastName
-    editForm.phoneNumber = currentUser.value.phoneNumber || ''
+    editForm.phoneNumber = currentUser.value.phone || ''
     editForm.billingStreet = currentUser.value.billingStreet || ''
     editForm.billingCity = currentUser.value.billingCity || ''
     editForm.billingProvince = currentUser.value.billingProvince || ''

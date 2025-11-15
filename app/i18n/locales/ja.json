@@ -1,0 +1,65 @@
+{
+  "common": {
+    "welcome": "Konomi Shopへようこそ",
+    "language": "言語",
+    "home": "ホーム",
+    "products": "製品",
+    "cart": "カート",
+    "account": "アカウント",
+    "logout": "ログアウト",
+    "login": "ログイン",
+    "signup": "サインアップ"
+  },
+  "hero": {
+    "title": "Konomi Shopへようこそ",
+    "subtitle": "最高品質の商品を最安値で購入しましょう",
+    "cta": "今すぐ購入"
+  },
+  "nav": {
+    "home": "ホーム",
+    "products": "製品",
+    "about": "について",
+    "contact": "お問い合わせ",
+    "profile": "プロフィール",
+    "orders": "注文",
+    "settings": "設定"
+  },
+  "footer": {
+    "contact": "お問い合わせ",
+    "hotline": "ホットライン",
+    "email": "メール",
+    "office": "オフィス",
+    "hours": "営業時間",
+    "guide": "ショッピングガイド",
+    "search": "商品を検索する方法",
+    "order": "注文方法",
+    "payment": "支払い方法",
+    "promotions": "プロモーション&オファー",
+    "shipping": "配送&返品",
+    "policy": "配送ポリシー",
+    "fees": "配送料金",
+    "returns": "返品交換ポリシー",
+    "tracking": "注文を追跡",
+    "terms": "利用規約&ポリシー",
+    "termsOfUse": "利用規約",
+    "privacy": "プライバシーポリシー",
+    "cookies": "クッキーポリシー",
+    "about": "について",
+    "copyright": "著作権2025 Konomi Shop。著作権所有。"
+  },
+  "auth": {
+    "signin": "ログイン",
+    "signup": "サインアップ",
+    "email": "メール",
+    "username": "ユーザー名",
+    "password": "パスワード",
+    "confirmPassword": "パスワード確認",
+    "firstName": "名前",
+    "lastName": "姓",
+    "phoneNumber": "電話番号",
+    "forgotPassword": "パスワードをお忘れですか?",
+    "rememberMe": "次回から自動的にログイン",
+    "noAccount": "アカウントをお持ちですか?",
+    "haveAccount": "既にアカウントをお持ちですか?"
+  }
+}

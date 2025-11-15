@@ -1,0 +1,65 @@
+{
+  "common": {
+    "welcome": "Willkommen bei Konomi Shop",
+    "language": "Sprache",
+    "home": "Startseite",
+    "products": "Produkte",
+    "cart": "Einkaufswagen",
+    "account": "Konto",
+    "logout": "Abmelden",
+    "login": "Anmelden",
+    "signup": "Registrieren"
+  },
+  "hero": {
+    "title": "Willkommen bei Konomi Shop",
+    "subtitle": "Kaufen Sie hochwertige Produkte zu den besten Preisen",
+    "cta": "Jetzt einkaufen"
+  },
+  "nav": {
+    "home": "Startseite",
+    "products": "Produkte",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "profile": "Profil",
+    "orders": "Bestellungen",
+    "settings": "Einstellungen"
+  },
+  "footer": {
+    "contact": "Kontakt",
+    "hotline": "Hotline",
+    "email": "E-Mail",
+    "office": "Büro",
+    "hours": "Geschäftszeiten",
+    "guide": "Einkaufsführer",
+    "search": "Produkte suchen",
+    "order": "Bestellung aufgeben",
+    "payment": "Zahlungsmethoden",
+    "promotions": "Promotionen & Angebote",
+    "shipping": "Versand & Rückgaben",
+    "policy": "Versandrichtlinie",
+    "fees": "Versandgebühren",
+    "returns": "Rück- und Umtauschrichtlinie",
+    "tracking": "Bestellung verfolgen",
+    "terms": "Bedingungen & Richtlinien",
+    "termsOfUse": "Nutzungsbedingungen",
+    "privacy": "Datenschutzrichtlinie",
+    "cookies": "Cookie-Richtlinie",
+    "about": "Über uns",
+    "copyright": "Copyright 2025 Konomi Shop. Alle Rechte vorbehalten."
+  },
+  "auth": {
+    "signin": "Anmelden",
+    "signup": "Registrieren",
+    "email": "E-Mail",
+    "username": "Benutzername",
+    "password": "Passwort",
+    "confirmPassword": "Passwort bestätigen",
+    "firstName": "Vorname",
+    "lastName": "Nachname",
+    "phoneNumber": "Telefonnummer",
+    "forgotPassword": "Passwort vergessen?",
+    "rememberMe": "Anmeldedaten speichern",
+    "noAccount": "Kein Konto vorhanden?",
+    "haveAccount": "Haben Sie bereits ein Konto?"
+  }
+}

@@ -2,7 +2,7 @@
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },  // ✅ Keep this for Nuxt DevTools
-  modules: ["@pinia/nuxt", "@nuxt/ui", "@nuxt/image"],
+  modules: ["@pinia/nuxt", "@nuxt/ui", "@nuxt/image", "@nuxtjs/i18n"],
   css: ["@/assets/css/main.css"],
 
   icon: {
@@ -93,6 +93,23 @@ export default defineNuxtConfig({
 
   pinia: {
     storesDirs: ["@/stores/**"],
+  },
+
+  i18n: {
+    locales: [
+      { code: 'vi', language: 'vi-VN', name: 'Tiếng Việt', iso: 'vi' },
+      { code: 'en', language: 'en-US', name: 'English', iso: 'en' },
+      { code: 'ja', language: 'ja-JP', name: '日本語', iso: 'ja' },
+      { code: 'de', language: 'de-DE', name: 'Deutsch', iso: 'de' },
+    ],
+    defaultLocale: 'vi',
+    strategy: 'prefix_except_default',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root',
+    },
+    vueI18n: '~/i18n.config.ts',
   },
 
   runtimeConfig: {

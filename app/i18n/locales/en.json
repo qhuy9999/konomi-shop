@@ -1,0 +1,65 @@
+{
+  "common": {
+    "welcome": "Welcome to Konomi Shop",
+    "language": "Language",
+    "home": "Home",
+    "products": "Products",
+    "cart": "Cart",
+    "account": "Account",
+    "logout": "Logout",
+    "login": "Login",
+    "signup": "Sign Up"
+  },
+  "hero": {
+    "title": "Welcome to Konomi Shop",
+    "subtitle": "Shop high-quality products at the best prices",
+    "cta": "Shop Now"
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "about": "About Us",
+    "contact": "Contact",
+    "profile": "Profile",
+    "orders": "Orders",
+    "settings": "Settings"
+  },
+  "footer": {
+    "contact": "Contact",
+    "hotline": "Hotline",
+    "email": "Email",
+    "office": "Office",
+    "hours": "Business Hours",
+    "guide": "Shopping Guide",
+    "search": "How to Search Products",
+    "order": "How to Order",
+    "payment": "Payment Methods",
+    "promotions": "Promotions & Offers",
+    "shipping": "Shipping & Returns",
+    "policy": "Shipping Policy",
+    "fees": "Shipping Fees",
+    "returns": "Return & Exchange Policy",
+    "tracking": "Track Order",
+    "terms": "Terms & Policies",
+    "termsOfUse": "Terms of Use",
+    "privacy": "Privacy Policy",
+    "cookies": "Cookie Policy",
+    "about": "About Us",
+    "copyright": "Copyright 2025 Konomi Shop. All rights reserved."
+  },
+  "auth": {
+    "signin": "Sign In",
+    "signup": "Sign Up",
+    "email": "Email",
+    "username": "Username",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "phoneNumber": "Phone Number",
+    "forgotPassword": "Forgot Password?",
+    "rememberMe": "Remember Me",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?"
+  }
+}
