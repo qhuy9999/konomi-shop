@@ -1,7 +1,7 @@
 <template>
   <Hero />
-  <PartnerLogos />
-  <Products />
+  <PartnerLogo />
+  <Product />
   <Slogan />
   <HoneyCombFeature />
   <BestSellerCarousel />

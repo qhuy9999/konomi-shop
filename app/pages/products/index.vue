@@ -116,7 +116,6 @@ const filteredProducts = computed(() => {
   );
 });
 
-// Lifecycle
 onMounted(() => {
   animateMultiple([
     {

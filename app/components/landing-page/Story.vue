@@ -1,4 +1,27 @@
-<script></script>
+<script setup lang="ts">
+const { animateOnScroll } = useScrollAnimation();
+
+onMounted(() => {
+  animateOnScroll(
+    "[data-animate-sub-heading]",
+    "animate-slideRight",
+    200,
+    false
+  );
+  animateOnScroll(
+    "[data-animate-main-heading]",
+    "animate-slideRight",
+    400,
+    false
+  );
+  animateOnScroll(
+    "[data-animate-description]",
+    "animate-slideRight",
+    800,
+    false
+  );
+});
+</script>
 
 <template>
   <section id="story">
@@ -25,10 +48,12 @@
 
           <!-- nội dung chính -->
           <div class="relative 2xl:left-50">
-            <h2 class="story_sub_heading">Khám phá</h2>
-            <h1 class="story_main_heading">Câu chuyện & sứ mệnh</h1>
+            <h2 data-animate-sub-heading class="story_sub_heading">Khám phá</h2>
+            <h1 data-animate-main-heading class="story_main_heading">
+              Câu chuyện & sứ mệnh
+            </h1>
 
-            <p class="text-primary-50 max-w-80">
+            <p data-animate-description class="text-primary-50 max-w-80">
               Tại Tea Station, chúng tôi tận tâm tạo ra những loại trà đặc biệt
               tôn vinh hương vị và sức khỏe. Có nguồn gốc từ những thành phần
               tốt nhất, các hỗn hợp của chúng tôi được chế tác bằng sự chăm chút

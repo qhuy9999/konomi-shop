@@ -13,16 +13,57 @@ if (!process.env.JWT_ACCESS_SECRET) {
   throw new Error('JWT_ACCESS_SECRET is required but not configured')
 }
 interface SignUpInput {
+  username: string      // 3-20 chars
+  email: string         // Valid email
+  password: string      // Min 8 chars, 1 uppercase, 1 number
+  firstName: string     // 2-50 chars
+  lastName: string      // 2-50 chars
+  phoneNumber?: string  // Optional, max 20 chars
+  // Billing Address (Optional)
+  billingStreet?: string
+  billingCity?: string
+  billingProvince?: string
+  billingZipCode?: string
+  billingCountry?: string
+  // Delivery Address (Optional)
+  deliveryStreet?: string
+  deliveryCity?: string
+  deliveryProvince?: string
+  deliveryZipCode?: string
+  deliveryCountry?: string
+}
+
+interface SignUpProfile {
+  billingAddress?: string    // For checkout
+  deliveryAddress?: string   // For delivery
+}
+
+// Combine both for complete user profile
+interface UserProfile {
+  id: number
   username: string
-  password: string
   email: string
   firstName: string
   lastName: string
+  phoneNumber?: string
+  billingStreet?: string
+  billingCity?: string
+  billingProvince?: string
+  billingZipCode?: string
+  billingCountry?: string
+  deliveryStreet?: string
+  deliveryCity?: string
+  deliveryProvince?: string
+  deliveryZipCode?: string
+  deliveryCountry?: string
+  emailVerified: boolean
+  createdAt: Date
 }
 
 interface SignInInput {
-  username: string
-  password: string
+  username?: string     // Optional
+  email?: string        // Optional
+  password: string      // Required
 }
 
 // === SIGN UP ===
@@ -59,6 +100,7 @@ export const signUp = async (data: SignUpInput) => {
     })
     
     // Create user (without transaction - createAndSendOTP handles its own transaction)
+    // Note: Using 'as any' temporarily due to Prisma client not being fully regenerated with new address fields
     const newUser = await prisma.user.create({
       data: {
         username: data.username,
@@ -66,8 +108,21 @@ export const signUp = async (data: SignUpInput) => {
         email: data.email,
         firstName: data.firstName,
         lastName: data.lastName,
+        phone: data.phoneNumber,
         emailVerified: false,
-      },
+        // Billing Address
+        billingStreet: data.billingStreet,
+        billingCity: data.billingCity,
+        billingProvince: data.billingProvince,
+        billingZipCode: data.billingZipCode,
+        billingCountry: data.billingCountry,
+        // Delivery Address
+        deliveryStreet: data.deliveryStreet,
+        deliveryCity: data.deliveryCity,
+        deliveryProvince: data.deliveryProvince,
+        deliveryZipCode: data.deliveryZipCode,
+        deliveryCountry: data.deliveryCountry,
+      } as any, // Temporary: Prisma types will update after migration
     })
 
     // Create and send OTP (with its own transaction)

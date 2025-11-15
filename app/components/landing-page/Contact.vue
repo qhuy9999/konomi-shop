@@ -1,3 +1,17 @@
+<script setup lang="ts">
+import { useSessionStore } from "@/stores/session";
+
+const sessionStore = useSessionStore();
+
+const handleSignIn = () => {
+  sessionStore.setAuthModalPage('signin');
+};
+
+const handleSignUp = () => {
+  sessionStore.setAuthModalPage('signup');
+};
+</script>
+
 <template>
   <section id="contact">
     <div class="container my-20">
@@ -15,7 +29,7 @@
           <!-- địa chỉ -->
           <div class="contact-info">
             <div>
-              <img src="./assets/building.svg" alt="building" class="size-4" />
+              <UIcon name="i-lucide-building-2" class="w-4 h-4" />
               <h1>Địa Chỉ</h1>
             </div>
 
@@ -28,7 +42,7 @@
           <!-- email -->
           <div class="contact-info">
             <div>
-              <img src="./assets/mail.svg" alt="building" class="size-4" />
+              <UIcon name="i-lucide-mail" class="w-4 h-4" />
               <h1>Email</h1>
             </div>
 
@@ -38,7 +52,7 @@
           <!-- số điện thoại -->
           <div class="contact-info">
             <div>
-              <img src="./assets/phone.svg" alt="building" class="size-4" />
+              <UIcon name="i-lucide-phone" class="w-4 h-4" />
               <h1>Điện Thoại</h1>
             </div>
 
@@ -46,36 +60,37 @@
           </div>
         </div>
 
-        <!-- form đăng ký theo dõi -->
+        <!-- form đăng nhập -->
         <div
           class="relative text-center flex flex-col items-center w-full flex-1 h-[515px] px-10 py-20 gap-9 border border-p-600 overflow-clip"
         >
           <!-- heading -->
           <div>
-            <h2 class="sub_heading">Cập nhập bản tin</h2>
-            <h1 class="main_heading">Đăng ký theo dõi</h1>
+            <h2 class="sub_heading">Tham gia cộng đồng</h2>
+            <h1 class="main_heading">Thành Viên Konomi Shop</h1>
           </div>
 
-          <p>Đăng ký nhận bản tin của chúng tôi và cập nhật thông tin.</p>
+          <p>Trở thành thành viên Konomi Shop sẽ giúp bạn nhận ưu đãi độc quyền. Đăng nhập để truy cập tài khoản của bạn hoặc tạo tài khoản mới.</p>
 
-          <!-- email input -->
-          <div
-            class="flex items-center justify-center gap-2 w-[350px] md:w-[350px] py-3 border border-primary-600"
-          >
-            <UIcon name="i-lucide-mail" class="w-6 h-6" />
-            <input
-              type="email"
-              placeholder="Nhập địa chỉ email của bạn"
-              class="w-[300px] text-base"
+          <!-- 2 nút đăng nhập & đăng ký -->
+          <div class="flex gap-3">
+            <Button
+              label="Đăng Nhập"
+              to="/auth?auth=signin"
+              variant="secondary"
+              size="sm"
+              @click="handleSignIn"
+            />
+            <Button
+              label="Đăng Ký"
+              to="/auth?auth=signup"
+              variant="primary"
+              size="sm"
+              @click="handleSignUp"
             />
           </div>
 
-          <!-- nút theo dõi -->
-          <button class="flex-none border-primary-600 w-[350px] md:w-[350px]">
-            <div class="capitalize btn bg-primary-600 hover:bg-primary-700">
-              <span class="w-max text-center">Đồng Ý Theo Dõi</span>
-            </div>
-          </button>
+          <p class="text-sm text-neutral-600">Chưa có tài khoản? Đăng ký ngay!</p>
 
           <!-- hình decor -->
           <NuxtImg

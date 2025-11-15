@@ -354,6 +354,11 @@ export const checkAndResendOTP = async (
       message: `OTP already sent to your email. Please check your inbox. Can request new OTP after ${pendingOTP.expiresAt.toLocaleString()}`,
     }
   } catch (error: unknown) {
+    // Re-throw RateLimitError as-is
+    if (error instanceof RateLimitError) {
+      throw error
+    }
+    
     if (error instanceof Error) {
       throw new Error(error.message || 'Error checking OTP')
     }

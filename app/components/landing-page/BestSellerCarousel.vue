@@ -6,12 +6,99 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "~/app.config";
 
+const { animateOnScroll } = useScrollAnimation();
+
+onMounted(() => {
+  animateOnScroll('[data-animate-sub-heading]', 'animate-slideRight', 400, false);
+  animateOnScroll('[data-animate-main-heading]', 'animate-slideRight', 200, false);
+  animateOnScroll('[data-animate-description]', 'animate-slideRight', 800, false);
+  animateOnScroll("[data-animate-sub-heading-swiper]", "animate-fadeIn", 900, false);
+  animateOnScroll("[data-animate-description-swiper]", "animate-fadeIn", 900, false);
+  
+  // Setup progress bar animation observer (trigger on scroll)
+  setupProgressBarObserver();
+});
+
+// Setup observer for progress bars
+const setupProgressBarObserver = () => {
+  const section = document.querySelector('#best-sellers');
+  if (!section) return;
+  
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          // Reset animated values before starting animation
+          Object.keys(animatedProgressValues.value).forEach((productId) => {
+            animatedProgressValues.value[productId] = [0, 0, 0, 0];
+          });
+          // Trigger animation
+          animateProgressValues();
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+  
+  observer.observe(section);
+};
+
+// Animate progress values with stagger and requestAnimationFrame
+const animateProgressValues = () => {
+  const duration = 1200; // 1.2 seconds
+  const startTime = Date.now();
+  
+  Object.keys(progressValues.value).forEach((productId) => {
+    progressValues.value[productId]?.forEach((targetValue, index) => {
+      const delay = (index + 1) * 150; // Stagger: 150ms between each
+      
+      setTimeout(() => {
+        const animateValue = () => {
+          const elapsed = Date.now() - startTime - delay;
+          const progress = Math.min(elapsed / duration, 1);
+          
+          // Easing function: ease-out-quad
+          const easeProgress = easeOutQuad(progress);
+          const currentValue = Math.round(targetValue * easeProgress);
+          
+          if (animatedProgressValues.value[productId]) {
+            animatedProgressValues.value[productId][index] = currentValue;
+          }
+          
+          if (progress < 1) {
+            requestAnimationFrame(animateValue);
+          } else {
+            if (animatedProgressValues.value[productId]) {
+              animatedProgressValues.value[productId][index] = targetValue;
+            }
+          }
+        };
+        
+        requestAnimationFrame(animateValue);
+      }, delay);
+    });
+  });
+};
+
+// Easing function: ease-out-quad
+const easeOutQuad = (t: number): number => {
+  return 1 - (1 - t) * (1 - t);
+};
+
 // Progress values for each product
 const progressValues = ref<Record<string, number[]>>({
   product1: [94, 93, 90, 95],
   product2: [96, 97, 90, 89],
   product3: [85, 95, 88, 99],
   product4: [83, 89, 97, 99],
+});
+
+// Animated progress values (for animation from 0 to target)
+const animatedProgressValues = ref<Record<string, number[]>>({
+  product1: [0, 0, 0, 0],
+  product2: [0, 0, 0, 0],
+  product3: [0, 0, 0, 0],
+  product4: [0, 0, 0, 0],
 });
 
 const getProgressValue = (productId: string, index: number): number => {
@@ -48,7 +135,7 @@ const productProgressRefs = computed(() => {
 
 // Safe getter for progress values
 const getProductProgress = (productId: string, index: number): number => {
-  return getProgressValue(productId, index);
+  return animatedProgressValues.value[productId]?.[index] ?? 0;
 };
 
 interface Product {
@@ -103,13 +190,13 @@ const paginationConfig = {
       <!-- tiêu đề -->
       <div class="flex flex-col items-start md:items-center lg:items-start">
         <div data-aos="fade-right">
-          <h2 class="sub_heading">Khách hàng yêu thích</h2>
-          <h2 class="main_heading">
+          <h2 data-animate-sub-heading class="sub_heading">Khách hàng yêu thích</h2>
+          <h2 data-animate-main-heading class="main_heading">
             Những Sản Phẩm <span class="text-gradient">Bán Chạy Nhất</span>
           </h2>
         </div>
 
-        <p data-aos="fade-right" data-aos-delay="100">
+        <p data-animate-description>
           Khám phá những sản phẩm bán chạy nhất của chúng tôi, nơi chất lượng
           kết hợp hương vị trong mỗi tách trà. Hãy tham gia cùng hàng ngàn khách
           hàng hài lòng đã biến những hỗn hợp này thành sở thích của họ và nâng
@@ -134,15 +221,15 @@ const paginationConfig = {
               <!-- phần bên trái -->
               <div class="flex-1 best-product--left">
                 <div class="best-product-info">
-                  <h3>{{ product.name }}</h3>
-                  <p>{{ product.description }}</p>
+                  <h3 data-animate-sub-heading-swiper>{{ product.name }}</h3>
+                  <p data-animate-description-swiper>{{ product.description }}</p>
                 </div>
 
                 <!-- thanh tiến trình -->
                 <div class="benefit-bars">
                   <!-- hàng trên -->
                   <div class="grid grid-cols-2 gap-4 mt-3">
-                    <div>
+                    <div data-progress>
                       <h4 class="text-xs sm-md:text-sm text-accent-750">
                         Tăng cường năng lượng và tập trung
                       </h4>
@@ -151,7 +238,7 @@ const paginationConfig = {
                           :model-value="(getProductProgress(product.id, 0) as any)"
                           :max="100"
                           color="primary"
-                          class="flex-1"
+                          class="flex-1 progress-bar"
                         />
                         <span
                           class="text-xs font-semibold text-primary-600 min-w-fit mr-3"
@@ -159,7 +246,7 @@ const paginationConfig = {
                         >
                       </div>
                     </div>
-                    <div>
+                    <div data-progress>
                       <h4 class="text-xs sm-md:text-sm text-accent-750">
                         Giàu chất chống oxy hoá
                       </h4>
@@ -168,7 +255,7 @@ const paginationConfig = {
                           :model-value="(getProductProgress(product.id, 1) as any)"
                           :max="100"
                           color="primary"
-                          class="flex-1"
+                          class="flex-1 progress-bar"
                         />
                         <span
                           class="text-xs font-semibold text-primary-600 min-w-fit mr-3"
@@ -179,7 +266,7 @@ const paginationConfig = {
                   </div>
                   <!-- hàng dưới -->
                   <div class="grid grid-cols-2 gap-4">
-                    <div>
+                    <div data-progress>
                       <h4 class="text-xs sm-md:text-sm text-accent-750">
                         Tăng cường trao đổi chất
                       </h4>
@@ -188,7 +275,7 @@ const paginationConfig = {
                           :model-value="(getProductProgress(product.id, 2) as any)"
                           :max="100"
                           color="primary"
-                          class="flex-1"
+                          class="flex-1 progress-bar"
                         />
                         <span
                           class="text-xs font-semibold text-primary-600 min-w-fit mr-3"
@@ -196,7 +283,7 @@ const paginationConfig = {
                         >
                       </div>
                     </div>
-                    <div>
+                    <div data-progress>
                       <h4 class="text-xs sm-md:text-sm text-accent-750">
                         Thúc đẩy sự bình tĩnh và thư giãn
                       </h4>
@@ -205,7 +292,7 @@ const paginationConfig = {
                           :model-value="(getProductProgress(product.id, 3) as any)"
                           :max="100"
                           color="primary"
-                          class="flex-1"
+                          class="flex-1 progress-bar"
                         />
                         <span
                           class="text-xs font-semibold text-primary-600 min-w-fit mr-3"
@@ -218,7 +305,7 @@ const paginationConfig = {
               </div>
 
               <!-- phần bên phải -->
-              <div class="mt-2">
+              <div data-animate-description-swiper class="mt-2">
                 <img :src="product.image" :alt="product.name" />
               </div>
             </div>
@@ -276,5 +363,55 @@ const paginationConfig = {
 :deep(.swiper-pagination-bullet-active) {
   @apply w-3 h-3;
   background-color: var(--color-accent-400);
+}
+
+/* Progress bar animation */
+:deep(.progress-bar) {
+  @apply transition-all duration-700 ease-out;
+}
+
+[data-progress] {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+[data-progress]:nth-child(1) {
+  animation-delay: 0.2s;
+}
+
+[data-progress]:nth-child(2) {
+  animation-delay: 0.4s;
+}
+
+[data-progress]:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+[data-progress]:nth-child(4) {
+  animation-delay: 0.8s;
+}
+
+.progress-animated :deep(.progress-bar) {
+  animation: progressFill 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes progressFill {
+  0% {
+    width: 0;
+  }
+  100% {
+    width: 100%;
+  }
 }
 </style>

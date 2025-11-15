@@ -1,9 +1,14 @@
 <script setup lang="ts">
 const { videoConfig } = useVideoContent();
+const { animateOnScroll } = useScrollAnimation();
+
+onMounted(() => {
+  animateOnScroll('[data-slogan]', 'animate-fadeIn', 600, false);
+});
 </script>
 
 <template>
-  <section id="slogan" class="overflow-clip">
+  <section data-slogan id="slogan" class="overflow-clip">
     <div
       class="relative min-w-full h-[30vh] max-h-[276px] overflow-hidden flex justify-center items-center"
     >

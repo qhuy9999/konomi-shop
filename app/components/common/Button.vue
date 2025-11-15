@@ -58,7 +58,7 @@ const buttonClass = computed(() => {
     transition-all duration-300 ease-out
     hover:shadow-lg hover:scale-105
     active:scale-95
-    w-fit mt-3
+    w-fit
     overflow-hidden
     ${variantClasses[props.variant]}
     ${sizeClasses[props.size]}

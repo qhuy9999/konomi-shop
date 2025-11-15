@@ -1,5 +1,9 @@
 <script setup lang="ts">
 import { ref } from "vue";
+import { useSessionStore } from "@/stores/session";
+
+// Stores
+const sessionStore = useSessionStore();
 
 // Mobile menu state
 const mobileMenuOpen = ref(false);
@@ -15,6 +19,16 @@ const navLinks = [
 // Close menu when clicking a link
 const closeMenu = () => {
   mobileMenuOpen.value = false;
+};
+
+// Handle Sign In button
+const handleSignIn = () => {
+  sessionStore.setAuthModalPage('signin');
+};
+
+// Handle Sign Up button
+const handleSignUp = () => {
+  sessionStore.setAuthModalPage('signup');
 };
 </script>
 
@@ -33,7 +47,7 @@ const closeMenu = () => {
 
         <!-- Desktop Navigation (md+) -->
         <nav
-          class="hidden md:flex md:text-sm md:text-base items-center gap-6 md:gap-8 pr-4"
+          class="hidden lg:flex items-center gap-6 pr-4"
         >
           <NuxtLink
             v-for="link in navLinks"
@@ -43,11 +57,29 @@ const closeMenu = () => {
           >
             {{ link.label }}
           </NuxtLink>
+
+          <!-- Auth Buttons -->
+          <div class="flex gap-3 ml-auto pl-4 border-l border-neutral-200">
+            <Button
+              label="Đăng Nhập"
+              to="/auth?auth=signin"
+              variant="secondary"
+              size="sm"
+              @click="handleSignIn"
+            />
+            <Button
+              label="Đăng Ký"
+              to="/auth?auth=signup"
+              variant="primary"
+              size="sm"
+              @click="handleSignUp"
+            />
+          </div>
         </nav>
 
         <!-- Mobile Menu Button (sm only) -->
         <button
-          class="md:hidden px-0 py-0 border-0 p-2 text-neutral-700 hover:text-primary-600 transition-colors"
+          class="lg:hidden px-0 py-0 border-0 p-2 text-neutral-700 hover:text-primary-600 transition-colors"
           @click="mobileMenuOpen = !mobileMenuOpen"
           aria-label="Toggle menu"
         >
@@ -69,20 +101,42 @@ const closeMenu = () => {
       >
         <nav
           v-show="mobileMenuOpen"
-          class="md:hidden bg-neutral-50 border-t border-neutral-200"
+          class="lg:hidden bg-neutral-50 border-t border-neutral-200"
         >
-          <div class="container py-4 flex flex-col gap-3">
-            <NuxtLink
-              v-for="link in navLinks"
-              :key="link.href"
-              :to="link.href"
-              class="px-4 py-2 text-neutral-700 hover:bg-primary-50 hover:text-primary-600 rounded-md transition-colors font-medium"
-              @click="closeMenu"
-            >
-              {{ link.label }}
-            </NuxtLink>
+          <div class="py-4 flex flex-col items-center justify-center gap-1">
+            <!-- Nav Links - Centered -->
+            <div class="grid grid-cols-2 sm:flex sm:flex-row sm:justify-center gap-3 w-full">
+              <NuxtLink
+                v-for="link in navLinks"
+                :key="link.href"
+                :to="link.href"
+                class="px-4 py-2 text-neutral-700 hover:bg-primary-50 hover:text-primary-600 rounded-md transition-colors font-medium whitespace-nowrap text-center"
+                @click="closeMenu"
+              >
+                {{ link.label }}
+              </NuxtLink>
+            </div>
+
+            <!-- Mobile Auth Buttons - Centered on sm-md, Horizontal on md+ -->
+            <div class="grid grid-cols-2 sm:flex sm:flex-row sm:items-center gap-3 w-auto">
+              <Button
+                label="Đăng Nhập"
+                to="/auth?auth=signin"
+                variant="secondary"
+                size="sm"
+                @click="handleSignIn; closeMenu()"
+              />
+              <Button
+                label="Đăng Ký"
+                to="/auth?auth=signup"
+                variant="primary"
+                size="sm"
+                @click="handleSignUp; closeMenu()"
+              />
+            </div>
           </div>
         </nav>
+
       </transition>
     </header>
 

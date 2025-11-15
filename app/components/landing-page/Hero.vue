@@ -1,3 +1,15 @@
+<script setup lang="ts">
+const { animateOnScroll } = useScrollAnimation();
+
+onMounted(() => {
+  animateOnScroll('[data-animate-sub-heading]', 'animate-slideRight', 400, false);
+  animateOnScroll('[data-animate-main-heading]', 'animate-slideRight', 200, false);
+  animateOnScroll('[data-animate-description]', 'animate-slideRight', 0, false);
+  animateOnScroll('[data-animate-button]', 'animate-fadeIn', 800, false);
+});
+</script>
+
+
 <template>
   <section
     id="hero"
@@ -22,21 +34,21 @@
       >
         <div>
           <h2
+          data-animate-sub-heading
             class="mb-2 text-xs font-semibold text-center uppercase leading-none tracking-wider md:text-start xl:text-start"
           >
             hơn
             <span class="text-sm text-gradient">một trăm</span> hương vị trà
           </h2>
           <h1
-            data-aos="zoom-in"
-            data-aos-delay="100"
+            data-animate-main-heading
             class="text-5xl leading-none tracking-wide text-center capitalize font-lobster md:text-6xl lg:text-7xl"
           >
             Trà Đặc Biệt Chế Tác
           </h1>
         </div>
 
-        <p class="max-w-xl px-4 text-center md:text-start xl:text-start">
+        <p data-animate-description class="max-w-xl px-4 text-center md:text-start xl:text-start">
           Sứ mệnh của chúng tôi là mang đến cho bạn sự yên bình và kết nối thông
           qua các hương vị trà được chọn lọc cẩn thận và được tạo ra để nâng cao
           trải nghiệm hàng ngày và sức khoẻ toàn diện cho bạn.
@@ -48,6 +60,7 @@
           variant="accent"
           size="md"
           icon="i-lucide-arrow-right"
+          data-animate-button
         />
       </div>
     </div>

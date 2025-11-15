@@ -41,27 +41,83 @@ export const signUpSchema = z.object({
 
   firstName: z
     .string()
-    .max(50, 'Tên không được quá 50 ký tự')
-    .optional()
-    .default(''),
+    .min(2, 'Tên phải có ít nhất 2 ký tự')
+    .max(50, 'Tên không được quá 50 ký tự'),
 
   lastName: z
     .string()
-    .max(50, 'Họ không được quá 50 ký tự')
-    .optional()
-    .default(''),
+    .min(2, 'Họ phải có ít nhất 2 ký tự')
+    .max(50, 'Họ không được quá 50 ký tự'),
+
+  phoneNumber: z
+    .string()
+    .max(20, 'Số điện thoại không được quá 20 ký tự')
+    .regex(/^[0-9+\-\s()]*$/, 'Số điện thoại không hợp lệ')
+    .optional(),
+
+  // Billing Address (Optional - can be filled during checkout)
+  billingStreet: z
+    .string()
+    .max(255, 'Địa chỉ quá dài')
+    .optional(),
+
+  billingCity: z
+    .string()
+    .max(100, 'Thành phố quá dài')
+    .optional(),
+
+  billingProvince: z
+    .string()
+    .max(100, 'Tỉnh/Thành quá dài')
+    .optional(),
+
+  billingZipCode: z
+    .string()
+    .max(20, 'Mã bưu điện quá dài')
+    .optional(),
+
+  billingCountry: z
+    .string()
+    .max(100, 'Quốc gia quá dài')
+    .optional(),
+
+  // Delivery Address (Optional - defaults to billing)
+  deliveryStreet: z
+    .string()
+    .max(255, 'Địa chỉ quá dài')
+    .optional(),
+
+  deliveryCity: z
+    .string()
+    .max(100, 'Thành phố quá dài')
+    .optional(),
+
+  deliveryProvince: z
+    .string()
+    .max(100, 'Tỉnh/Thành quá dài')
+    .optional(),
+
+  deliveryZipCode: z
+    .string()
+    .max(20, 'Mã bưu điện quá dài')
+    .optional(),
+
+  deliveryCountry: z
+    .string()
+    .max(100, 'Quốc gia quá dài')
+    .optional(),
 })
 
 export type SignUpRequest = z.infer<typeof signUpSchema>
 
 /**
- * Sign In Schema
+ * Sign In Schema - Support username OR email
  */
 export const signInSchema = z.object({
   username: z
     .string()
-    .min(3, 'Username phải có ít nhất 3 ký tự')
-    .max(20, 'Username không được quá 20 ký tự'),
+    .min(3, 'Username hoặc email bắt buộc')
+    .max(255, 'Username/email quá dài'),
 
   password: z
     .string()

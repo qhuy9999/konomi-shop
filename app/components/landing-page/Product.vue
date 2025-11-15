@@ -1,4 +1,24 @@
 <script setup lang="ts">
+const { animateOnScroll } = useScrollAnimation();
+
+onMounted(() => {
+  animateOnScroll("[data-animate-sub-heading]", "animate-slideRight", 0, false);
+  animateOnScroll(
+    "[data-animate-main-heading]",
+    "animate-slideRight",
+    300,
+    false
+  );
+  animateOnScroll(
+    "[data-animate-description]",
+    "animate-slideRight",
+    600,
+    false
+  );
+  animateOnScroll("[data-animate-image]", "animate-fadeIn", 1000, false);
+  animateOnScroll("[data-animate-button]", "animate-fadeIn", 800, false);
+});
+
 // ============ PRODUCTS TABS - Custom Implementation ============
 const activeTab = ref<"matcha" | "white-tea" | "oolong" | "black-tea">(
   "matcha"
@@ -18,8 +38,8 @@ const tabs = [
       <div class="flex flex-col gap-7">
         <!-- heading -->
         <div data-aos="fade-right">
-          <h2 class="sub_heading">Tìm hiểu</h2>
-          <h1 class="main_heading">
+          <h2 data-animate-sub-heading class="sub_heading">Tìm hiểu</h2>
+          <h1 data-animate-main-heading class="main_heading">
             sản phẩm <span class="text-gradient">trà ngon</span>
           </h1>
         </div>
@@ -41,16 +61,19 @@ const tabs = [
                 class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-8 items-center py-2"
               >
                 <NuxtImg
+                  data-animate-image
                   src="/images/product_1.jpg"
                   alt="Matcha Magic - Premium matcha tea powder"
                   class="w-full h-auto rounded-lg"
                 />
                 <div>
-                  <h4 class="products-sub_heading">Matcha Magic</h4>
-                  <h5 class="products-main_heading">
+                  <h4 data-animate-sub-heading class="products-sub_heading">
+                    Matcha Magic
+                  </h4>
+                  <h5 data-animate-main-heading class="products-main_heading">
                     Khám phá những lợi ích tiềm năng của "vàng xanh" từ Nhật Bản
                   </h5>
-                  <p>
+                  <p data-animate-description>
                     Sẵn sàng nâng cao sức khỏe của bạn? Hãy làm quen với matcha,
                     loại bột màu xanh lá cây rực rỡ đang làm khuynh đảo thế giới
                     chăm sóc sức khỏe. Chứa đầy chất chống oxy hóa và chất dinh
@@ -68,11 +91,11 @@ const tabs = [
                     variant="accent"
                     size="md"
                     icon="i-lucide-arrow-right"
+                    data-animate-button
                   />
                 </div>
               </div>
             </div>
-
             <!-- White Tea Tab -->
             <div v-show="activeTab === 'white-tea'">
               <div
@@ -104,6 +127,7 @@ const tabs = [
                     variant="accent"
                     size="md"
                     icon="i-lucide-arrow-right"
+                    data-animate-button
                   />
                 </div>
               </div>
@@ -139,6 +163,7 @@ const tabs = [
                     variant="accent"
                     size="md"
                     icon="i-lucide-arrow-right"
+                    data-animate-button
                   />
                 </div>
               </div>
@@ -174,6 +199,7 @@ const tabs = [
                     variant="accent"
                     size="md"
                     icon="i-lucide-arrow-right"
+                    data-animate-button
                   />
                 </div>
               </div>

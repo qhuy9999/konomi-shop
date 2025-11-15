@@ -27,6 +27,20 @@ model User {
   bio            String?  @db.VarChar(500)
   phone          String?  @unique @db.VarChar(20)
 
+  // Billing Address (Optional - can be filled during signup or checkout)
+  billingStreet    String?  @db.VarChar(255)
+  billingCity      String?  @db.VarChar(100)
+  billingProvince  String?  @db.VarChar(100)
+  billingZipCode   String?  @db.VarChar(20)
+  billingCountry   String?  @db.VarChar(100)
+
+  // Delivery Address (Optional - defaults to billing if not provided)
+  deliveryStreet   String?  @db.VarChar(255)
+  deliveryCity     String?  @db.VarChar(100)
+  deliveryProvince String?  @db.VarChar(100)
+  deliveryZipCode  String?  @db.VarChar(20)
+  deliveryCountry  String?  @db.VarChar(100)
+
   createdAt      DateTime @default(now())
   updatedAt      DateTime @updatedAt
 

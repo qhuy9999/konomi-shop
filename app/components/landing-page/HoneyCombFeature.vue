@@ -1,18 +1,20 @@
 <script setup lang="ts">
 const { features } = useFeatures();
+const { animateOnScroll } = useScrollAnimation();
 
-// ============ FEATURES - Responsive Pentagon/Honeycomb Layout ============
-// XS (< 480px): Vertical (1 column)
-// SM (480-624px): Vertical (1 column)
-// SM-MD (625px+): Honeycomb (3 on top, 2 on bottom)
-// MD-LG (768px+): Honeycomb (3 on top, 2 on bottom)
-// 5 items total
 const featureRows = computed(() => {
   // Desktop: 3-2 layout (honeycomb)
   return {
     topRow: features.slice(0, 3), // Items 1, 2, 3
     bottomRow: features.slice(3, 5), // Items 4, 5
   };
+});
+
+onMounted(() => {
+  animateOnScroll('[data-counter-1]', 'animate-fadeIn', 100, false);
+  animateOnScroll('[data-counter-2]', 'animate-fadeIn', 200, false);
+  animateOnScroll('[data-counter-3]', 'animate-fadeIn', 300, false);
+  animateOnScroll('[data-counter-4]', 'animate-fadeIn', 400, false);
 });
 </script>
 <template>
@@ -53,6 +55,7 @@ const featureRows = computed(() => {
           :data-aos="`zoom-in`"
           :data-aos-delay="`0`"
           class="group w-full sm-md:col-span-2"
+          data-counter-1
         >
           <div
             class="relative h-64 md:h-72 lg:h-80 overflow-hidden"
@@ -105,6 +108,7 @@ const featureRows = computed(() => {
           :data-aos="`zoom-in`"
           :data-aos-delay="`100`"
           class="group w-full sm-md:col-span-2"
+          data-counter-2
         >
           <div
             class="relative h-64 md:h-72 lg:h-80 overflow-hidden"
@@ -148,6 +152,7 @@ const featureRows = computed(() => {
             :data-aos="`zoom-in`"
             :data-aos-delay="`200`"
             class="group w-full sm-md:col-span-2 sm-md:-mt-8"
+            data-counter-3
           >
             <div
               class="relative h-64 md:h-72 lg:h-80 overflow-hidden"
@@ -184,6 +189,7 @@ const featureRows = computed(() => {
             :data-aos="`zoom-in`"
             :data-aos-delay="`400`"
             class="group w-full sm-md:col-span-2 sm-md:-mt-8"
+            data-counter-4
           >
             <div
               class="relative h-64 md:h-72 lg:h-80 overflow-hidden"
