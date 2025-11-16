@@ -95,6 +95,12 @@ export default defineNuxtConfig({
     storesDirs: ["@/stores/**"],
   },
 
+  nitro: {
+    rollupConfig: {
+      external: ["@prisma/client"],
+    },
+  },
+
   i18n: {
     locales: [
       { code: 'vi', language: 'vi-VN', name: 'Tiếng Việt', iso: 'vi' },
@@ -130,7 +136,7 @@ export default defineNuxtConfig({
       },
     },
     sitemap: {
-      hostname: "https://example.com",
+      hostname: "https://konomi-shop.vn",
       gzip: true,
       exclude: ["/secret", "/admin/**"],
       routes: [
