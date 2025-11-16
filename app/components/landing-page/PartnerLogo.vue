@@ -16,9 +16,9 @@ const marqueeLogos = computed(() => [...logoList.value, ...logoList.value]);
     <div class="container">
       <!-- heading -->
       <div data-aos="fade-right" class="mt-10">
-        <h2 data-animate-sub-heading class="sub_heading">Có mặt tại</h2>
+        <h2 data-animate-sub-heading class="sub_heading">{{ $t('partner.subheading') }}</h2>
         <h1 data-animate-main-heading class="main_heading">
-          Những Nhà Phân Phối <span class="text-gradient">Uy Tín</span>
+          {{ $t('partner.mainHeading') }}
         </h1>
       </div>
       <!-- logos marquee -->

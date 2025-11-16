@@ -76,15 +76,11 @@ export const useProducts = () => {
 
   // ===== Partner Logos =====
   const partnerLogos: Ref<PartnerLogo[]> = ref([
-    { fileName: 'costco.png', alt: 'Costco Logo' },
-    { fileName: 'kroger.png', alt: 'Kroger Logo' },
-    { fileName: 'meijer.png', alt: 'Meijer Logo' },
-    { fileName: 'publix.png', alt: 'Publix Logo' },
-    { fileName: 'safeway.png', alt: 'Safeway Logo' },
-    { fileName: 'target.png', alt: 'Target Logo' },
-    { fileName: 'walmart.png', alt: 'Walmart Logo' },
-    { fileName: 'wegmans.png', alt: 'Wegmans Logo' },
-    { fileName: 'whole-foods.png', alt: 'Whole Foods Logo' },
+    { fileName: 'aquarius-logo.png', alt: 'Aquarius Logo' },
+    { fileName: 'aries-logo.png', alt: 'Aries Logo' },
+    { fileName: 'cancer-logo.png', alt: 'Cancer Logo' },
+    { fileName: 'capricorn-logo.png', alt: 'Capricorn Logo' },
+    { fileName: 'leo-logo.png', alt: 'Leo Logo' },
   ])
 
   // ===== Generate Duplicated Logos (for carousel effect) =====

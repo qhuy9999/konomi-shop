@@ -2,6 +2,7 @@
 import { useSessionStore } from "@/stores/session";
 
 const sessionStore = useSessionStore();
+const { t } = useI18n();
 
 const handleSignIn = () => {
   sessionStore.setAuthModalPage('signin');
@@ -22,41 +23,38 @@ const handleSignUp = () => {
         >
           <!-- tiêu đề -->
           <div data-aos="fade-down">
-            <h2 class="sub_heading">Có câu hỏi?</h2>
-            <h1 class="main_heading">Liên hệ tea station tại</h1>
+            <h2 class="sub_heading">{{ $t('contact.mainHeading') }}</h2>
+            <h1 class="main_heading">{{ $t('contact.subheading') }}</h1>
           </div>
 
           <!-- địa chỉ -->
           <div class="contact-info">
             <div>
               <UIcon name="i-lucide-building-2" class="w-4 h-4" />
-              <h1>Địa Chỉ</h1>
+              <h1>{{ $t('common.home') }}</h1>
             </div>
 
-            <p>
-              123 Phan Đình Phùng, Phường 1, Quận Tân Bình, Thành phố Hồ Chí
-              Minh, VN
-            </p>
+            <p>{{ $t('contact.address') }}</p>
           </div>
 
           <!-- email -->
           <div class="contact-info">
             <div>
               <UIcon name="i-lucide-mail" class="w-4 h-4" />
-              <h1>Email</h1>
+              <h1>{{ $t('common.account') }}</h1>
             </div>
 
-            <p>test.service@example.com</p>
+            <p>konomi@email.com</p>
           </div>
 
           <!-- số điện thoại -->
           <div class="contact-info">
             <div>
               <UIcon name="i-lucide-phone" class="w-4 h-4" />
-              <h1>Điện Thoại</h1>
+              <h1>{{ $t('footer.hotline') }}</h1>
             </div>
 
-            <p>(+1) 823 456 789</p>
+            <p>{{ $t('contact.phone') }}</p>
           </div>
         </div>
 
@@ -66,23 +64,23 @@ const handleSignUp = () => {
         >
           <!-- heading -->
           <div>
-            <h2 class="sub_heading">Tham gia cộng đồng</h2>
-            <h1 class="main_heading">Thành Viên Konomi Shop</h1>
+            <h2 class="sub_heading">{{ $t('contact.community.title') }}</h2>
+            <h1 class="main_heading">{{ $t('contact.community.subtitle') }}</h1>
           </div>
 
-          <p>Trở thành thành viên Konomi Shop sẽ giúp bạn nhận ưu đãi độc quyền. Đăng nhập để truy cập tài khoản của bạn hoặc tạo tài khoản mới.</p>
+          <p>{{ $t('contact.community.description') }}</p>
 
           <!-- 2 nút đăng nhập & đăng ký -->
           <div class="flex gap-3">
             <Button
-              label="Đăng Nhập"
+              :label="$t('common.login')"
               to="/auth?auth=signin"
               variant="secondary"
               size="sm"
               @click="handleSignIn"
             />
             <Button
-              label="Đăng Ký"
+              :label="$t('common.signup')"
               to="/auth?auth=signup"
               variant="primary"
               size="sm"
@@ -90,7 +88,7 @@ const handleSignUp = () => {
             />
           </div>
 
-          <p class="text-sm text-neutral-600">Chưa có tài khoản? Đăng ký ngay!</p>
+          <p class="text-sm text-neutral-600">{{ $t('contact.community.noAccount') }}</p>
 
           <!-- hình decor -->
           <NuxtImg

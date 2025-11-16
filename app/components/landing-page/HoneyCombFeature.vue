@@ -1,12 +1,23 @@
 <script setup lang="ts">
-const { features } = useFeatures();
+const { features: baseFeatures } = useFeatures();
 const { animateOnScroll } = useScrollAnimation();
+const { t } = useI18n();
+
+// Map base features with i18n translations
+const features = computed(() => {
+  const featureKeys = ['premium-source', 'unique-flavor', 'health-focus', 'personalized-experience', 'sustainability'];
+  return baseFeatures.map((feature, index) => ({
+    ...feature,
+    title: t(`features.items.${index}.title`),
+    description: t(`features.items.${index}.description`),
+  }));
+});
 
 const featureRows = computed(() => {
   // Desktop: 3-2 layout (honeycomb)
   return {
-    topRow: features.slice(0, 3), // Items 1, 2, 3
-    bottomRow: features.slice(3, 5), // Items 4, 5
+    topRow: features.value.slice(0, 3), // Items 1, 2, 3
+    bottomRow: features.value.slice(3, 5), // Items 4, 5
   };
 });
 
@@ -34,11 +45,9 @@ onMounted(() => {
             data-aos="fade-right"
           >
             <div class="features_container_heading">
-              <h2 class="sub_heading">Tại sao chọn chúng tôi?</h2>
+              <h2 class="sub_heading">{{ $t('features.subHeading') }}</h2>
               <h1 class="main_heading">
-                Sự <span class="text-gradient">Độc Đáo</span> Từ
-                <br />
-                Konomi Shop
+                <span class="text-gradient">{{ $t('features.mainHeadingHighlight') }}</span> {{ $t('features.mainHeading') }}
               </h1>
             </div>
           </div>
@@ -95,9 +104,9 @@ onMounted(() => {
           }"
         >
           <div data-aos="fade-right" class="features_container_heading">
-            <h2 class="sub_heading">Tại sao chọn chúng tôi?</h2>
+            <h2 class="sub_heading">{{ $t('features.subHeading') }}</h2>
             <h1 class="main_heading">
-              Sự <span class="text-gradient">Độc Đáo</span> Từ<br />Konomi Shop
+              <span class="text-gradient">{{ $t('features.mainHeadingHighlight') }}</span> {{ $t('features.mainHeading') }}
             </h1>
           </div>
         </div>

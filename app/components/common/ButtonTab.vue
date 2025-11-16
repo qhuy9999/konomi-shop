@@ -40,13 +40,14 @@ const handleTabClick = (tabId: string) => {
           `variant-${variant}`,
         ]"
         @click="handleTabClick(tab.id)"
+        :title="tab.label"
       >
         <UIcon v-if="tab.icon" :name="tab.icon" class="w-5 h-5" />
-        <span class="hidden md:inline">{{ tab.label }}</span>
-        <span v-if="tab.labelShort" class="md:hidden">{{
+        <span class="hidden md:inline truncate">{{ tab.label }}</span>
+        <span v-if="tab.labelShort" class="md:hidden truncate">{{
           tab.labelShort
         }}</span>
-        <span v-else class="md:hidden">{{ tab.label }}</span>
+        <span v-else class="md:hidden truncate">{{ tab.label }}</span>
       </button>
     </div>
     <!-- Divider -->
@@ -62,17 +63,19 @@ const handleTabClick = (tabId: string) => {
 }
 
 .tabs-nav {
-  @apply flex items-center justify-center gap-2 mx-auto flex-nowrap overflow-x-auto;
+  @apply flex flex-wrap items-center justify-center gap-2 w-full;
 }
 
 .tab-button {
-  @apply inline-flex items-center whitespace-nowrap;
-  @apply px-3 md:px-4 lg:px-6;
-  @apply text-xs md:text-sm font-medium lg:text-2xl lg:gap-3;
+  @apply inline-flex items-center justify-center gap-1;
+  @apply px-1.5 md:px-4 lg:px-6;
+  @apply text-[10px] md:text-sm font-medium lg:text-base lg:gap-3;
   @apply text-accent-200 bg-primary-800 rounded-t-lg;
   @apply transition-all duration-200;
   @apply cursor-pointer hover:bg-primary-700;
   @apply border-0;
+  @apply py-1.5 md:py-3;
+  flex-shrink: 0; /* Prevent shrinking below content size */
 
   /* Active state */
   &.active {

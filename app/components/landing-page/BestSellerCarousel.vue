@@ -7,6 +7,7 @@ import "swiper/css/pagination";
 import "~/app.config";
 
 const { animateOnScroll } = useScrollAnimation();
+const { t } = useI18n();
 
 onMounted(() => {
   animateOnScroll('[data-animate-sub-heading]', 'animate-slideRight', 400, false);
@@ -140,41 +141,38 @@ const getProductProgress = (productId: string, index: number): number => {
 
 interface Product {
   id: "product1" | "product2" | "product3" | "product4";
-  name: string;
-  description: string;
   image: string;
 }
 
 const products: Product[] = [
   {
     id: "product1" as const,
-    name: "Peppermint Velvet",
-    description:
-      "Mỗi ngụm mang đến sự pha trộn hài hòa giữa hương vị đậm đà và hương thơm sảng khoái, khiến đây trở thành lựa chọn lý tưởng cho cả nghi lễ buổi sáng và giờ nghỉ giải lao buổi chiều. Trải nghiệm sự ấm áp dễ chịu và những phẩm chất tràn đầy năng lượng đã khiến trà đen trở thành thức uống cổ điển được yêu thích trong nhiều thế kỷ.",
     image: "/images/products/matcha1.jpg",
   },
   {
     id: "product2" as const,
-    name: "Chamomile Bliss",
-    description:
-      "Mỗi ngụm mang đến sự pha trộn hài hòa giữa hương vị đậm đà và hương thơm sảng khoái, khiến đây trở thành lựa chọn lý tưởng cho cả nghi lễ buổi sáng và giờ nghỉ giải lao buổi chiều. Trải nghiệm sự ấm áp dễ chịu và những phẩm chất tràn đầy năng lượng đã khiến trà đen trở thành thức uống cổ điển được yêu thích trong nhiều thế kỷ.",
     image: "/images/products/blacktea1.jpg",
   },
   {
     id: "product3" as const,
-    name: "Lemon Ginger Zest",
-    description:
-      "Mỗi ngụm mang đến sự pha trộn hài hòa giữa hương vị đậm đà và hương thơm sảng khoái, khiến đây trở thành lựa chọn lý tưởng cho cả nghi lễ buổi sáng và giờ nghỉ giải lao buổi chiều. Trải nghiệm sự ấm áp dễ chịu và những phẩm chất tràn đầy năng lượng đã khiến trà đen trở thành thức uống cổ điển được yêu thích trong nhiều thế kỷ.",
     image: "/images/products/whitetea1.jpg",
   },
   {
     id: "product4" as const,
-    name: "Mystic Earl Grey",
-    description:
-      "Mỗi ngụm mang đến sự pha trộn hài hòa giữa hương vị đậm đà và hương thơm sảng khoái, khiến đây trở thành lựa chọn lý tưởng cho cả nghi lễ buổi sáng và giờ nghỉ giải lao buổi chiều. Trải nghiệm sự ấm áp dễ chịu và những phẩm chất tràn đầy năng lượng đã khiến trà đen trở thành thức uống cổ điển được yêu thích trong nhiều thế kỷ.",
     image: "/images/products/oolong1.jpg",
   },
 ] as const;
+
+// Get product name and description from i18n
+const getProductName = (productId: string): string => {
+  const productIndex = products.findIndex(p => p.id === productId);
+  return t(`bestSellers.products.${productIndex}.name`);
+};
+
+const getProductDescription = (productId: string): string => {
+  const productIndex = products.findIndex(p => p.id === productId);
+  return t(`bestSellers.products.${productIndex}.description`);
+};
 
 const modules = [Navigation, Autoplay, Pagination];
 
@@ -190,17 +188,14 @@ const paginationConfig = {
       <!-- tiêu đề -->
       <div class="flex flex-col items-start md:items-center lg:items-start">
         <div data-aos="fade-right">
-          <h2 data-animate-sub-heading class="sub_heading">Khách hàng yêu thích</h2>
+          <h2 data-animate-sub-heading class="sub_heading">{{ $t('bestSellers.subheading') }}</h2>
           <h2 data-animate-main-heading class="main_heading">
-            Những Sản Phẩm <span class="text-gradient">Bán Chạy Nhất</span>
+            {{ $t('bestSellers.mainHeading') }}
           </h2>
         </div>
 
         <p data-animate-description>
-          Khám phá những sản phẩm bán chạy nhất của chúng tôi, nơi chất lượng
-          kết hợp hương vị trong mỗi tách trà. Hãy tham gia cùng hàng ngàn khách
-          hàng hài lòng đã biến những hỗn hợp này thành sở thích của họ và nâng
-          tầm thời gian uống trà của bạn ngay hôm nay!
+          {{ $t('bestSellers.description') }}
         </p>
       </div>
 
@@ -221,8 +216,8 @@ const paginationConfig = {
               <!-- phần bên trái -->
               <div class="flex-1 best-product--left">
                 <div class="best-product-info">
-                  <h3 data-animate-sub-heading-swiper>{{ product.name }}</h3>
-                  <p data-animate-description-swiper>{{ product.description }}</p>
+                  <h3 data-animate-sub-heading-swiper>{{ getProductName(product.id) }}</h3>
+                  <p data-animate-description-swiper>{{ getProductDescription(product.id) }}</p>
                 </div>
 
                 <!-- thanh tiến trình -->
@@ -231,7 +226,7 @@ const paginationConfig = {
                   <div class="grid grid-cols-2 gap-4 mt-3">
                     <div data-progress>
                       <h4 class="text-xs sm-md:text-sm text-accent-750">
-                        Tăng cường năng lượng và tập trung
+                        {{ $t('bestSellers.benefits.0') }}
                       </h4>
                       <div class="flex items-center gap-2">
                         <UProgress
@@ -248,7 +243,7 @@ const paginationConfig = {
                     </div>
                     <div data-progress>
                       <h4 class="text-xs sm-md:text-sm text-accent-750">
-                        Giàu chất chống oxy hoá
+                        {{ $t('bestSellers.benefits.1') }}
                       </h4>
                       <div class="flex items-center gap-2">
                         <UProgress
@@ -268,7 +263,7 @@ const paginationConfig = {
                   <div class="grid grid-cols-2 gap-4">
                     <div data-progress>
                       <h4 class="text-xs sm-md:text-sm text-accent-750">
-                        Tăng cường trao đổi chất
+                        {{ $t('bestSellers.benefits.2') }}
                       </h4>
                       <div class="flex items-center gap-2">
                         <UProgress
@@ -285,7 +280,7 @@ const paginationConfig = {
                     </div>
                     <div data-progress>
                       <h4 class="text-xs sm-md:text-sm text-accent-750">
-                        Thúc đẩy sự bình tĩnh và thư giãn
+                        {{ $t('bestSellers.benefits.3') }}
                       </h4>
                       <div class="flex items-center gap-2">
                         <UProgress

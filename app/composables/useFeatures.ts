@@ -31,7 +31,7 @@ export const useFeatures = () => {
       description:
         'Sản phẩm độc quyền của chúng tôi gồm các loại trà được với hương vị độc đáo, được chế tác để làm hài lòng mọi khẩu vị.',
       icon: 'i-lucide-palette',
-      bgImage: 'url(/images/pic1.jpg)',
+      bgImage: 'url(/images/benefit_2.jpg)',
       bgColor: 'from-secondary-100 to-secondary-200',
     },
     {
@@ -58,7 +58,7 @@ export const useFeatures = () => {
       description:
         'Chúng tôi cam kết bảo vệ môi trường thông qua các phương pháp nông nghiệp bền vững và bao bì thân thiện với eco.',
       icon: 'i-lucide-sprout',
-      bgImage: 'url(/images/benefit_2.jpg)',
+      bgImage: 'url(/images/benefit_4.jpg)',
       bgColor: 'from-success-100 to-success-200',
     },
   ]

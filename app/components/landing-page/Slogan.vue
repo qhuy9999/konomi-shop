@@ -1,6 +1,7 @@
 <script setup lang="ts">
 const { videoConfig } = useVideoContent();
 const { animateOnScroll } = useScrollAnimation();
+const { t } = useI18n();
 
 onMounted(() => {
   animateOnScroll('[data-slogan]', 'animate-fadeIn', 600, false);
@@ -27,14 +28,12 @@ onMounted(() => {
 
       <!-- Text Content with AOS animation -->
       <p
-        class="px-4 text-base tracking-wide text-center text-white md:text-2xl lg:text-3xl font-medium"
+        class="px-4 text-base tracking-wide text-center text-primary-100 md:text-2xl lg:text-3xl font-medium"
         :style="{ textShadow: '2px 2px 8px rgba(0, 0, 0, 0.7)' }"
         data-aos="fade-up"
         data-aos-delay="100"
       >
-        Chỉ những lá trà ngon nhất mới được đưa vào sản phẩm của chúng tôi,
-        <br class="hidden lg:block" />
-        đảm bảo mỗi ngụm trà đều mang hương vị tinh khiết và tuyệt hảo.
+        {{ t('slogan') }}
       </p>
     </div>
   </section>

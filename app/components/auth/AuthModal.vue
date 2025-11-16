@@ -3,11 +3,15 @@ import { reactive, computed } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import { useSessionStore } from '@/stores/session'
 import { useToastStore } from '@/stores/toast'
+import { useI18n } from 'vue-i18n'
 
 // ============ Stores ============
 const authStore = useAuthStore()
 const sessionStore = useSessionStore()
 const toastStore = useToastStore()
+
+// ============ i18n ============
+const { t } = useI18n()
 
 // ============ Router & Route ============
 const router = useRouter()
@@ -94,12 +98,12 @@ const validateSignIn = (): boolean => {
   let isValid = true
 
   if (!signInForm.username.trim()) {
-    sessionStore.setSignInError('username', 'Username hoặc email bắt buộc')
+    sessionStore.setSignInError('username', t('auth.validation.usernameRequired'))
     isValid = false
   }
 
   if (!signInForm.password.trim()) {
-    sessionStore.setSignInError('password', 'Mật khẩu bắt buộc')
+    sessionStore.setSignInError('password', t('auth.validation.passwordRequired'))
     isValid = false
   }
 
@@ -116,76 +120,76 @@ const validateSignUp = (): boolean => {
 
   // Username validation
   if (!signUpForm.username.trim()) {
-    sessionStore.setSignUpError('username', 'Username bắt buộc')
+    sessionStore.setSignUpError('username', t('auth.validation.usernameRequired'))
     isValid = false
   } else if (signUpForm.username.length < 3) {
-    sessionStore.setSignUpError('username', 'Username phải có ít nhất 3 ký tự')
+    sessionStore.setSignUpError('username', t('auth.validation.usernameMinLength'))
     isValid = false
   } else if (signUpForm.username.length > 20) {
-    sessionStore.setSignUpError('username', 'Username không được vượt quá 20 ký tự')
+    sessionStore.setSignUpError('username', t('auth.validation.usernameMaxLength'))
     isValid = false
   } else if (!/^[a-zA-Z0-9_-]+$/.test(signUpForm.username)) {
-    sessionStore.setSignUpError('username', 'Username chỉ chứa chữ, số, _, -')
+    sessionStore.setSignUpError('username', t('auth.validation.usernameInvalid'))
     isValid = false
   }
 
   // Email validation
   if (!signUpForm.email.trim()) {
-    sessionStore.setSignUpError('email', 'Email bắt buộc')
+    sessionStore.setSignUpError('email', t('auth.validation.emailRequired'))
     isValid = false
   } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signUpForm.email)) {
-    sessionStore.setSignUpError('email', 'Email không hợp lệ')
+    sessionStore.setSignUpError('email', t('auth.validation.emailInvalid'))
     isValid = false
   }
 
   // Password validation
   if (!signUpForm.password.trim()) {
-    sessionStore.setSignUpError('password', 'Mật khẩu bắt buộc')
+    sessionStore.setSignUpError('password', t('auth.validation.passwordRequired'))
     isValid = false
   } else if (signUpForm.password.length < 8) {
-    sessionStore.setSignUpError('password', 'Mật khẩu phải có ít nhất 8 ký tự')
+    sessionStore.setSignUpError('password', t('auth.validation.passwordMinLength'))
     isValid = false
   } else if (!/[A-Z]/.test(signUpForm.password)) {
-    sessionStore.setSignUpError('password', 'Mật khẩu phải chứa ít nhất 1 chữ hoa')
+    sessionStore.setSignUpError('password', t('auth.validation.passwordRequireUppercase'))
     isValid = false
   } else if (!/[0-9]/.test(signUpForm.password)) {
-    sessionStore.setSignUpError('password', 'Mật khẩu phải chứa ít nhất 1 chữ số')
+    sessionStore.setSignUpError('password', t('auth.validation.passwordRequireNumber'))
     isValid = false
   }
 
   // Confirm password validation
   if (!signUpForm.confirmPassword.trim()) {
-    sessionStore.setSignUpError('confirmPassword', 'Xác nhận mật khẩu bắt buộc')
+    sessionStore.setSignUpError('confirmPassword', t('auth.validation.confirmPasswordRequired'))
     isValid = false
   } else if (signUpForm.password !== signUpForm.confirmPassword) {
-    sessionStore.setSignUpError('confirmPassword', 'Mật khẩu xác nhận không khớp')
+    sessionStore.setSignUpError('confirmPassword', t('auth.validation.passwordMismatch'))
     isValid = false
   }
 
   // FirstName validation
   if (!signUpForm.firstName.trim()) {
-    sessionStore.setSignUpError('firstName', 'Tên bắt buộc')
+    sessionStore.setSignUpError('firstName', t('auth.validation.firstNameRequired'))
     isValid = false
   } else if (signUpForm.firstName.length < 2) {
-    sessionStore.setSignUpError('firstName', 'Tên phải có ít nhất 2 ký tự')
+    sessionStore.setSignUpError('firstName', t('auth.validation.firstNameMinLength'))
     isValid = false
   }
 
   // LastName validation
   if (!signUpForm.lastName.trim()) {
-    sessionStore.setSignUpError('lastName', 'Họ bắt buộc')
+    sessionStore.setSignUpError('lastName', t('auth.validation.lastNameRequired'))
     isValid = false
   } else if (signUpForm.lastName.length < 2) {
-    sessionStore.setSignUpError('lastName', 'Họ phải có ít nhất 2 ký tự')
+    sessionStore.setSignUpError('lastName', t('auth.validation.lastNameMinLength'))
     isValid = false
   }
 
   // PhoneNumber validation (optional)
   if (signUpForm.phoneNumber && !/^[0-9+\-\s()]*$/.test(signUpForm.phoneNumber)) {
-    sessionStore.setSignUpError('phoneNumber', 'Số điện thoại không hợp lệ')
+    sessionStore.setSignUpError('phoneNumber', t('auth.validation.phoneInvalid'))
     isValid = false
   } else if (signUpForm.phoneNumber && signUpForm.phoneNumber.length > 20) {
-    sessionStore.setSignUpError('phoneNumber', 'Số điện thoại không được vượt quá 20 ký tự')
+    sessionStore.setSignUpError('phoneNumber', t('auth.validation.phoneInvalid'))
     isValid = false
   }
 
@@ -584,8 +588,8 @@ const toggleAddressFields = () => {
           <div class="page-content">
             <!-- Header -->
             <div class="mb-10">
-              <h2 class="sub_heading">Chào mừng quay lại</h2>
-              <h1 class="main_heading">Đăng Nhập</h1>
+              <h2 class="sub_heading">{{ t('auth.signin') }}</h2>
+              <h1 class="main_heading">{{ t('auth.signInTitle') }}</h1>
             </div>
 
             <!-- Error Message -->
@@ -601,12 +605,12 @@ const toggleAddressFields = () => {
               <!-- Username Input -->
               <div>
                 <label class="block text-sm font-medium mb-2">
-                  Tên đăng nhập hoặc Email
+                  {{ t('auth.username') }}
                 </label>
                 <input
                   v-model="signInForm.username"
                   type="text"
-                  placeholder="Nhập username hoặc email"
+                  :placeholder="t('auth.username')"
                   :class="[
                     'w-full px-4 py-3 border rounded-lg transition-colors',
                     signInErrors.username?.message
@@ -622,11 +626,11 @@ const toggleAddressFields = () => {
 
               <!-- Password Input -->
               <div>
-                <label class="block text-sm font-medium mb-2">Mật khẩu</label>
+                <label class="block text-sm font-medium mb-2">{{ t('auth.password') }}</label>
                 <input
                   v-model="signInForm.password"
                   type="password"
-                  placeholder="Nhập mật khẩu"
+                  :placeholder="t('auth.password')"
                   :class="[
                     'w-full px-4 py-3 border rounded-lg transition-colors',
                     signInErrors.password?.message
@@ -646,7 +650,7 @@ const toggleAddressFields = () => {
                 :disabled="isLoading"
                 class="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {{ isLoading ? 'Đang xử lý...' : 'Đăng Nhập' }}
+                {{ isLoading ? t('common.processing') : t('auth.signInButton') }}
               </button>
             </form>
 
@@ -657,14 +661,14 @@ const toggleAddressFields = () => {
                 type="button"
                 class="block w-full text-primary-600 hover:text-primary-700 text-sm font-medium"
               >
-                Quên mật khẩu?
+                {{ t('auth.forgotPassword') }}
               </button>
               <button
                 @click="navigateToPage('verify-otp-email')"
                 type="button"
                 class="block w-full text-accent-600 hover:text-accent-700 text-sm font-medium"
               >
-                Xác nhận Email lại
+                📧 {{ t('auth.verifyEmailAgain') }}
               </button>
               <!-- Show button to reopen OTP modal only if there's pending OTP -->
               <button
@@ -673,20 +677,20 @@ const toggleAddressFields = () => {
                 type="button"
                 class="block w-full text-yellow-600 hover:text-yellow-700 text-sm font-medium"
               >
-                📧 Mở lại Modal OTP
+                📧 {{ t('auth.reopenOTPModal') }}
               </button>
             </div>
           </div>
 
           <!-- Signup CTA -->
           <div class="page-footer">
-            <p class="text-center mb-4">Chưa có tài khoản?</p>
+            <p class="text-center mb-4">{{ t('auth.noAccount') }}</p>
             <button
               @click="goToSignUp"
               type="button"
               class="w-full py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold rounded-lg transition-colors"
             >
-              Tạo Tài Khoản Mới
+              {{ t('auth.signUpButton') }}
             </button>
           </div>
         </div>
@@ -701,8 +705,8 @@ const toggleAddressFields = () => {
           <div class="page-content">
             <!-- Header -->
             <div class="mb-8">
-              <h2 class="sub_heading">Bắt đầu ngay</h2>
-              <h1 class="main_heading">Đăng Ký</h1>
+              <h2 class="sub_heading">{{ t('auth.signup') }}</h2>
+              <h1 class="main_heading">{{ t('auth.signUpTitle') }}</h1>
             </div>
 
             <!-- Error Message -->
@@ -717,11 +721,11 @@ const toggleAddressFields = () => {
             <form @submit.prevent="handleSignUp" class="space-y-4">
               <!-- Username -->
               <div>
-                <label class="block text-xs font-medium mb-1">Tên đăng nhập *</label>
+                <label class="block text-xs font-medium mb-1">{{ t('auth.username') }} *</label>
                 <input
                   v-model="signUpForm.username"
                   type="text"
-                  placeholder="3-20 ký tự"
+                  :placeholder="t('auth.username')"
                   :class="[
                     'w-full px-3 py-2 border rounded-lg text-sm transition-colors',
                     signUpErrors.username?.message
@@ -737,7 +741,7 @@ const toggleAddressFields = () => {
 
               <!-- Email -->
               <div>
-                <label class="block text-xs font-medium mb-1">Email *</label>
+                <label class="block text-xs font-medium mb-1">{{ t('auth.email') }} *</label>
                 <input
                   v-model="signUpForm.email"
                   type="email"
@@ -757,11 +761,11 @@ const toggleAddressFields = () => {
 
               <!-- Password -->
               <div>
-                <label class="block text-xs font-medium mb-1">Mật khẩu *</label>
+                <label class="block text-xs font-medium mb-1">{{ t('auth.password') }} *</label>
                 <input
                   v-model="signUpForm.password"
                   type="password"
-                  placeholder="Min 8 ký tự, 1 chữ hoa, 1 số"
+                  placeholder="Min 8 characters, 1 uppercase, 1 number"
                   :class="[
                     'w-full px-3 py-2 border rounded-lg text-sm transition-colors',
                     signUpErrors.password?.message
@@ -777,11 +781,11 @@ const toggleAddressFields = () => {
 
               <!-- Confirm Password -->
               <div>
-                <label class="block text-xs font-medium mb-1">Xác nhận mật khẩu *</label>
+                <label class="block text-xs font-medium mb-1">{{ t('auth.confirmPassword') }} *</label>
                 <input
                   v-model="signUpForm.confirmPassword"
                   type="password"
-                  placeholder="Nhập lại mật khẩu"
+                  :placeholder="t('auth.confirmPassword')"
                   :class="[
                     'w-full px-3 py-2 border rounded-lg text-sm transition-colors',
                     signUpErrors.confirmPassword?.message
@@ -797,11 +801,11 @@ const toggleAddressFields = () => {
 
               <!-- First Name -->
               <div>
-                <label class="block text-xs font-medium mb-1">Tên *</label>
+                <label class="block text-xs font-medium mb-1">{{ t('auth.firstName') }} *</label>
                 <input
                   v-model="signUpForm.firstName"
                   type="text"
-                  placeholder="Tên của bạn"
+                  :placeholder="t('auth.firstName')"
                   :class="[
                     'w-full px-3 py-2 border rounded-lg text-sm transition-colors',
                     signUpErrors.firstName?.message
@@ -817,11 +821,11 @@ const toggleAddressFields = () => {
 
               <!-- Last Name -->
               <div>
-                <label class="block text-xs font-medium mb-1">Họ *</label>
+                <label class="block text-xs font-medium mb-1">{{ t('auth.lastName') }} *</label>
                 <input
                   v-model="signUpForm.lastName"
                   type="text"
-                  placeholder="Họ của bạn"
+                  :placeholder="t('auth.lastName')"
                   :class="[
                     'w-full px-3 py-2 border rounded-lg text-sm transition-colors',
                     signUpErrors.lastName?.message
@@ -837,11 +841,11 @@ const toggleAddressFields = () => {
 
               <!-- Phone Number -->
               <div>
-                <label class="block text-xs font-medium mb-1">Số điện thoại (Tuỳ chọn)</label>
+                <label class="block text-xs font-medium mb-1">{{ t('auth.phoneNumberOptional') }}</label>
                 <input
                   v-model="signUpForm.phoneNumber"
                   type="tel"
-                  placeholder="(+84) 123 456 789"
+                  :placeholder="t('auth.phoneNumber')"
                   :class="[
                     'w-full px-3 py-2 border rounded-lg text-sm transition-colors',
                     signUpErrors.phoneNumber?.message
@@ -862,76 +866,76 @@ const toggleAddressFields = () => {
                   @click="toggleAddressFields"
                   class="text-xs font-medium text-primary-600 hover:text-primary-700 transition-colors"
                 >
-                  {{ showAddressFields ? '▼ Ẩn' : '▶ Thêm' }} địa chỉ (Tuỳ chọn)
+                  {{ showAddressFields ? t('auth.hideAddress') : t('auth.showAddress') }}
                 </button>
               </div>
 
               <!-- Billing Address (Collapsible) -->
               <div v-if="showAddressFields" class="space-y-3 pt-2 border-t border-neutral-200">
-                <p class="text-xs font-semibold text-neutral-700">Địa chỉ thanh toán</p>
+                <p class="text-xs font-semibold text-neutral-700">{{ t('auth.billingAddress') }}</p>
                 <div class="grid grid-cols-2 gap-3">
                   <input
                     v-model="signUpForm.billingStreet"
                     type="text"
-                    placeholder="Địa chỉ"
+                    :placeholder="t('auth.streetAddress')"
                     class="col-span-2 px-3 py-2 border border-primary-300 rounded-lg text-xs"
                   />
                   <input
                     v-model="signUpForm.billingCity"
                     type="text"
-                    placeholder="Thành phố"
+                    :placeholder="t('auth.city')"
                     class="px-3 py-2 border border-primary-300 rounded-lg text-xs"
                   />
                   <input
                     v-model="signUpForm.billingProvince"
                     type="text"
-                    placeholder="Tỉnh/Thành"
+                    :placeholder="t('auth.province')"
                     class="px-3 py-2 border border-primary-300 rounded-lg text-xs"
                   />
                   <input
                     v-model="signUpForm.billingZipCode"
                     type="text"
-                    placeholder="Mã bưu điện"
+                    :placeholder="t('auth.zipCode')"
                     class="px-3 py-2 border border-primary-300 rounded-lg text-xs"
                   />
                   <input
                     v-model="signUpForm.billingCountry"
                     type="text"
-                    placeholder="Quốc gia"
+                    :placeholder="t('auth.country')"
                     class="px-3 py-2 border border-primary-300 rounded-lg text-xs"
                   />
                 </div>
 
-                <p class="text-xs font-semibold text-neutral-700 pt-2">Địa chỉ giao hàng (Nếu khác)</p>
+                <p class="text-xs font-semibold text-neutral-700 pt-2">{{ t('auth.deliveryAddress') }}</p>
                 <div class="grid grid-cols-2 gap-3">
                   <input
                     v-model="signUpForm.deliveryStreet"
                     type="text"
-                    placeholder="Địa chỉ"
+                    :placeholder="t('auth.streetAddress')"
                     class="col-span-2 px-3 py-2 border border-primary-300 rounded-lg text-xs"
                   />
                   <input
                     v-model="signUpForm.deliveryCity"
                     type="text"
-                    placeholder="Thành phố"
+                    :placeholder="t('auth.city')"
                     class="px-3 py-2 border border-primary-300 rounded-lg text-xs"
                   />
                   <input
                     v-model="signUpForm.deliveryProvince"
                     type="text"
-                    placeholder="Tỉnh/Thành"
+                    :placeholder="t('auth.province')"
                     class="px-3 py-2 border border-primary-300 rounded-lg text-xs"
                   />
                   <input
                     v-model="signUpForm.deliveryZipCode"
                     type="text"
-                    placeholder="Mã bưu điện"
+                    :placeholder="t('auth.zipCode')"
                     class="px-3 py-2 border border-primary-300 rounded-lg text-xs"
                   />
                   <input
                     v-model="signUpForm.deliveryCountry"
                     type="text"
-                    placeholder="Quốc gia"
+                    :placeholder="t('auth.country')"
                     class="px-3 py-2 border border-primary-300 rounded-lg text-xs"
                   />
                 </div>
@@ -943,20 +947,20 @@ const toggleAddressFields = () => {
                 :disabled="isLoading"
                 class="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed mt-6"
               >
-                {{ isLoading ? 'Đang xử lý...' : 'Đăng Ký' }}
+                {{ isLoading ? t('common.processing') : t('auth.signUpButton') }}
               </button>
             </form>
           </div>
 
           <!-- Back to SignIn -->
           <div class="page-footer">
-            <p class="text-center mb-4 text-sm">Đã có tài khoản?</p>
+            <p class="text-center mb-4 text-sm">{{ t('auth.haveAccount') }}</p>
             <button
               @click="goToSignIn"
               type="button"
               class="w-full py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold rounded-lg transition-colors text-sm"
             >
-              Quay Lại Đăng Nhập
+              {{ t('auth.signInButton') }}
             </button>
           </div>
         </div>
@@ -971,12 +975,12 @@ const toggleAddressFields = () => {
           <div class="page-content">
             <!-- Header -->
             <div class="mb-10">
-              <h2 class="sub_heading">Xác nhận Email</h2>
-              <h1 class="main_heading">Nhập Mã OTP</h1>
+              <h2 class="sub_heading">{{ t('auth.signin') }}</h2>
+              <h1 class="main_heading">{{ t('auth.otpTitle') }}</h1>
             </div>
 
             <p class="text-neutral-600 mb-6 text-sm">
-              Mã xác nhận 6 chữ số đã được gửi đến email:
+              {{ t('auth.otpCodeSentTo') }}
               <br />
               <strong>{{ pendingEmail }}</strong>
             </p>
@@ -985,11 +989,11 @@ const toggleAddressFields = () => {
             <form @submit.prevent="handleVerifyOTP" class="space-y-6">
               <!-- OTP Code Input -->
               <div>
-                <label class="block text-sm font-medium mb-2">Mã OTP</label>
+                <label class="block text-sm font-medium mb-2">{{ t('auth.otpCode') }}</label>
                 <input
                   v-model="otpForm.code"
                   type="text"
-                  placeholder="Nhập 6 chữ số"
+                  :placeholder="t('auth.otpPlaceholder')"
                   maxlength="6"
                   :class="[
                     'w-full px-4 py-3 border rounded-lg transition-colors text-center text-2xl font-bold tracking-widest',
@@ -1005,7 +1009,7 @@ const toggleAddressFields = () => {
                 :disabled="isLoading"
                 class="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {{ isLoading ? 'Đang xử lý...' : 'Xác Nhận' }}
+                {{ isLoading ? t('common.processing') : t('auth.otpVerifyButton') }}
               </button>
             </form>
 
@@ -1017,7 +1021,7 @@ const toggleAddressFields = () => {
                 :disabled="isLoading"
                 class="text-primary-600 hover:text-primary-700 text-sm font-medium disabled:opacity-50"
               >
-                Gửi lại mã OTP
+                {{ t('auth.otpResendButton') }}
               </button>
             </div>
           </div>
@@ -1029,7 +1033,7 @@ const toggleAddressFields = () => {
               type="button"
               class="w-full py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold rounded-lg transition-colors"
             >
-              Quay Lại
+              {{ t('auth.backButton') }}
             </button>
           </div>
         </div>
@@ -1044,23 +1048,23 @@ const toggleAddressFields = () => {
           <div class="page-content">
             <!-- Header -->
             <div class="mb-10">
-              <h2 class="sub_heading">Quên mật khẩu?</h2>
-              <h1 class="main_heading">Khôi Phục Mật Khẩu</h1>
+              <h2 class="sub_heading">{{ t('auth.forgotPasswordTitle') }}</h2>
+              <h1 class="main_heading">{{ t('auth.resetPasswordTitle') }}</h1>
             </div>
 
             <p class="text-neutral-600 mb-6 text-sm">
-              Nhập email của bạn để nhận hướng dẫn khôi phục mật khẩu
+              {{ t('auth.forgotPasswordDescription') }}
             </p>
 
             <!-- Form -->
             <form @submit.prevent="handleForgotPassword" class="space-y-6">
               <!-- Email Input -->
               <div>
-                <label class="block text-sm font-medium mb-2">Email</label>
+                <label class="block text-sm font-medium mb-2">{{ t('auth.email') }}</label>
                 <input
                   v-model="forgotPasswordForm.email"
                   type="email"
-                  placeholder="Nhập email của bạn"
+                  :placeholder="t('auth.email')"
                   :class="[
                     'w-full px-4 py-3 border rounded-lg transition-colors',
                     'border-primary-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-200'
@@ -1075,7 +1079,7 @@ const toggleAddressFields = () => {
                 :disabled="isLoading"
                 class="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {{ isLoading ? 'Đang xử lý...' : 'Gửi Hướng Dẫn' }}
+                {{ isLoading ? t('common.processing') : t('auth.forgotPasswordButton') }}
               </button>
             </form>
           </div>
@@ -1087,7 +1091,7 @@ const toggleAddressFields = () => {
               type="button"
               class="w-full py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold rounded-lg transition-colors"
             >
-              Quay Lại Đăng Nhập
+              {{ t('auth.backToSignIn') }}
             </button>
           </div>
         </div>
@@ -1102,23 +1106,23 @@ const toggleAddressFields = () => {
           <div class="page-content">
             <!-- Header -->
             <div class="mb-10">
-              <h2 class="sub_heading">Đặt Lại Mật Khẩu</h2>
-              <h1 class="main_heading">Mật Khẩu Mới</h1>
+              <h2 class="sub_heading">{{ t('auth.resetPasswordTitle') }}</h2>
+              <h1 class="main_heading">{{ t('auth.newPassword') }}</h1>
             </div>
 
             <p class="text-neutral-600 mb-6 text-sm">
-              Nhập mã xác nhận từ email và mật khẩu mới
+              {{ t('auth.resetPasswordDescription') }}
             </p>
 
             <!-- Form -->
             <form @submit.prevent="handleResetPassword" class="space-y-6">
               <!-- OTP Code Input -->
               <div>
-                <label class="block text-sm font-medium mb-2">Mã Xác Nhận</label>
+                <label class="block text-sm font-medium mb-2">{{ t('auth.resetCode') }}</label>
                 <input
                   v-model="resetPasswordForm.code"
                   type="text"
-                  placeholder="Nhập mã từ email"
+                  :placeholder="t('auth.resetCode')"
                   :class="[
                     'w-full px-4 py-3 border rounded-lg transition-colors',
                     'border-primary-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-200'
@@ -1129,11 +1133,11 @@ const toggleAddressFields = () => {
 
               <!-- New Password Input -->
               <div>
-                <label class="block text-sm font-medium mb-2">Mật Khẩu Mới</label>
+                <label class="block text-sm font-medium mb-2">{{ t('auth.newPassword') }}</label>
                 <input
                   v-model="resetPasswordForm.password"
                   type="password"
-                  placeholder="Mật khẩu mới"
+                  :placeholder="t('auth.newPassword')"
                   :class="[
                     'w-full px-4 py-3 border rounded-lg transition-colors',
                     'border-primary-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-200'
@@ -1144,11 +1148,11 @@ const toggleAddressFields = () => {
 
               <!-- Confirm Password Input -->
               <div>
-                <label class="block text-sm font-medium mb-2">Xác Nhận Mật Khẩu</label>
+                <label class="block text-sm font-medium mb-2">{{ t('auth.confirmNewPassword') }}</label>
                 <input
                   v-model="resetPasswordForm.confirmPassword"
                   type="password"
-                  placeholder="Xác nhận mật khẩu"
+                  :placeholder="t('auth.confirmNewPassword')"
                   :class="[
                     'w-full px-4 py-3 border rounded-lg transition-colors',
                     'border-primary-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-200'
@@ -1163,7 +1167,7 @@ const toggleAddressFields = () => {
                 :disabled="isLoading"
                 class="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {{ isLoading ? 'Đang xử lý...' : 'Cập Nhật Mật Khẩu' }}
+                {{ isLoading ? t('common.processing') : t('auth.resetPasswordButton') }}
               </button>
             </form>
           </div>
@@ -1175,7 +1179,7 @@ const toggleAddressFields = () => {
               type="button"
               class="w-full py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold rounded-lg transition-colors"
             >
-              Quay Lại Đăng Nhập
+              {{ t('auth.backToSignIn') }}
             </button>
           </div>
         </div>
@@ -1190,23 +1194,23 @@ const toggleAddressFields = () => {
           <div class="page-content">
             <!-- Header -->
             <div class="mb-8">
-              <h2 class="sub_heading">Xác nhận tài khoản</h2>
-              <h1 class="main_heading">Cấp Lại OTP</h1>
+              <h2 class="sub_heading">{{ t('auth.signin') }}</h2>
+              <h1 class="main_heading">{{ t('auth.verifyEmailAgain') }}</h1>
             </div>
 
             <p class="text-neutral-600 mb-6 text-sm">
-              Nhập email của tài khoản cần xác nhận để nhận mã OTP mới
+              {{ t('auth.forgotPasswordDescription') }}
             </p>
 
             <!-- Form -->
             <form @submit.prevent="handleVerifyOTPEmail" class="space-y-6">
               <!-- Email Input -->
               <div>
-                <label class="block text-sm font-medium mb-2">Email</label>
+                <label class="block text-sm font-medium mb-2">{{ t('auth.email') }}</label>
                 <input
                   v-model="verifyOTPEmailForm.email"
                   type="email"
-                  placeholder="Nhập email của tài khoản"
+                  :placeholder="t('auth.email')"
                   :class="[
                     'w-full px-4 py-3 border rounded-lg transition-colors',
                     'border-primary-300 focus:border-primary-600 focus:ring-2 focus:ring-primary-200'
@@ -1221,7 +1225,7 @@ const toggleAddressFields = () => {
                 :disabled="isLoading"
                 class="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {{ isLoading ? 'Đang xử lý...' : 'Gửi OTP' }}
+                {{ isLoading ? t('common.processing') : t('auth.otpResendButton') }}
               </button>
             </form>
           </div>
@@ -1233,7 +1237,7 @@ const toggleAddressFields = () => {
               type="button"
               class="w-full py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold rounded-lg transition-colors"
             >
-              Quay Lại Đăng Nhập
+              {{ t('auth.backToSignIn') }}
             </button>
           </div>
         </div>

@@ -1,5 +1,12 @@
 <script setup lang="ts">
 const { animateOnScroll } = useScrollAnimation();
+const { t, locale } = useI18n();
+
+// Compute locale prefix for product links
+const getProductLink = (category: string): string => {
+  const localePrefix = locale.value === 'vi' ? '' : `/${locale.value}`;
+  return `${localePrefix}/products?category=${category}`;
+};
 
 onMounted(() => {
   animateOnScroll("[data-animate-sub-heading]", "animate-slideRight", 0, false);
@@ -20,31 +27,29 @@ onMounted(() => {
 });
 
 // ============ PRODUCTS TABS - Custom Implementation ============
-const activeTab = ref<"matcha" | "white-tea" | "oolong" | "black-tea">(
-  "matcha"
+const activeTab = ref<"specialty" | "espresso" | "arabica" | "robusta">(
+  "specialty"
 );
 
-const tabs = [
-  { id: "matcha", label: "Trà Matcha", icon: "i-lucide-moon" },
-  { id: "white-tea", label: "Trà Trắng", icon: "i-lucide-sun" },
-  { id: "oolong", label: "Trà Ô Long", icon: "i-lucide-cloud" },
-  { id: "black-tea", label: "Trà Đen", icon: "i-lucide-star" },
-];
+const tabs = computed(() => [
+  { id: "specialty", label: t('product.tabs.specialty'), icon: "i-lucide-moon" },
+  { id: "espresso", label: t('product.tabs.espresso'), icon: "i-lucide-sun" },
+  { id: "arabica", label: t('product.tabs.arabica'), icon: "i-lucide-cloud" },
+  { id: "robusta", label: t('product.tabs.robusta'), icon: "i-lucide-star" },
+]);
 </script>
 
 <template>
   <section id="products">
     <div class="container">
       <div class="flex flex-col gap-7">
-        <!-- heading -->
-        <div data-aos="fade-right">
-          <h2 data-animate-sub-heading class="sub_heading">Tìm hiểu</h2>
-          <h1 data-animate-main-heading class="main_heading">
-            sản phẩm <span class="text-gradient">trà ngon</span>
-          </h1>
-        </div>
-
-        <!-- ============ CUSTOM TABS ============ -->
+      <!-- heading -->
+      <div data-aos="fade-right">
+        <h2 data-animate-sub-heading class="sub_heading">{{ $t('product.subheading') }}</h2>
+        <h1 data-animate-main-heading class="main_heading">
+          {{ $t('product.mainHeading') }}
+        </h1>
+      </div>        <!-- ============ CUSTOM TABS ============ -->
         <div class="products-tabs">
           <!-- Tab Buttons Component -->
           <ButtonTab
@@ -55,39 +60,30 @@ const tabs = [
           />
 
           <div class="tabs-content">
-            <!-- Matcha Tab -->
-            <div v-show="activeTab === 'matcha'">
+            <!-- Specialty Tab -->
+            <div v-show="activeTab === 'specialty'">
               <div
                 class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-8 items-center py-2"
               >
                 <NuxtImg
                   data-animate-image
                   src="/images/product_1.jpg"
-                  alt="Matcha Magic - Premium matcha tea powder"
+                  alt="Specialty Coffee"
                   class="w-full h-auto rounded-lg"
                 />
                 <div>
                   <h4 data-animate-sub-heading class="products-sub_heading">
-                    Matcha Magic
+                    {{ $t('product.featured.subtitle') }}
                   </h4>
                   <h5 data-animate-main-heading class="products-main_heading">
-                    Khám phá những lợi ích tiềm năng của "vàng xanh" từ Nhật Bản
+                    {{ $t('product.featured.title') }}
                   </h5>
                   <p data-animate-description>
-                    Sẵn sàng nâng cao sức khỏe của bạn? Hãy làm quen với matcha,
-                    loại bột màu xanh lá cây rực rỡ đang làm khuynh đảo thế giới
-                    chăm sóc sức khỏe. Chứa đầy chất chống oxy hóa và chất dinh
-                    dưỡng, matcha cung cấp nguồn năng lượng mạnh mẽ mà không gây
-                    bồn chồn, nhờ sự kết hợp độc đáo giữa caffeine và
-                    L-theanine.
-                    <br />
-                    Loại trà này không chỉ tăng cường sự tập trung và trao đổi
-                    chất mà còn thêm hương vị thơm ngon cho sinh tố, đồ nướng và
-                    cà phê latte. Hãy đắm mình vào thế giới matcha!
+                    {{ $t('product.featured.description') }}
                   </p>
                   <Button
-                    label="Xem Sản Phẩm Matcha"
-                    to="/products?category=matcha"
+                    :label="$t('product.featured.cta')"
+                    :to="getProductLink('specialty')"
                     variant="accent"
                     size="md"
                     icon="i-lucide-arrow-right"
@@ -96,34 +92,29 @@ const tabs = [
                 </div>
               </div>
             </div>
-            <!-- White Tea Tab -->
-            <div v-show="activeTab === 'white-tea'">
+            <!-- Espresso Tab -->
+            <div v-show="activeTab === 'espresso'">
               <div
                 class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-8 items-center py-2"
               >
                 <NuxtImg
                   src="/images/product_2.jpg"
-                  alt="White Tea - Premium white tea leaves"
+                  alt="Espresso Blends"
                   class="w-full h-auto rounded-lg"
                 />
                 <div>
                   <h3 class="products-sub_heading">
-                    Tinh chất tinh tế từ trà trắng
+                    {{ $t('product.featured.subtitle') }}
                   </h3>
                   <h4 class="products-main_heading">
-                    Hành trình khám phá hương vị tinh khiết nhất từ thiên nhiên
+                    {{ $t('product.tabs.espresso') }}
                   </h4>
                   <p>
-                    Trà trắng, được tôn sùng vì sự nhẹ nhàng và tinh tế của nó,
-                    được chế biến từ lá non và nụ của cây Camellia sinensis. Với
-                    hương hoa nhẹ nhàng và vị ngọt tự nhiên, loại trà này mang
-                    đến trải nghiệm nhẹ nhàng nhưng sảng khoái. Giàu chất chống
-                    oxy hóa và ít caffeine, trà trắng không chỉ làm hài lòng
-                    khẩu vị mà còn hỗ trợ sức khỏe.
+                    {{ $t('product.featured.description') }}
                   </p>
                   <Button
-                    label="Xem Sản Phẩm Trà Trắng"
-                    to="/products?category=white-tea"
+                    :label="$t('product.featured.cta')"
+                    :to="getProductLink('espresso')"
                     variant="accent"
                     size="md"
                     icon="i-lucide-arrow-right"
@@ -133,33 +124,29 @@ const tabs = [
               </div>
             </div>
 
-            <!-- Oolong Tab -->
-            <div v-show="activeTab === 'oolong'">
+            <!-- Arabica Tab -->
+            <div v-show="activeTab === 'arabica'">
               <div
                 class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-8 items-center py-2"
               >
                 <NuxtImg
                   src="/images/product_3.jpg"
-                  alt="Oolong Tea - Premium oolong tea leaves"
+                  alt="Arabica Selection"
                   class="w-full h-auto rounded-lg"
                 />
                 <div>
                   <h3 class="products-sub_heading">
-                    Cuộc cách mạng trà ô long
+                    {{ $t('product.featured.subtitle') }}
                   </h3>
                   <h4 class="products-main_heading">
-                    Mở khóa bí mật của loại trà lành mạnh nhất từ thiên nhiên
+                    {{ $t('product.tabs.arabica') }}
                   </h4>
                   <p>
-                    Bạn có tò mò về bí quyết trường thọ không? Hãy tìn đến trà ô
-                    long! Thức uống cổ xưa này, được tôn sùng trong nhiều nền
-                    văn hóa trên thế giới, chứa đầy chất chống oxy hóa mạnh mẽ
-                    có thể thúc đẩy quá trình trao đổi chất, tăng cường chức
-                    năng não và thúc đẩy sức khỏe tim mạch.
+                    {{ $t('product.featured.description') }}
                   </p>
                   <Button
-                    label="Xem Sản Phẩm Trà Ô Long"
-                    to="/products?category=oolong"
+                    :label="$t('product.featured.cta')"
+                    :to="getProductLink('arabica')"
                     variant="accent"
                     size="md"
                     icon="i-lucide-arrow-right"
@@ -169,33 +156,29 @@ const tabs = [
               </div>
             </div>
 
-            <!-- Black Tea Tab -->
-            <div v-show="activeTab === 'black-tea'">
+            <!-- Robusta Tab -->
+            <div v-show="activeTab === 'robusta'">
               <div
                 class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-8 items-center py-2"
               >
                 <NuxtImg
-                  src="/images/product_4.png"
-                  alt="Black Tea - Premium black tea leaves"
+                  src="/images/product_4.jpg"
+                  alt="Robusta Selection"
                   class="w-full h-auto rounded-lg"
                 />
                 <div>
                   <h3 class="products-sub_heading">
-                    Đánh thức các giác quan cùng trà đen
+                    {{ $t('product.featured.subtitle') }}
                   </h3>
                   <h4 class="products-main_heading">
-                    Hương vị đậm đà truyền thống vượt thời gian
+                    {{ $t('product.tabs.robusta') }}
                   </h4>
                   <p>
-                    Hãy thưởng thức hương vị đậm đà, mạnh mẽ của trà đen, được
-                    chế tác hoàn hảo cho khẩu vị sành điệu. Mỗi ngụm trà mang
-                    đến sự pha trộn hài hòa giữa hương vị sâu lắng và hương thơm
-                    sảng khoái, khiến đây trở thành lựa chọn lý tưởng cho cả
-                    nghi lễ buổi sáng và giờ nghỉ trưa.
+                    {{ $t('product.featured.description') }}
                   </p>
                   <Button
-                    label="Xem Sản Phẩm Trà Đen"
-                    to="/products?category=black-tea"
+                    :label="$t('product.featured.cta')"
+                    :to="getProductLink('robusta')"
                     variant="accent"
                     size="md"
                     icon="i-lucide-arrow-right"

@@ -119,7 +119,7 @@ export default defineNuxtConfig({
     DATABASE_URL: process.env.DATABASE_URL,
     nodemailer: {
       from: `"Konomi Shop" <${
-        process.env.MAILTRAP_FROM_EMAIL || "noreply@konomi-shop.com"
+        process.env.MAILTRAP_FROM_EMAIL || "noreply@Konomi-shop.com"
       }>`,
       host: process.env.MAILTRAP_HOST,
       port: Number(process.env.MAILTRAP_PORT),

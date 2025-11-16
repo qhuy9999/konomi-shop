@@ -20,13 +20,16 @@ const currentUser = computed(() => authStore.currentUser);
 const mobileMenuOpen = ref(false);
 const userMenuOpen = ref(false);
 
-// Navigation links
-const navLinks = computed(() => [
-  { label: $t('nav.home'), href: "/" },
-  { label: $t('nav.products'), href: "#products" },
-  { label: $t('nav.about'), href: "#about" },
-  { label: $t('nav.contact'), href: "#contact" },
-]);
+// Navigation links - include locale prefix
+const navLinks = computed(() => {
+  const localePrefix = locale.value === 'vi' ? '' : `/${locale.value}`;
+  return [
+    { label: $t('nav.home'), href: `${localePrefix}/` },
+    { label: $t('nav.products'), href: `${localePrefix}/#products` },
+    { label: $t('nav.about'), href: `${localePrefix}/#features` },
+    { label: $t('nav.contact'), href: `${localePrefix}/#contact` },
+  ];
+});
 
 // Close menu when clicking a link
 const closeMenu = () => {
@@ -35,19 +38,24 @@ const closeMenu = () => {
 
 // Handle Sign In button
 const handleSignIn = () => {
+  const localePrefix = locale.value === 'vi' ? '' : `/${locale.value}`;
   sessionStore.setAuthModalPage('signin');
+  router.push(`${localePrefix}/auth?auth=signin`);
 };
 
 // Handle Sign Up button
 const handleSignUp = () => {
+  const localePrefix = locale.value === 'vi' ? '' : `/${locale.value}`;
   sessionStore.setAuthModalPage('signup');
+  router.push(`${localePrefix}/auth?auth=signup`);
 };
 
 // Handle Logout
 const handleLogout = async () => {
   await authStore.logout();
   userMenuOpen.value = false;
-  router.push('/?auth=signin');
+  const localePrefix = locale.value === 'vi' ? '' : `/${locale.value}`;
+  router.push(`${localePrefix}/?auth=signin`);
 };
 </script>
 
@@ -58,7 +66,7 @@ const handleLogout = async () => {
       <div class="flex items-center justify-between px-4 md:px-8">
         <!-- Logo -->
         <div class="flex items-center justify-center py-4">
-          <NuxtImg src="images/logo.png" alt="logo" class="w-16 h-16" />
+          <NuxtImg src="images/tea-leaves-logo.png" alt="logo" class="w-16 h-16" />
           <NuxtLink to="/" class="text-2xl font-bold text-primary-600">
             Konomi Shop
           </NuxtLink>
@@ -149,18 +157,16 @@ const handleLogout = async () => {
             <!-- If Not Authenticated: Auth Buttons -->
             <template v-else>
               <Button
-                label="Đăng Nhập"
-                to="/auth?auth=signin"
+                :label="$t('common.login')"
+                :to="`${locale === 'vi' ? '' : `/${locale}`}/auth?auth=signin`"
                 variant="secondary"
                 size="sm"
-                @click="handleSignIn"
               />
               <Button
-                label="Đăng Ký"
-                to="/auth?auth=signup"
+                :label="$t('common.signup')"
+                :to="`${locale === 'vi' ? '' : `/${locale}`}/auth?auth=signup`"
                 variant="primary"
                 size="sm"
-                @click="handleSignUp"
               />
             </template>
           </div>
@@ -206,8 +212,27 @@ const handleLogout = async () => {
               </NuxtLink>
             </div>
 
-            <!-- Mobile Auth Section -->
+            <!-- Language Switcher (Mobile) -->
             <div class="w-full border-t border-neutral-200 pt-4 mt-4">
+              <!-- 3 buttons inline: Language + Auth buttons (only if not authenticated) -->
+              <div v-if="!isAuthenticated" class="flex items-center justify-center gap-2">
+                <LanguageSwitcher />
+                <Button
+                  :label="$t('common.login')"
+                  :to="`${locale === 'vi' ? '' : `/${locale}`}/auth?auth=signin`"
+                  variant="secondary"
+                  size="sm"
+                  @click="closeMenu()"
+                />
+                <Button
+                  :label="$t('common.signup')"
+                  :to="`${locale === 'vi' ? '' : `/${locale}`}/auth?auth=signup`"
+                  variant="primary"
+                  size="sm"
+                  @click="closeMenu()"
+                />
+              </div>
+
               <!-- If Authenticated: User Info + Menu -->
               <div v-if="isAuthenticated" class="space-y-3">
                 <div class="px-4 py-3 bg-primary-50 rounded-lg">
@@ -242,26 +267,6 @@ const handleLogout = async () => {
                   Đăng Xuất
                 </button>
               </div>
-
-              <!-- If Not Authenticated: Auth Buttons -->
-              <template v-else>
-                <div class="grid grid-cols-2 gap-3">
-                  <Button
-                    label="Đăng Nhập"
-                    to="/auth?auth=signin"
-                    variant="secondary"
-                    size="sm"
-                    @click="handleSignIn; closeMenu()"
-                  />
-                  <Button
-                    label="Đăng Ký"
-                    to="/auth?auth=signup"
-                    variant="primary"
-                    size="sm"
-                    @click="handleSignUp; closeMenu()"
-                  />
-                </div>
-              </template>
             </div>
           </div>
         </nav>
@@ -275,16 +280,16 @@ const handleLogout = async () => {
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white shadow-footer z-50 border-t border-neutral-200">
-      <div class="container mx-auto px-4 py-12">
+    <footer class="bg-white shadow-footer z-50 border-t border-accent-50 mt-5">
+      <div class="w-full px-4 py-12">
         <!-- Footer Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 max-w-7xl mx-auto text-center md:text-left">
           <!-- Liên Hệ -->
           <div>
             <h4 class="font-semibold text-gray-900 mb-4">📞 {{ $t('footer.contact') }}</h4>
             <ul class="space-y-2 text-sm text-gray-600">
               <li><a href="tel:+84123456789" class="hover:text-blue-600">{{ $t('footer.hotline') }}: +84 (0)123 456 789</a></li>
-              <li><a href="mailto:support@konomi.com" class="hover:text-blue-600">{{ $t('footer.email') }}: support@konomi.com</a></li>
+              <li><a href="mailto:konomi@email.com" class="hover:text-blue-600">{{ $t('footer.email') }}: konomi@email.com</a></li>
               <li><a href="#" class="hover:text-blue-600">{{ $t('footer.office') }}: 123 Đường ABC, Tp. HCM</a></li>
               <li><a href="#" class="hover:text-blue-600">{{ $t('footer.hours') }}: 8:00 - 22:00</a></li>
             </ul>
@@ -325,7 +330,7 @@ const handleLogout = async () => {
         </div>
 
         <!-- Divider -->
-        <div class="border-t border-neutral-200 pt-8">
+        <div class="border-t border-neutral-200 pt-8 max-w-7xl mx-auto">
           <div class="flex flex-col md:flex-row justify-between items-center text-sm text-gray-600">
             <p>&copy; {{ $t('footer.copyright') }}</p>
             <div class="flex gap-6 mt-4 md:mt-0">

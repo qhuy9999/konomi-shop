@@ -37,25 +37,23 @@ onMounted(() => {
           data-animate-sub-heading
             class="mb-2 text-xs font-semibold text-center uppercase leading-none tracking-wider md:text-start xl:text-start"
           >
-            hơn
-            <span class="text-sm text-gradient">một trăm</span> hương vị trà
+            {{ $t('hero.subheading') }}
+            <span class="text-sm text-gradient">{{ $t('hero.subheadingHighlight') }}</span> {{ $t('hero.subheadingProduct') }}
           </h2>
           <h1
             data-animate-main-heading
             class="text-5xl leading-none tracking-wide text-center capitalize font-lobster md:text-6xl lg:text-7xl"
           >
-            Trà Đặc Biệt Chế Tác
+            {{ $t('hero.mainHeading') }}
           </h1>
         </div>
 
         <p data-animate-description class="max-w-xl px-4 text-center md:text-start xl:text-start">
-          Sứ mệnh của chúng tôi là mang đến cho bạn sự yên bình và kết nối thông
-          qua các hương vị trà được chọn lọc cẩn thận và được tạo ra để nâng cao
-          trải nghiệm hàng ngày và sức khoẻ toàn diện cho bạn.
+          {{ $t('hero.description') }}
         </p>
 
         <Button
-          label="Tìm Hiểu Sản Phẩm"
+          :label="$t('hero.ctaButton')"
           to="/#products"
           variant="accent"
           size="md"

@@ -1,12 +1,15 @@
 <script setup lang="ts">
 // Counter values
-const counters = [
-  { target: 100, suffix: '+', label: 'Hương Vị Pha Chế' },
-  { target: 500000, suffix: '+', label: 'Sản Phẩm Bán Ra Toàn Thế Giới', format: 'k' },
-  { target: 4.9, suffix: '+', label: 'Điểm Đánh Giá Từ Khách Hàng' },
-];
+const { t } = useI18n();
+const counters = computed(() => [
+  { target: 100, suffix: '+', label: t('status.items.0.label') },
+  { target: 500000, suffix: '+', label: t('status.items.1.label'), format: 'k' },
+  { target: 4.9, suffix: '+', label: t('status.items.2.label') },
+]);
 
-const counterValues = reactive(counters.map(c => ({ ...c, current: 0 })));
+const counterValues = reactive(
+  computed(() => counters.value.map(c => ({ ...c, current: 0 }))).value
+);
 
 // Animate counters when scrolled into view
 onMounted(() => {
