@@ -1,5 +1,10 @@
 <script setup lang="ts">
+const { locale } = useI18n();
+
 const { animateOnScroll } = useScrollAnimation();
+
+// Get locale prefix for navigation
+const localePrefix = computed(() => locale.value === 'vi' ? '' : `/${locale.value}`);
 
 onMounted(() => {
   animateOnScroll('[data-animate-sub-heading]', 'animate-slideRight', 400, false);
@@ -54,7 +59,7 @@ onMounted(() => {
 
         <Button
           :label="$t('hero.ctaButton')"
-          to="/#products"
+          :to="`${localePrefix}/products`"
           variant="accent"
           size="md"
           icon="i-lucide-arrow-right"
