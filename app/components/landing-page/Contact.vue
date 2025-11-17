@@ -1,6 +1,14 @@
 <script setup lang="ts">
 import { useSessionStore } from "@/stores/session";
 
+const { animateOnScroll } = useScrollAnimation();
+
+onMounted(() => {
+  animateOnScroll('[data-animate-sub-heading]', 'animate-slideRight', 400, false);
+  animateOnScroll('[data-animate-main-heading]', 'animate-slideRight', 200, false);
+  animateOnScroll('[data-animate-description]', 'animate-slideRight', 0, false);
+});
+
 const sessionStore = useSessionStore();
 const { t } = useI18n();
 const { locale } = useI18n();
@@ -28,15 +36,15 @@ const handleSignUp = () => {
           class="flex h-[515px] flex-col items-center justify-center flex-1 w-full px-10 py-20 border border-dotted border-p-600 gap-9"
         >
           <!-- tiêu đề -->
-          <div data-aos="fade-down">
-            <h2 class="sub_heading">{{ $t('contact.mainHeading') }}</h2>
-            <h1 class="main_heading">{{ $t('contact.subheading') }}</h1>
+          <div>
+            <h2 data-animate-sub-heading class="sub_heading">{{ $t('contact.mainHeading') }}</h2>
+            <h1 data-animate-main-heading class="main_heading">{{ $t('contact.subheading') }}</h1>
           </div>
 
           <!-- địa chỉ -->
-          <div class="contact-info">
+          <div data-animate-description class="contact-info">
             <div>
-              <UIcon name="i-lucide-building-2" class="w-4 h-4" />
+              <UIcon name="i-lucide-building-2" class="w-4 h-4 text-accent-100" />
               <h1>{{ $t('common.home') }}</h1>
             </div>
 
@@ -44,9 +52,9 @@ const handleSignUp = () => {
           </div>
 
           <!-- email -->
-          <div class="contact-info">
+          <div data-animate-description class="contact-info">
             <div>
-              <UIcon name="i-lucide-mail" class="w-4 h-4" />
+              <UIcon name="i-lucide-mail" class="w-4 h-4 text-accent-100" />
               <h1>{{ $t('common.account') }}</h1>
             </div>
 
@@ -54,9 +62,9 @@ const handleSignUp = () => {
           </div>
 
           <!-- số điện thoại -->
-          <div class="contact-info">
+          <div data-animate-description class="contact-info">
             <div>
-              <UIcon name="i-lucide-phone" class="w-4 h-4" />
+              <UIcon name="i-lucide-phone" class="w-4 h-4 text-accent-100" />
               <h1>{{ $t('footer.hotline') }}</h1>
             </div>
 
@@ -70,14 +78,14 @@ const handleSignUp = () => {
         >
           <!-- heading -->
           <div>
-            <h2 class="sub_heading">{{ $t('contact.community.title') }}</h2>
-            <h1 class="main_heading">{{ $t('contact.community.subtitle') }}</h1>
+            <h2 data-animate-sub-heading class="sub_heading">{{ $t('contact.community.title') }}</h2>
+            <h1 data-animate-main-heading class="main_heading">{{ $t('contact.community.subtitle') }}</h1>
           </div>
 
-          <p>{{ $t('contact.community.description') }}</p>
+          <p data-animate-description>  {{ $t('contact.community.description') }}</p>
 
           <!-- 2 nút đăng nhập & đăng ký -->
-          <div class="flex gap-3">
+          <div data-animate-description class="flex gap-3">
             <Button
               :label="$t('common.login')"
               variant="secondary"
@@ -92,13 +100,13 @@ const handleSignUp = () => {
             />
           </div>
 
-          <p class="text-sm text-neutral-600">{{ $t('contact.community.noAccount') }}</p>
+          <p data-animate-description class="text-sm text-neutral-600">{{ $t('contact.community.noAccount') }}</p>
 
           <!-- hình decor -->
           <NuxtImg
             src="/images/contact.png"
             alt="decor"
-            class="absolute -bottom-20 -right-20 w-[400px] opacity-15 -z-10"
+            class="absolute -bottom-20 -right-20 w-[400px] opacity-10 -z-10"
           />
         </div>
       </div>
@@ -113,11 +121,11 @@ const handleSignUp = () => {
   @apply w-full;
 
   > div {
-    @apply flex items-center gap-2 px-2 py-2 bg-primary-600;
+    @apply flex items-center gap-2 px-2 py-2 bg-primary-900;
   }
 
   h1 {
-    @apply text-white capitalize;
+    @apply text-accent-200 capitalize;
   }
 
   p {

@@ -39,10 +39,6 @@ const selectLanguage = (code: LanguageCode) => {
     router.push(`/${code}${path}`)
   }
 }
-
-const closeDropdown = () => {
-  isOpen.value = false
-}
 </script>
 
 <template>
@@ -61,7 +57,7 @@ const closeDropdown = () => {
     <!-- Mobile: Icon only button -->
     <button
       @click="isOpen = !isOpen"
-      class="md:hidden p-2 text-primary-625 hover:bg-gray-100 rounded-lg transition-colors"
+      class="md:hidden bg-primary-100 p-2 text-primary-625 hover:bg-primary-150 rounded-lg transition-colors"
     >
       <UIcon name="i-lucide-languages" class="w-5 h-5" />
     </button>
@@ -76,13 +72,13 @@ const closeDropdown = () => {
     >
       <div
         v-if="isOpen"
-        class="absolute left-5 right-3 md:top-full md:right-0 md:bottom-auto md:mt-2 w-max bg-white border border-neutral-200 rounded-md shadow-md z-50 overflow-hidden"
+        class="absolute left-5 right-3 md:top-full md:right-0 md:bottom-auto md:mt-2 w-max bg-neutral-100 rounded-md z-50 overflow-hidden"
       >
         <button
           v-for="lang in languages"
           :key="lang.code"
           @click="selectLanguage(lang.code)"
-          class="w-full px-3 py-2.5 flex items-center gap-2.5 hover:bg-neutral-50 transition-colors text-left text-sm font-medium"
+          class="w-full px-3 py-2.5 flex items-center gap-2.5 hover:bg-neutral-150 transition-colors text-left text-sm font-medium"
           :class="{ 'bg-primary-50 text-primary-600': lang.code === locale, 'text-neutral-700': lang.code !== locale }"
         >
           <span class="text-base">{{ lang.icon }}</span>

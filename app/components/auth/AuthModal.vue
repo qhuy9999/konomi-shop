@@ -645,13 +645,15 @@ const toggleAddressFields = () => {
               </div>
 
               <!-- Submit Button -->
-              <button
-                type="submit"
-                :disabled="isLoading"
-                class="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {{ isLoading ? t('common.processing') : t('auth.signInButton') }}
-              </button>
+              <div class="flex justify-center">
+                <button
+                  type="submit"
+                  :disabled="isLoading"
+                  class="px-12 py-3 bg-primary-900 hover:bg-primary-600 text-accent-200 font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {{ isLoading ? t('common.processing') : t('auth.signInButton') }}
+                </button>
+              </div>
             </form>
 
             <!-- Forgot Password Link -->
@@ -659,25 +661,27 @@ const toggleAddressFields = () => {
               <button
                 @click="navigateToPage('forgot-password')"
                 type="button"
-                class="block w-full text-primary-600 hover:text-primary-700 text-sm font-medium"
+                class="text-primary-900 hover:text-primary-600 text-sm font-medium"
               >
                 {{ t('auth.forgotPassword') }}
               </button>
+              <br />
               <button
                 @click="navigateToPage('verify-otp-email')"
                 type="button"
-                class="block w-full text-accent-600 hover:text-accent-700 text-sm font-medium"
+                class="text-accent-600 hover:text-accent-700 text-sm font-medium"
               >
-                📧 {{ t('auth.verifyEmailAgain') }}
+                {{ t('auth.verifyEmailAgain') }}
               </button>
               <!-- Show button to reopen OTP modal only if there's pending OTP -->
+              <br v-if="pendingUserId && pendingEmail" />
               <button
                 v-if="pendingUserId && pendingEmail"
                 @click="sessionStore.setAuthModalPage('otp-verify')"
                 type="button"
-                class="block w-full text-yellow-600 hover:text-yellow-700 text-sm font-medium"
+                class="text-yellow-600 hover:text-yellow-700 text-sm font-medium"
               >
-                📧 {{ t('auth.reopenOTPModal') }}
+                {{ t('auth.reopenOTPModal') }}
               </button>
             </div>
           </div>
@@ -685,13 +689,15 @@ const toggleAddressFields = () => {
           <!-- Signup CTA -->
           <div class="page-footer">
             <p class="text-center mb-4">{{ t('auth.noAccount') }}</p>
-            <button
-              @click="goToSignUp"
-              type="button"
-              class="w-full py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold rounded-lg transition-colors"
-            >
-              {{ t('auth.signUpButton') }}
-            </button>
+            <div class="flex justify-center">
+              <button
+                @click="goToSignUp"
+                type="button"
+                class="px-8 py-3 border-2 bg-accent-400 hover:bg-accent-400/80 text-primary-850 border-primary-700 hover:text-primary-800 font-semibold rounded-lg transition-colors"
+              >
+                {{ t('auth.signUpButton') }}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -942,26 +948,30 @@ const toggleAddressFields = () => {
               </div>
 
               <!-- Submit Button -->
-              <button
-                type="submit"
-                :disabled="isLoading"
-                class="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed mt-6"
-              >
-                {{ isLoading ? t('common.processing') : t('auth.signUpButton') }}
-              </button>
+              <div class="flex justify-center mt-6">
+                <button
+                  type="submit"
+                  :disabled="isLoading"
+                  class="px-12 py-3 bg-primary-900 hover:bg-primary-600 text-accent-200 font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {{ isLoading ? t('common.processing') : t('auth.signUpButton') }}
+                </button>
+              </div>
             </form>
           </div>
 
           <!-- Back to SignIn -->
           <div class="page-footer">
             <p class="text-center mb-4 text-sm">{{ t('auth.haveAccount') }}</p>
-            <button
-              @click="goToSignIn"
-              type="button"
-              class="w-full py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold rounded-lg transition-colors text-sm"
-            >
-              {{ t('auth.signInButton') }}
-            </button>
+            <div class="flex justify-center">
+              <button
+                @click="goToSignIn"
+                type="button"
+                class="px-8 py-3 border-2 bg-accent-400 hover:bg-accent-400/80 text-primary-850 border-primary-700 hover:text-primary-800 font-semibold rounded-lg transition-colors text-sm"
+              >
+                {{ t('auth.signInButton') }}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -1004,13 +1014,15 @@ const toggleAddressFields = () => {
               </div>
 
               <!-- Submit Button -->
-              <button
-                type="submit"
-                :disabled="isLoading"
-                class="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {{ isLoading ? t('common.processing') : t('auth.otpVerifyButton') }}
-              </button>
+              <div class="flex justify-center">
+                <button
+                  type="submit"
+                  :disabled="isLoading"
+                  class="px-12 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {{ isLoading ? t('common.processing') : t('auth.otpVerifyButton') }}
+                </button>
+              </div>
             </form>
 
             <!-- Resend OTP -->
@@ -1028,13 +1040,15 @@ const toggleAddressFields = () => {
 
           <!-- Back Button -->
           <div class="page-footer">
-            <button
-              @click="navigateToPage('signin')"
-              type="button"
-              class="w-full py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold rounded-lg transition-colors"
-            >
-              {{ t('auth.backButton') }}
-            </button>
+            <div class="flex justify-center">
+              <button
+                @click="navigateToPage('signin')"
+                type="button"
+                class="px-8 py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold rounded-lg transition-colors"
+              >
+                {{ t('auth.backButton') }}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -1074,25 +1088,29 @@ const toggleAddressFields = () => {
               </div>
 
               <!-- Submit Button -->
-              <button
-                type="submit"
-                :disabled="isLoading"
-                class="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {{ isLoading ? t('common.processing') : t('auth.forgotPasswordButton') }}
-              </button>
+              <div class="flex justify-center">
+                <button
+                  type="submit"
+                  :disabled="isLoading"
+                  class="px-12 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {{ isLoading ? t('common.processing') : t('auth.forgotPasswordButton') }}
+                </button>
+              </div>
             </form>
           </div>
 
           <!-- Back to SignIn -->
           <div class="page-footer">
-            <button
-              @click="navigateToPage('signin')"
-              type="button"
-              class="w-full py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold rounded-lg transition-colors"
-            >
-              {{ t('auth.backToSignIn') }}
-            </button>
+            <div class="flex justify-center">
+              <button
+                @click="navigateToPage('signin')"
+                type="button"
+                class="px-8 py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold rounded-lg transition-colors"
+              >
+                {{ t('auth.backToSignIn') }}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -1162,25 +1180,29 @@ const toggleAddressFields = () => {
               </div>
 
               <!-- Submit Button -->
-              <button
-                type="submit"
-                :disabled="isLoading"
-                class="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {{ isLoading ? t('common.processing') : t('auth.resetPasswordButton') }}
-              </button>
+              <div class="flex justify-center">
+                <button
+                  type="submit"
+                  :disabled="isLoading"
+                  class="px-12 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {{ isLoading ? t('common.processing') : t('auth.resetPasswordButton') }}
+                </button>
+              </div>
             </form>
           </div>
 
           <!-- Back to SignIn -->
           <div class="page-footer">
-            <button
-              @click="navigateToPage('signin')"
-              type="button"
-              class="w-full py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold rounded-lg transition-colors"
-            >
-              {{ t('auth.backToSignIn') }}
-            </button>
+            <div class="flex justify-center">
+              <button
+                @click="navigateToPage('signin')"
+                type="button"
+                class="px-8 py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold rounded-lg transition-colors"
+              >
+                {{ t('auth.backToSignIn') }}
+              </button>
+            </div>
           </div>
         </div>
 
@@ -1220,25 +1242,29 @@ const toggleAddressFields = () => {
               </div>
 
               <!-- Submit Button -->
-              <button
-                type="submit"
-                :disabled="isLoading"
-                class="w-full py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-              >
-                {{ isLoading ? t('common.processing') : t('auth.otpResendButton') }}
-              </button>
+              <div class="flex justify-center">
+                <button
+                  type="submit"
+                  :disabled="isLoading"
+                  class="px-12 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {{ isLoading ? t('common.processing') : t('auth.otpResendButton') }}
+                </button>
+              </div>
             </form>
           </div>
 
           <!-- Back to SignIn -->
           <div class="page-footer">
-            <button
-              @click="navigateToPage('signin')"
-              type="button"
-              class="w-full py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold rounded-lg transition-colors"
-            >
-              {{ t('auth.backToSignIn') }}
-            </button>
+            <div class="flex justify-center">
+              <button
+                @click="navigateToPage('signin')"
+                type="button"
+                class="px-8 py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold rounded-lg transition-colors"
+              >
+                {{ t('auth.backToSignIn') }}
+              </button>
+            </div>
           </div>
         </div>
       </div>

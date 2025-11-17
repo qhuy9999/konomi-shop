@@ -28,7 +28,7 @@ onMounted(() => {
 
       <!-- Text Content with AOS animation -->
       <p
-        class="px-4 text-base tracking-wide text-center text-primary-100 md:text-2xl lg:text-3xl font-medium"
+        class="px-4 text-base tracking-wide text-center text-accent-100 md:text-2xl lg:text-3xl font-medium"
         :style="{ textShadow: '2px 2px 8px rgba(0, 0, 0, 0.7)' }"
         data-aos="fade-up"
         data-aos-delay="100"
