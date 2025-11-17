@@ -3,13 +3,19 @@ import { useSessionStore } from "@/stores/session";
 
 const sessionStore = useSessionStore();
 const { t } = useI18n();
+const { locale } = useI18n();
+const router = useRouter();
 
 const handleSignIn = () => {
   sessionStore.setAuthModalPage('signin');
+  const localePrefix = locale.value === 'vi' ? '' : `/${locale.value}`;
+  router.push(`${localePrefix}/auth?auth=signin`);
 };
 
 const handleSignUp = () => {
   sessionStore.setAuthModalPage('signup');
+  const localePrefix = locale.value === 'vi' ? '' : `/${locale.value}`;
+  router.push(`${localePrefix}/auth?auth=signup`);
 };
 </script>
 
@@ -74,14 +80,12 @@ const handleSignUp = () => {
           <div class="flex gap-3">
             <Button
               :label="$t('common.login')"
-              to="/auth?auth=signin"
               variant="secondary"
               size="sm"
               @click="handleSignIn"
             />
             <Button
               :label="$t('common.signup')"
-              to="/auth?auth=signup"
               variant="primary"
               size="sm"
               @click="handleSignUp"

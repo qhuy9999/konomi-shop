@@ -67,7 +67,7 @@ const handleLogout = async () => {
         <!-- Logo -->
         <div class="flex items-center justify-center py-4">
           <NuxtImg src="images/tea-leaves-logo.png" alt="logo" class="w-16 h-16" />
-          <NuxtLink to="/" class="text-2xl font-bold text-primary-600">
+          <NuxtLink :to="`${locale === 'vi' ? '' : `/${locale}`}/`" class="text-2xl font-bold text-primary-600">
             Konomi Shop
           </NuxtLink>
         </div>

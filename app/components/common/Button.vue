@@ -4,7 +4,7 @@ type Size = "sm" | "md" | "lg";
 
 interface Props {
   label: string;
-  to: string;
+  to?: string;
   icon?: string;
   variant?: Variant;
   size?: Size;
@@ -16,7 +16,12 @@ const props = withDefaults(defineProps<Props>(), {
   size: "md",
   icon: "i-lucide-arrow-right",
   disabled: false,
+  to: undefined,
 });
+
+const emit = defineEmits<{
+  click: [event: MouseEvent]
+}>();
 
 // Variant styles
 const variantClasses: Record<Variant, string> = {
@@ -72,15 +77,28 @@ const buttonClass = computed(() => {
 </script>
 
 <template>
+  <!-- If has 'to' prop, render as NuxtLink -->
   <NuxtLink
+    v-if="props.to"
     :to="props.to"
     :class="buttonClass"
     :aria-disabled="disabled"
-    @click.prevent="!disabled && $router.push(to)"
   >
     <span>{{ label }}</span>
     <UIcon v-if="icon" :name="icon" :class="iconColorClasses[props.variant]" />
   </NuxtLink>
+
+  <!-- Otherwise render as button -->
+  <button
+    v-else
+    :class="buttonClass"
+    :aria-disabled="disabled"
+    :disabled="disabled"
+    @click="emit('click', $event)"
+  >
+    <span>{{ label }}</span>
+    <UIcon v-if="icon" :name="icon" :class="iconColorClasses[props.variant]" />
+  </button>
 </template>
 
 <style scoped>
