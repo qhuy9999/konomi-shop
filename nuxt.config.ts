@@ -95,12 +95,6 @@ export default defineNuxtConfig({
     storesDirs: ["@/stores/**"],
   },
 
-  nitro: {
-    rollupConfig: {
-      external: ["@prisma/client"],
-    },
-  },
-
   i18n: {
     locales: [
       { code: 'vi', language: 'vi-VN', name: 'Tiếng Việt', iso: 'vi' },
