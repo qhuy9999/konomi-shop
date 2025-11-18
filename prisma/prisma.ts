@@ -1,7 +1,14 @@
 import { PrismaClient } from '@prisma/client'
 
 const prismaClientSingleton = () => {
-  return new PrismaClient()
+  const client = new PrismaClient()
+  
+  // Log if DATABASE_URL is not set (for debugging)
+  if (!process.env.DATABASE_URL) {
+    console.warn('⚠️  Warning: DATABASE_URL environment variable is not set. Prisma may fail to connect.')
+  }
+  
+  return client
 }
 
 declare const globalThis: {

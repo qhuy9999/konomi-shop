@@ -16,6 +16,15 @@ class ValidationError extends Error {
 
 export default defineEventHandler(async (event) => {
   try {
+    // Check if DATABASE_URL is set
+    if (!process.env.DATABASE_URL) {
+      console.error('❌ DATABASE_URL environment variable is not set')
+      throw createError({
+        statusCode: 500,
+        message: 'Database is not configured. Please contact administrator.',
+      })
+    }
+
     // Đọc request body
     let body
     try {
@@ -56,11 +65,13 @@ export default defineEventHandler(async (event) => {
     else if (error instanceof Error) {
       statusCode = 500
       message = error.message
+      console.error('❌ Error in signup:', message, error.stack)
     }
     // Unknown errors → 500 Internal Server Error
     else {
       statusCode = 500
       message = 'An unexpected error occurred'
+      console.error('❌ Unknown error in signup:', error)
     }
 
     throw createError({

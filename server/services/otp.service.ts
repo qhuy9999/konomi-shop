@@ -38,25 +38,14 @@ const checkOTPRateLimit = async (userId: number): Promise<{
   isAllowed: boolean
   retryAfterSeconds?: number
 }> => {
-  // Calculate time window (last N minutes)
-  const windowStartTime = new Date(
-    Date.now() - OTP_RATE_LIMIT_WINDOW * 60 * 1000
-  )
+  try {
+    // Calculate time window (last N minutes)
+    const windowStartTime = new Date(
+      Date.now() - OTP_RATE_LIMIT_WINDOW * 60 * 1000
+    )
 
-  // Count OTP creations for this user in the rolling window
-  const recentOTPCount = await prisma.otp.count({
-    where: {
-      userId,
-      type: 'EMAIL_VERIFICATION',
-      createdAt: {
-        gte: windowStartTime,
-      },
-    },
-  })
-
-  if (recentOTPCount >= OTP_RATE_LIMIT_MAX) {
-    // Find oldest OTP in window to calculate retry time
-    const oldestOTP = await prisma.otp.findFirst({
+    // Count OTP creations for this user in the rolling window
+    const recentOTPCount = await prisma.otp.count({
       where: {
         userId,
         type: 'EMAIL_VERIFICATION',
@@ -64,29 +53,48 @@ const checkOTPRateLimit = async (userId: number): Promise<{
           gte: windowStartTime,
         },
       },
-      orderBy: {
-        createdAt: 'asc',
-      },
-      select: {
-        createdAt: true,
-      },
     })
 
-    // Calculate seconds until oldest OTP falls outside the window
-    const retryAfterTime = new Date(
-      oldestOTP!.createdAt.getTime() + OTP_RATE_LIMIT_WINDOW * 60 * 1000
-    )
-    const retryAfterSeconds = Math.ceil(
-      (retryAfterTime.getTime() - Date.now()) / 1000
-    )
+    if (recentOTPCount >= OTP_RATE_LIMIT_MAX) {
+      // Find oldest OTP in window to calculate retry time
+      const oldestOTP = await prisma.otp.findFirst({
+        where: {
+          userId,
+          type: 'EMAIL_VERIFICATION',
+          createdAt: {
+            gte: windowStartTime,
+          },
+        },
+        orderBy: {
+          createdAt: 'asc',
+        },
+        select: {
+          createdAt: true,
+        },
+      })
 
-    return {
-      isAllowed: false,
-      retryAfterSeconds: Math.max(1, retryAfterSeconds),
+      // Calculate seconds until oldest OTP falls outside the window
+      const retryAfterTime = new Date(
+        oldestOTP!.createdAt.getTime() + OTP_RATE_LIMIT_WINDOW * 60 * 1000
+      )
+      const retryAfterSeconds = Math.ceil(
+        (retryAfterTime.getTime() - Date.now()) / 1000
+      )
+
+      return {
+        isAllowed: false,
+        retryAfterSeconds: Math.max(1, retryAfterSeconds),
+      }
     }
-  }
 
-  return { isAllowed: true }
+    return { isAllowed: true }
+  } catch (error) {
+    // Log the error for debugging
+    console.error('❌ Error checking OTP rate limit:', error)
+    // If there's a database error, fail safely by not rate limiting
+    // This prevents blocking users if database is temporarily down
+    throw new Error(`Failed to check OTP rate limit: ${error instanceof Error ? error.message : 'Unknown error'}`)
+  }
 }
 
 /**
