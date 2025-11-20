@@ -12,9 +12,9 @@ const showContact = computed(() => !authStore.isAuthenticated)
   <Product />
   <Slogan />
   <HoneyCombFeature />
-  <BestSellerCarousel />
+  <LazyBestSellerCarousel />
   <Status />
   <Story />
-  <!-- Contact chỉ hiển thị khi chưa đăng nhập -->
-  <Contact v-if="showContact" />
+  <!-- Contact: Lazy loaded only when user is not authenticated -->
+  <LazyContact v-if="showContact" />
 </template>

@@ -3,8 +3,8 @@
       <!-- Toast Notifications -->
     <ToastNotification />
 
-    <!-- OTP Verification Modal -->
-    <OTPVerificationModal />
+    <!-- OTP Verification Modal: Lazy loaded (only shown conditionally) -->
+    <LazyOTPVerificationModal />
 
     <!-- Main Layout -->
     <NuxtLayout>
@@ -17,7 +17,6 @@
 import { onMounted } from 'vue'
 import { useAuthStore } from '@/stores/auth'
 import ToastNotification from '@/components/common/ToastNotification.vue'
-import OTPVerificationModal from '@/components/common/OTPVerificationModal.vue'
 
 const authStore = useAuthStore()
 

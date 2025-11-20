@@ -649,7 +649,7 @@ const toggleAddressFields = () => {
                 <button
                   type="submit"
                   :disabled="isLoading"
-                  class="px-12 py-3 bg-primary-900 hover:bg-primary-600 text-accent-200 font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  class="px-12 py-3 bg-primary-900 hover:bg-primary-600 text-accent-200 font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {{ isLoading ? t('common.processing') : t('auth.signInButton') }}
                 </button>
@@ -693,7 +693,7 @@ const toggleAddressFields = () => {
               <button
                 @click="goToSignUp"
                 type="button"
-                class="px-8 py-3 border-2 bg-accent-400 hover:bg-accent-400/80 text-primary-850 border-primary-700 hover:text-primary-800 font-semibold rounded-lg transition-colors"
+                class="px-8 py-3 border-2 bg-accent-400 hover:bg-accent-400/80 text-primary-850 border-primary-700 hover:text-primary-800 font-semibold transition-colors"
               >
                 {{ t('auth.signUpButton') }}
               </button>
@@ -952,7 +952,7 @@ const toggleAddressFields = () => {
                 <button
                   type="submit"
                   :disabled="isLoading"
-                  class="px-12 py-3 bg-primary-900 hover:bg-primary-600 text-accent-200 font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  class="px-12 py-3 bg-primary-900 hover:bg-primary-600 text-accent-200 font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {{ isLoading ? t('common.processing') : t('auth.signUpButton') }}
                 </button>
@@ -967,7 +967,7 @@ const toggleAddressFields = () => {
               <button
                 @click="goToSignIn"
                 type="button"
-                class="px-8 py-3 border-2 bg-accent-400 hover:bg-accent-400/80 text-primary-850 border-primary-700 hover:text-primary-800 font-semibold rounded-lg transition-colors text-sm"
+                class="px-8 py-3 border-2 bg-accent-400 hover:bg-accent-400/80 text-primary-850 border-primary-700 hover:text-primary-800 font-semibold transition-colors text-sm"
               >
                 {{ t('auth.signInButton') }}
               </button>
@@ -1018,7 +1018,7 @@ const toggleAddressFields = () => {
                 <button
                   type="submit"
                   :disabled="isLoading"
-                  class="px-12 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  class="px-12 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {{ isLoading ? t('common.processing') : t('auth.otpVerifyButton') }}
                 </button>
@@ -1044,7 +1044,7 @@ const toggleAddressFields = () => {
               <button
                 @click="navigateToPage('signin')"
                 type="button"
-                class="px-8 py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold rounded-lg transition-colors"
+                class="px-8 py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold transition-colors"
               >
                 {{ t('auth.backButton') }}
               </button>
@@ -1092,7 +1092,7 @@ const toggleAddressFields = () => {
                 <button
                   type="submit"
                   :disabled="isLoading"
-                  class="px-12 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  class="px-12 py-3 bg-primary-900 hover:bg-primary-600 text-accent-200 font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {{ isLoading ? t('common.processing') : t('auth.forgotPasswordButton') }}
                 </button>
@@ -1106,7 +1106,7 @@ const toggleAddressFields = () => {
               <button
                 @click="navigateToPage('signin')"
                 type="button"
-                class="px-8 py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold rounded-lg transition-colors"
+                class="px-8 py-3 border-2 bg-accent-400 hover:bg-accent-400/80 text-primary-850 border-primary-700 hover:text-primary-800 font-semibold transition-colors"
               >
                 {{ t('auth.backToSignIn') }}
               </button>
@@ -1184,7 +1184,7 @@ const toggleAddressFields = () => {
                 <button
                   type="submit"
                   :disabled="isLoading"
-                  class="px-12 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  class="px-12 py-3 bg-primary-900 hover:bg-primary-600 text-accent-200 font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {{ isLoading ? t('common.processing') : t('auth.resetPasswordButton') }}
                 </button>
@@ -1198,7 +1198,7 @@ const toggleAddressFields = () => {
               <button
                 @click="navigateToPage('signin')"
                 type="button"
-                class="px-8 py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold rounded-lg transition-colors"
+                class="px-8 py-3 border-2 bg-accent-400 hover:bg-accent-400/80 text-primary-850 border-primary-700 hover:text-primary-800 font-semibold transition-colors"
               >
                 {{ t('auth.backToSignIn') }}
               </button>
@@ -1246,7 +1246,7 @@ const toggleAddressFields = () => {
                 <button
                   type="submit"
                   :disabled="isLoading"
-                  class="px-12 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  class="px-12 py-3 bg-primary-900 hover:bg-primary-600 text-accent-200 font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {{ isLoading ? t('common.processing') : t('auth.otpResendButton') }}
                 </button>
@@ -1260,7 +1260,7 @@ const toggleAddressFields = () => {
               <button
                 @click="navigateToPage('signin')"
                 type="button"
-                class="px-8 py-3 border-2 border-primary-600 text-primary-600 hover:bg-primary-50 font-semibold rounded-lg transition-colors"
+                class="px-8 py-3 border-2 bg-accent-400 hover:bg-accent-400/80 text-primary-850 border-primary-700 hover:text-primary-800 font-semibold transition-colors"
               >
                 {{ t('auth.backToSignIn') }}
               </button>

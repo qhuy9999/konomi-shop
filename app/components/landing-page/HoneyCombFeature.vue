@@ -238,7 +238,7 @@ onMounted(() => {
 @import "@/assets/css/main.css";
 
 .features_container {
-  @apply xs:px-30 sm-md:px-5;
+  @apply xs:px-15 sm-md:px-5;
 }
 
 .features_container_heading {

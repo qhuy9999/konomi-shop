@@ -66,6 +66,12 @@ const handleTabClick = (tabId: string) => {
   @apply flex flex-wrap items-center justify-center gap-2 w-full;
 }
 
+@media (max-width: 412px) {
+  .tabs-nav {
+    @apply max-w-70 mx-auto h-23;
+  }
+}
+
 .tab-button {
   @apply inline-flex items-center justify-center gap-1;
   @apply px-1.5 md:px-4 lg:px-6;
