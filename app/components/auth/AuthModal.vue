@@ -653,6 +653,7 @@ const toggleAddressFields = () => {
       <div class="book-container">
         <!-- Page 1: SignIn -->
         <div
+          v-if="currentPage === 'signin'"
           :class="[
             'book-page page-signin',
             {
@@ -808,6 +809,7 @@ const toggleAddressFields = () => {
 
         <!-- Page 2: SignUp -->
         <div
+          v-if="currentPage === 'signup'"
           :class="[
             'book-page page-signup',
             {
@@ -1147,6 +1149,7 @@ const toggleAddressFields = () => {
 
         <!-- Page 3: OTP Verification -->
         <div
+          v-if="currentPage === 'otp-verify'"
           :class="[
             'book-page page-otp-verify',
             {
@@ -1259,6 +1262,7 @@ const toggleAddressFields = () => {
 
         <!-- Page 4: Forgot Password -->
         <div
+          v-if="currentPage === 'forgot-password'"
           :class="[
             'book-page page-forgot-password',
             { active: currentPage === 'forgot-password' },
@@ -1346,6 +1350,7 @@ const toggleAddressFields = () => {
 
         <!-- Page 5: Reset Password -->
         <div
+          v-if="currentPage === 'reset-password'"
           :class="[
             'book-page page-reset-password',
             { active: currentPage === 'reset-password' },
@@ -1467,6 +1472,7 @@ const toggleAddressFields = () => {
 
         <!-- Page 6: Verify OTP Email -->
         <div
+          v-if="currentPage === 'verify-otp-email'"
           :class="[
             'book-page page-verify-otp-email',
             {
@@ -1572,32 +1578,16 @@ const toggleAddressFields = () => {
 .book-page {
   @apply w-full bg-white rounded-2xl shadow-2xl p-8 lg:p-12;
   @apply transition-all duration-500 ease-in-out;
-  min-height: 600px;
   display: flex;
   flex-direction: column;
 
-  /* Hidden state for transitions */
-  opacity: 0;
-  transform: translateX(100%) rotateY(45deg);
-  pointer-events: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-
-  &.active {
-    opacity: 1;
-    transform: translateX(0) rotateY(0);
-    pointer-events: auto;
-    position: relative;
-  }
-
-  &.prev {
-    transform: translateX(-100%) rotateY(-45deg);
-  }
-
-  &.next {
-    transform: translateX(100%) rotateY(45deg);
-  }
+  /* Page is always visible when rendered */
+  opacity: 1;
+  transform: translateX(0) rotateY(0);
+  pointer-events: auto;
+  position: relative;
+  
+  animation: slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .page-content {
@@ -1610,14 +1600,15 @@ const toggleAddressFields = () => {
 
 /* Page-specific styles */
 .page-signin,
-.page-signup,
 .page-otp-verify,
 .page-forgot-password,
-.page-reset-password,
 .page-verify-otp-email {
-  &.active {
-    animation: slideIn 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-  }
+  min-height: 450px;
+}
+
+.page-signup,
+.page-reset-password {
+  min-height: 650px;
 }
 
 @keyframes slideIn {

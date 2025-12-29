@@ -281,7 +281,7 @@ const handleLogout = async () => {
 
     <!-- Footer -->
     <footer class="bg-white shadow-footer z-50 border-t border-accent-50">
-      <div class="w-full px-4 py-12">
+      <div class="w-full px-4 pt-6 pb-4">
         <!-- Footer Grid -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 max-w-7xl mx-auto text-center md:text-left">
           <!-- Liên Hệ -->
@@ -330,10 +330,10 @@ const handleLogout = async () => {
         </div>
 
         <!-- Divider -->
-        <div class="border-t border-neutral-200 pt-8 max-w-7xl mx-auto">
-          <div class="flex flex-col md:flex-row justify-between items-center font-bold text-sm text-neutral-1000">
+        <div class="border-t border-neutral-200 pt-3 max-w-7xl mx-auto">
+          <div class="flex flex-col md:flex-row justify-around items-center font-bold text-sm text-neutral-1000">
             <p>&copy; {{ $t('footer.copyright') }}</p>
-            <div class="flex gap-6 mt-4 md:mt-0">
+            <div class="flex gap-6 md:mt-0">
               <a href="#" class="text-primary-600 hover:text-neutral-700">Facebook</a>
               <a href="#" class="text-primary-600 hover:text-neutral-700">Twitter</a>
               <a href="#" class="text-primary-600 hover:text-neutral-700">Instagram</a>
