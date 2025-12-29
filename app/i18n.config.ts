@@ -132,13 +132,13 @@ export default defineI18nConfig(() => ({
         subheading: 'Tìm hiểu',
         mainHeading: 'sản phẩm trà ngon',
         tabs: {
-          specialty: 'Trà Bạc Hà',
-          espresso: 'Trà Cúc',
-          arabica: 'Trà Chanh Gừng',
-          robusta: 'Trà Earl Grey'
+          peppermintTea: 'Trà Bạc Hà',
+          chamomileTea: 'Trà Cúc',
+          lemonGinger: 'Trà Chanh Gừng',
+          earlGrey: 'Trà Earl Grey'
         },
         featured: {
-          title: 'Peppermint Velvet',
+          title: 'Trà Bạc Hà',
           subtitle: 'Khám phá hương vị trà tuyệt hảo từ các nông trại hàng đầu',
           description: 'Mỗi ngụm mang đến sự pha trộn hài hòa giữa hương vị đậm đà và hương thơm sảng khoái, khiến đây trở thành lựa chọn lý tưởng cho cả nghi lễ buổi sáng và giờ nghỉ giải lao buổi chiều. Trải nghiệm sự ấm áp dễ chịu và những phẩm chất tràn đầy năng lượng đã khiến trà trở thành thức uống cổ điển được yêu thích trong nhiều thế kỷ.',
           cta: 'Xem Sản Phẩm Trà'
@@ -360,10 +360,10 @@ export default defineI18nConfig(() => ({
         subheading: 'Discover Our',
         mainHeading: 'Premium Tea Collection',
         tabs: {
-          specialty: 'Peppermint Tea',
-          espresso: 'Chamomile Tea',
-          arabica: 'Lemon Ginger',
-          robusta: 'Earl Grey'
+          peppermintTea: 'Peppermint Tea',
+          chamomileTea: 'Chamomile Tea',
+          lemonGinger: 'Lemon Ginger',
+          earlGrey: 'Earl Grey'
         },
         featured: {
           title: 'Peppermint Velvet',
@@ -588,10 +588,10 @@ export default defineI18nConfig(() => ({
         subheading: '当社の',
         mainHeading: 'プレミアムお茶コレクションを発見',
         tabs: {
-          specialty: 'ペパーミント',
-          espresso: 'カモミール',
-          arabica: 'レモンジンジャー',
-          robusta: 'アールグレイ'
+          peppermintTea: 'ペパーミント',
+          chamomileTea: 'カモミール',
+          lemonGinger: 'レモンジンジャー',
+          earlGrey: 'アールグレイ'
         },
         featured: {
           title: 'ペパーミントベルベット',
@@ -816,10 +816,10 @@ export default defineI18nConfig(() => ({
         subheading: 'Entdecken Sie unsere',
         mainHeading: 'Premium-Teekollektion',
         tabs: {
-          specialty: 'Pfefferminz',
-          espresso: 'Kamille',
-          arabica: 'Zitronenginger',
-          robusta: 'Earl Grey'
+          peppermintTea: 'Pfefferminz',
+          chamomileTea: 'Kamille',
+          lemonGinger: 'Zitronenginger',
+          earlGrey: 'Earl Grey'
         },
         featured: {
           title: 'Pfefferminz-Samt',

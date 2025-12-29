@@ -11,12 +11,21 @@ interface Props {
   disabled?: boolean;
 }
 
+const appConfig = useAppConfig();
+
 const props = withDefaults(defineProps<Props>(), {
   variant: "primary",
   size: "md",
-  icon: "i-lucide-arrow-right",
+  icon: "arrowRight",
   disabled: false,
   to: undefined,
+});
+
+// Resolve icon from app config
+const resolvedIcon = computed(() => {
+  if (!props.icon) return undefined;
+  // If icon exists in app config, use it; otherwise return icon as-is (might be a full icon class)
+  return appConfig.ui.icons[props.icon as keyof typeof appConfig.ui.icons] || props.icon;
 });
 
 const emit = defineEmits<{
@@ -61,7 +70,7 @@ const buttonClass = computed(() => {
     font-medium tracking-wider
     border
     transition-all duration-300 ease-out
-    hover:shadow-lg hover:scale-105
+    hover:scale-105 shadow-xl hover:shadow-2xl transition-shadow
     active:scale-95
     w-fit
     overflow-hidden
@@ -85,7 +94,7 @@ const buttonClass = computed(() => {
     :aria-disabled="disabled"
   >
     <span>{{ label }}</span>
-    <UIcon v-if="icon" :name="icon" :class="iconColorClasses[props.variant]" />
+    <UIcon v-if="resolvedIcon" :name="resolvedIcon" :class="iconColorClasses[props.variant]" />
   </NuxtLink>
 
   <!-- Otherwise render as button -->
@@ -97,7 +106,7 @@ const buttonClass = computed(() => {
     @click="emit('click', $event)"
   >
     <span>{{ label }}</span>
-    <UIcon v-if="icon" :name="icon" :class="iconColorClasses[props.variant]" />
+    <UIcon v-if="resolvedIcon" :name="resolvedIcon" :class="iconColorClasses[props.variant]" />
   </button>
 </template>
 

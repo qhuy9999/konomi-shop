@@ -280,7 +280,7 @@ const handleLogout = async () => {
     </main>
 
     <!-- Footer -->
-    <footer class="bg-white shadow-footer z-50 border-t border-accent-50 mt-5">
+    <footer class="bg-white shadow-footer z-50 border-t border-accent-50">
       <div class="w-full px-4 py-12">
         <!-- Footer Grid -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8 max-w-7xl mx-auto text-center md:text-left">

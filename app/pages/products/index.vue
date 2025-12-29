@@ -9,20 +9,20 @@ interface ProductImage {
 }
 
 interface ProductCategory {
-  category: "specialty" | "espresso" | "arabica" | "robusta";
+  category: "peppermintTea" | "chamomileTea" | "lemonGinger" | "earlGrey";
   products: ProductImage[];
 }
 
 interface FilterTab {
   label: string;
   labelShort: string;
-  value: "" | "specialty" | "espresso" | "arabica" | "robusta";
+  value: "" | "peppermintTea" | "chamomileTea" | "lemonGinger" | "earlGrey";
 }
 
 // Data - Grouped by category with multiple products per category
 const productsByCategory: ProductCategory[] = [
   {
-    category: "specialty",
+    category: "peppermintTea",
     products: [
       {
         id: "1",
@@ -45,7 +45,7 @@ const productsByCategory: ProductCategory[] = [
     ],
   },
   {
-    category: "espresso",
+    category: "chamomileTea",
     products: [
       {
         id: "2",
@@ -68,7 +68,7 @@ const productsByCategory: ProductCategory[] = [
     ],
   },
   {
-    category: "arabica",
+    category: "lemonGinger",
     products: [
       {
         id: "3",
@@ -91,7 +91,7 @@ const productsByCategory: ProductCategory[] = [
     ],
   },
   {
-    category: "robusta",
+    category: "earlGrey",
     products: [
       {
         id: "4",
@@ -133,8 +133,8 @@ const formatPrice = (price: number): string => {
     de: { locale: "de-DE", currency: "EUR" },
   };
 
-  const config = currencyMap[locale.value] || currencyMap["vi"];
-  
+  const config = currencyMap[locale.value] ?? currencyMap["vi"]!;
+
   return new Intl.NumberFormat(config.locale, {
     style: "currency",
     currency: config.currency,
@@ -145,9 +145,9 @@ const formatPrice = (price: number): string => {
 const createShortLabel = (fullLabel: string): string => {
   // Remove common prefixes: "Trà ", "Tea ", "Tee "
   let cleaned = fullLabel
-    .replace(/^(Trà |Tea |Tee |trà |tea |tee )/i, '')
+    .replace(/^(Trà |Tea |Tee |trà |tea |tee )/i, "")
     .trim();
-  
+
   // For Japanese text, use first 3 chars; for others, use first 4 chars
   if (cleaned.match(/[\u3040-\u309F\u30A0-\u30FF]/)) {
     return cleaned.substring(0, 3);
@@ -156,25 +156,25 @@ const createShortLabel = (fullLabel: string): string => {
 };
 
 const filters: FilterTab[] = [
-  { 
-    label: t('product.tabs.specialty'), 
-    labelShort: '', 
-    value: "specialty" 
+  {
+    label: t("product.tabs.peppermintTea"),
+    labelShort: "",
+    value: "peppermintTea",
   },
-  { 
-    label: t('product.tabs.espresso'), 
-    labelShort: '', 
-    value: "espresso" 
+  {
+    label: t("product.tabs.chamomileTea"),
+    labelShort: "",
+    value: "chamomileTea",
   },
-  { 
-    label: t('product.tabs.arabica'), 
-    labelShort: '', 
-    value: "arabica" 
+  {
+    label: t("product.tabs.lemonGinger"),
+    labelShort: "",
+    value: "lemonGinger",
   },
-  { 
-    label: t('product.tabs.robusta'), 
-    labelShort: '', 
-    value: "robusta" 
+  {
+    label: t("product.tabs.earlGrey"),
+    labelShort: "",
+    value: "earlGrey",
   },
 ];
 
@@ -190,7 +190,7 @@ const activeCategory = computed(() => (route.query.category as string) || "");
 
 // Computed - Get locale prefix
 const getLocalePrefix = (): string => {
-  return locale.value === 'vi' ? '' : `/${locale.value}`;
+  return locale.value === "vi" ? "" : `/${locale.value}`;
 };
 
 // Computed - Transform filters to ButtonTab format
@@ -271,16 +271,18 @@ watch(
       <!-- tiêu đề -->
       <div class="mt-4 md:mt-9">
         <div>
-          <h2 class="sub_heading" data-animate="subHeading">{{ $t('product.subheading') }}</h2>
+          <h2 class="sub_heading" data-animate="subHeading">
+            {{ $t("product.subheading") }}
+          </h2>
           <h1 class="main_heading" data-animate="mainHeading">
-            {{ $t('product.mainHeading') }}
+            {{ $t("product.mainHeading") }}
           </h1>
         </div>
         <p
           data-animate="description"
           class="max-w-lg mt-2 text-xs text-neutral-500"
         >
-          {{ $t('product.featured.description') }}
+          {{ $t("product.featured.description") }}
         </p>
       </div>
 
@@ -289,7 +291,11 @@ watch(
         :tabs="filterTabs"
         :model-value="activeCategory || 'all'"
         @update:model-value="
-          router.push($event === 'all' ? `${getLocalePrefix()}/products` : `${getLocalePrefix()}/products?category=${$event}`)
+          router.push(
+            $event === 'all'
+              ? `${getLocalePrefix()}/products`
+              : `${getLocalePrefix()}/products?category=${$event}`
+          )
         "
         variant="default"
         :show-divider="true"
@@ -301,7 +307,10 @@ watch(
           class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6"
         >
           <!-- Loop through categories -->
-          <template v-for="category in filteredProducts" :key="category.category">
+          <template
+            v-for="category in filteredProducts"
+            :key="category.category"
+          >
             <!-- Loop through products in each category -->
             <div
               v-for="product in category.products"
@@ -326,21 +335,25 @@ watch(
                   class="absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex flex-col justify-end p-4"
                 >
                   <div class="space-y-2">
-                    <h3 class="text-white font-semibold text-base line-clamp-2">
+                    <h3
+                      class="text-primary-350 font-semibold text-base line-clamp-2"
+                    >
                       {{ getProductName(product.i18nKey) }}
                     </h3>
-                    <p class="text-neutral-200 text-xs line-clamp-2">
+                    <p class="text-primary-100 text-xs line-clamp-2">
                       {{ getProductDescription(product.i18nKey) }}
                     </p>
                     <div class="flex items-center justify-between pt-2">
-                      <span class="text-accent-400 font-bold text-sm">
+                      <span class="text-accent-150 font-bold text-sm">
                         {{ formatPrice(product.price) }}
                       </span>
-                      <button
-                        class="px-3 py-1 bg-primary-500 hover:bg-primary-600 text-white text-xs rounded transition-colors"
-                      >
-                        {{ $t('common.addToCart') }}
-                      </button>
+                      <Button
+                        :label="$t('common.addToCart')"
+                        to="#"
+                        variant="accent"
+                        size="sm"
+                        icon="plus"
+                      />
                     </div>
                   </div>
                 </div>

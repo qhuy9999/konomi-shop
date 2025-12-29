@@ -48,7 +48,7 @@ export default defineAppConfig({
         root: "gap-2",
         base: "relative overflow-hidden rounded-full",
         indicator: "rounded-full size-full transition-all duration-200 ease-out",
-        status: "flex text-dimmed transition-all duration-200",
+        status: "flex text-dimmed duration-200",
         steps: "grid items-end text-accent-100",
         step: "truncate text-end row-start-1 col-start-1 transition-opacity",
       },
@@ -62,7 +62,7 @@ export default defineAppConfig({
         color: {
           primary: {
             indicator: "bg-primary-500",
-            // steps: 'text-primary-50',
+            // steps:'text-primary-50',
           },
           secondary: {
             indicator: "bg-secondary",

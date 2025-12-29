@@ -27,15 +27,15 @@ onMounted(() => {
 });
 
 // ============ PRODUCTS TABS - Custom Implementation ============
-const activeTab = ref<"specialty" | "espresso" | "arabica" | "robusta">(
-  "specialty"
+const activeTab = ref<"peppermintTea" | "chamomileTea" | "lemonGinger" | "earlGrey">(
+  "peppermintTea"
 );
 
 const tabs = computed(() => [
-  { id: "specialty", label: t('product.tabs.specialty'), icon: "i-lucide-moon" },
-  { id: "espresso", label: t('product.tabs.espresso'), icon: "i-lucide-sun" },
-  { id: "arabica", label: t('product.tabs.arabica'), icon: "i-lucide-cloud" },
-  { id: "robusta", label: t('product.tabs.robusta'), icon: "i-lucide-star" },
+  { id: "peppermintTea", label: t('product.tabs.peppermintTea'), icon: "i-lucide-moon" },
+  { id: "chamomileTea", label: t('product.tabs.chamomileTea'), icon: "i-lucide-sun" },
+  { id: "lemonGinger", label: t('product.tabs.lemonGinger'), icon: "i-lucide-cloud" },
+  { id: "earlGrey", label: t('product.tabs.earlGrey'), icon: "i-lucide-star" },
 ]);
 </script>
 
@@ -61,14 +61,14 @@ const tabs = computed(() => [
 
           <div class="tabs-content">
             <!-- Specialty Tab -->
-            <div v-show="activeTab === 'specialty'">
+            <div v-show="activeTab === 'peppermintTea'">
               <div
                 class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-8 items-center py-2"
               >
                 <NuxtImg
                   data-animate-image
                   src="/images/product_1.jpg"
-                  alt="Specialty Coffee"
+                  alt="Peppermint Tea"
                   class="w-full h-auto rounded-lg"
                 />
                 <div>
@@ -83,7 +83,7 @@ const tabs = computed(() => [
                   </p>
                   <Button
                     :label="$t('product.featured.cta')"
-                    :to="getProductLink('specialty')"
+                    :to="getProductLink('peppermintTea')"
                     variant="accent"
                     size="md"
                     icon="i-lucide-arrow-right"
@@ -92,29 +92,30 @@ const tabs = computed(() => [
                 </div>
               </div>
             </div>
-            <!-- Espresso Tab -->
-            <div v-show="activeTab === 'espresso'">
+            <!-- Chamomile Tea Tab -->
+            <div v-show="activeTab === 'chamomileTea'">
               <div
                 class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-8 items-center py-2"
               >
                 <NuxtImg
+                  data-animate-image
                   src="/images/product_2.jpg"
-                  alt="Espresso Blends"
+                  alt="Chamomile Tea"
                   class="w-full h-auto rounded-lg"
                 />
                 <div>
-                  <h3 class="products-sub_heading">
+                  <h3 data-animate-sub-heading class="products-sub_heading">
                     {{ $t('product.featured.subtitle') }}
                   </h3>
-                  <h4 class="products-main_heading">
-                    {{ $t('product.tabs.espresso') }}
+                  <h4 data-animate-main-heading class="products-main_heading">
+                    {{ $t('product.tabs.chamomileTea') }}
                   </h4>
-                  <p>
+                  <p data-animate-description>
                     {{ $t('product.featured.description') }}
                   </p>
                   <Button
                     :label="$t('product.featured.cta')"
-                    :to="getProductLink('espresso')"
+                    :to="getProductLink('chamomileTea')"
                     variant="accent"
                     size="md"
                     icon="i-lucide-arrow-right"
@@ -125,28 +126,29 @@ const tabs = computed(() => [
             </div>
 
             <!-- Arabica Tab -->
-            <div v-show="activeTab === 'arabica'">
+            <div v-show="activeTab === 'lemonGinger'">
               <div
                 class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-8 items-center py-2"
               >
                 <NuxtImg
+                  data-animate-image
                   src="/images/product_3.jpg"
-                  alt="Arabica Selection"
+                  alt="Lemon Ginger Tea"
                   class="w-full h-auto rounded-lg"
                 />
                 <div>
-                  <h3 class="products-sub_heading">
+                  <h3 data-animate-sub-heading class="products-sub_heading">
                     {{ $t('product.featured.subtitle') }}
                   </h3>
-                  <h4 class="products-main_heading">
-                    {{ $t('product.tabs.arabica') }}
+                  <h4 data-animate-main-heading class="products-main_heading">
+                    {{ $t('product.tabs.lemonGinger') }}
                   </h4>
-                  <p>
+                  <p data-animate-description>
                     {{ $t('product.featured.description') }}
                   </p>
                   <Button
                     :label="$t('product.featured.cta')"
-                    :to="getProductLink('arabica')"
+                    :to="getProductLink('lemonGinger')"
                     variant="accent"
                     size="md"
                     icon="i-lucide-arrow-right"
@@ -156,29 +158,30 @@ const tabs = computed(() => [
               </div>
             </div>
 
-            <!-- Robusta Tab -->
-            <div v-show="activeTab === 'robusta'">
+            <!-- Earl Grey Tab -->
+            <div v-show="activeTab === 'earlGrey'">
               <div
                 class="grid grid-cols-1 md:grid-cols-2 gap-3 lg:gap-8 items-center py-2"
               >
                 <NuxtImg
+                  data-animate-image
                   src="/images/product_4.jpg"
-                  alt="Robusta Selection"
+                  alt="Earl Grey Tea"
                   class="w-full h-auto rounded-lg"
                 />
                 <div>
-                  <h3 class="products-sub_heading">
+                  <h3 data-animate-sub-heading class="products-sub_heading">
                     {{ $t('product.featured.subtitle') }}
                   </h3>
-                  <h4 class="products-main_heading">
-                    {{ $t('product.tabs.robusta') }}
+                  <h4 data-animate-main-heading class="products-main_heading">
+                    {{ $t('product.tabs.earlGrey') }}
                   </h4>
-                  <p>
+                  <p data-animate-description>
                     {{ $t('product.featured.description') }}
                   </p>
                   <Button
                     :label="$t('product.featured.cta')"
-                    :to="getProductLink('robusta')"
+                    :to="getProductLink('earlGrey')"
                     variant="accent"
                     size="md"
                     icon="i-lucide-arrow-right"

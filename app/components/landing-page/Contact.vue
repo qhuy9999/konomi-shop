@@ -104,9 +104,9 @@ const handleSignUp = () => {
 
           <!-- hình decor -->
           <NuxtImg
-            src="/images/contact.png"
-            alt="decor"
-            class="absolute -bottom-20 -right-20 w-[400px] opacity-10 -z-10"
+            src="/images/contact.jpg"
+            alt="Contact us Konomi Shop"
+            class="absolute inset-0 w-full h-full opacity-10 -z-10 object-cover"
           />
         </div>
       </div>

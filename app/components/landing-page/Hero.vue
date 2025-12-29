@@ -27,7 +27,7 @@ onMounted(() => {
         class="absolute bottom-0 right-0 overflow-hidden z-0 md:top-1/2 md:-translate-y-1/2 xl:top-1/2 xl:-translate-y-1/2"
       >
         <NuxtImg
-          src="/images/hero_img.png"
+          src="/images/hero-tea-leaves.png"
           alt="Tea specialty showcase - beautiful organic tea leaves and traditional brewing method"
           class="h-full 2xl:mask-[linear-gradient(to_left,transparent,black_10%)]"
         />
@@ -62,7 +62,6 @@ onMounted(() => {
           :to="`${localePrefix}/products`"
           variant="accent"
           size="md"
-          icon="i-lucide-arrow-right"
           data-animate-button
         />
       </div>
