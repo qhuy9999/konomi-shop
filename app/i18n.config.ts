@@ -5,7 +5,7 @@ export default defineI18nConfig(() => ({
     vi: {
       common: {
         welcome: 'Chào mừng đến Konomi Shop',
-        language: 'Ngôn ngữ',
+        languages: 'Ngôn ngữ',
         home: 'Trang chủ',
         products: 'Sản phẩm',
         cart: 'Giỏ hàng',
@@ -14,13 +14,15 @@ export default defineI18nConfig(() => ({
         login: 'Đăng nhập',
         signup: 'Đăng ký',
         addToCart: 'Thêm vào giỏ',
-        processing: 'Đang xử lý...'
+        processing: 'Đang xử lý...',
+        backToFirstPage: 'Quay về trang đầu tiên',
+        entertainment: 'Giải Trí-Tin Tức-Chia Sẻ'
       },
       nav: {
         home: 'Trang Chủ',
         products: 'Sản Phẩm',
         about: 'Về Chúng Tôi',
-        contact: 'Liên Hệ'
+        contact: 'Liên Hệ',
       },
       footer: {
         contact: 'Liên hệ',
@@ -228,12 +230,68 @@ export default defineI18nConfig(() => ({
           description: 'Trở thành thành viên Konomi Tea sẽ giúp bạn nhận ưu đãi độc quyền. Đăng nhập để truy cập tài khoản của bạn hoặc tạo tài khoản mới.',
           noAccount: 'Chưa có tài khoản? Đăng ký ngay!'
         }
+      },
+      entertainment: {
+        title: 'Góc Giải Trí, Tin Tức và Chia Sẻ',
+        subtitle: 'Khám phá thế giới giải trí và tin tức tuyệt vời',
+        comingSoon: 'Sắp ra mắt',
+        game: {
+          title: 'Trò Chơi',
+          subtitle: 'Trải nghiệm thú vị với trò chơi nhập vai độc đáo',
+          badge: 'Trò chơi mới',
+          description: 'Trò chơi Konomi World là một trò chơi nhập vai hấp dẫn nơi bạn có thể hóa thân nhân vật chính để trải nghiệm thế giới nhiệm màu, huyền bí của riêng mình, giao dịch với người chơi khác và cạnh tranh để trở thành anh hùng đứng đầu bảng xếp hạng.',
+          playCTA: 'Tải Ngay',
+          learnMore: 'Tìm Hiểu Thêm',
+          players: 'Người chơi',
+          rating: 'Đánh giá',
+          uptime: 'Thời gian hoạt động',
+          features: {
+            title: 'Tính Năng Nổi Bật',
+            subtitle: 'Tìm hiểu những gì làm cho Trò chơi Chè Konomi trở nên độc đáo'
+          },
+          feature1: {
+            title: 'Chiến Lược Sâu Sắc',
+            description: 'Lập kế hoạch chiến lược, quản lý tài nguyên và đưa ra quyết định thông minh để thành công'
+          },
+          feature2: {
+            title: 'Chơi Đa Người',
+            description: 'Tương tác với hàng ngàn người chơi khác, tạo liên minh và tham gia các sự kiện tập thể'
+          },
+          feature3: {
+            title: 'Phần Thưởng Hàng Ngày',
+            description: 'Nhận phần thưởng hàng ngày, hoàn thành nhiệm vụ và mở khóa các thành tựu độc quyền'
+          },
+          feature4: {
+            title: 'Cập Nhật Thường Xuyên',
+            description: 'Nội dung mới, sự kiện hấp dẫn và cải tiến được cập nhật mỗi tuần'
+          },
+          gameplay: {
+            title: 'Cách Chơi',
+            description: 'Bắt đầu hành trình của bạn bằng cách tạo nhân vật đầu tiên. Nâng cấp nhân vật và khám phá thế giới nhiệm màu.',
+            point1: 'Xây dựng nhân vật với đa dạng nghề nghiệp',
+            point2: 'Mỗi nghề nghiệp sẽ có những kĩ năng đặc trưng riêng và chiến thuật chơi độc đáo',
+            point3: 'Giao lưu với người chơi khác trên thị trường toàn cầu'
+          },
+          imagePlaceholder: 'Ảnh Gameplay sẽ được thêm vào',
+          community: {
+            title: 'Tham Gia Cộng Đồng',
+            subtitle: 'Kết nối với các người chơi khác, chia sẻ mẹo và hợp tác để tiến bộ',
+            joinCommunity: 'Tham Gia Cộng Đồng',
+            discord: 'Discord'
+          }
+        },
+        story: {
+          title: 'Câu Chuyện'
+        },
+        news: {
+          title: 'Tin Tức'
+        }
       }
     },
     en: {
       common: {
         welcome: 'Welcome to Konomi',
-        language: 'Language',
+        languages: 'Languages',
         home: 'Home',
         products: 'Products',
         cart: 'Cart',
@@ -242,7 +300,9 @@ export default defineI18nConfig(() => ({
         login: 'Sign In',
         signup: 'Sign Up',
         addToCart: 'Add to Cart',
-        processing: 'Processing...'
+        processing: 'Processing...',
+        backToFirstPage: 'Back to First Page',
+        entertainment: 'Entertainment-News-Sharing'
       },
       nav: {
         home: 'Home',
@@ -271,7 +331,7 @@ export default defineI18nConfig(() => ({
         privacy: 'Privacy Policy',
         cookies: 'Cookie Policy',
         about: 'About',
-        copyright: 'Copyright © 2024 Konomi Tea. All rights reserved.'
+        copyright: 'Copyright © 2025 Konomi Tea. All rights reserved.'
       },
       auth: {
         signin: 'Sign In',
@@ -456,12 +516,68 @@ export default defineI18nConfig(() => ({
           description: 'Become a Konomi Tea member for exclusive benefits and early access to new blends. Sign in to access your account or create a new one.',
           noAccount: 'No account yet? Sign up today!'
         }
+      },
+      entertainment: {
+        title: 'Entertainment, News and Sharing Corner',
+        subtitle: 'Discover an amazing world of entertainment and games',
+        comingSoon: 'Coming Soon',
+        game: {
+          title: 'Game',
+          subtitle: 'Experience an exciting role-playing game like no other',
+          badge: 'New Game',
+          description: 'Konomi World is an engaging role-playing game where you can embody the main character to experience your own magical, mysterious world, trade with other players, and compete to become the top hero on the leaderboard.',
+          playCTA: 'Download Now',
+          learnMore: 'Learn More',
+          players: 'Players',
+          rating: 'Rating',
+          uptime: 'Uptime',
+          features: {
+            title: 'Key Features',
+            subtitle: 'Discover what makes Konomi World Game unique'
+          },
+          feature1: {
+            title: 'Deep Strategy',
+            description: 'Plan strategically, manage resources, and make smart decisions to succeed'
+          },
+          feature2: {
+            title: 'Multiplayer Fun',
+            description: 'Interact with thousands of other players, form alliances, and participate in collective events'
+          },
+          feature3: {
+            title: 'Daily Rewards',
+            description: 'Earn daily rewards, complete quests, and unlock exclusive achievements'
+          },
+          feature4: {
+            title: 'Regular Updates',
+            description: 'New content, exciting events, and improvements released every week'
+          },
+          gameplay: {
+            title: 'How to Play',
+            description: 'Start your journey by creating your first character. Level up your character and explore the magical world.',
+            point1: 'Build characters with diverse professions',
+            point2: 'Each profession has its own unique skills and play strategies',
+            point3: 'Interact with other players in the global marketplace'
+          },
+          imagePlaceholder: 'Gameplay Image Coming Soon',
+          community: {
+            title: 'Join Our Community',
+            subtitle: 'Connect with other players, share tips, and collaborate to progress together',
+            joinCommunity: 'Join Community',
+            discord: 'Discord'
+          }
+        },
+        story: {
+          title: 'Story'
+        },
+        news: {
+          title: 'News'
+        }
       }
     },
     ja: {
       common: {
         welcome: 'コノミお茶へようこそ',
-        language: '言語',
+        languages: '言語',
         home: 'ホーム',
         products: '製品',
         cart: 'カート',
@@ -470,13 +586,15 @@ export default defineI18nConfig(() => ({
         login: 'サインイン',
         signup: '新規登録',
         addToCart: 'カートに追加',
-        processing: '処理中...'
+        processing: '処理中...',
+        backToFirstPage: '最初のページに戻る',
+        entertainment: 'エンターテインメント-ニュース-共有'
       },
       nav: {
         home: 'ホーム',
         products: '製品',
         about: 'について',
-        contact: 'お問い合わせ'
+        contact: 'お問い合わせ',
       },
       footer: {
         contact: 'お問い合わせ',
@@ -499,7 +617,7 @@ export default defineI18nConfig(() => ({
         privacy: 'プライバシーポリシー',
         cookies: 'クッキーポリシー',
         about: '私たちについて',
-        copyright: '著作権 © 2024 Konomi Tea。著作権所有。'
+        copyright: '著作権 © 2025 Konomi Tea。著作権所有。'
       },
       auth: {
         signin: 'サインイン',
@@ -684,12 +802,68 @@ export default defineI18nConfig(() => ({
           description: 'コノミお茶メンバーになると、独占的な特典と新しいブレンドへの早期アクセスが得られます。サインインしてアカウントにアクセスするか、新しいアカウントを作成してください。',
           noAccount: 'アカウントをお持ちでないですか？今すぐサインアップ！'
         }
+      },
+      entertainment: {
+        title: 'エンターテインメント、ニュースコーナー、共有',
+        subtitle: '素晴らしいエンターテインメントとゲームの世界を発見してください',
+        comingSoon: '近日公開予定',
+        game: {
+          title: 'ゲーム',
+          subtitle: '他に類を見ないエキサイティングなロールプレイングゲームを体験してください',
+          badge: '新しいゲーム',
+          description: 'Konomi Worldは魅力的なロールプレイングゲームで、主人公になりきって自分だけの魔法の神秘的な世界を体験し、他のプレイヤーと取引し、リーダーボードでトップヒーローになるために競い合うことができます。',
+          playCTA: '今すぐダウンロード',
+          learnMore: '詳しく知る',
+          players: 'プレイヤー',
+          rating: '評価',
+          uptime: '稼働時間',
+          features: {
+            title: '主な特徴',
+            subtitle: 'Konomi World Gameをユニークにするものを発見してください'
+          },
+          feature1: {
+            title: '深いストラテジー',
+            description: '戦略的に計画し、リソースを管理し、成功するために賢明な決定を下してください'
+          },
+          feature2: {
+            title: 'マルチプレイヤーの楽しさ',
+            description: '何千人もの他のプレイヤーと交流し、同盟を結び、集団イベントに参加してください'
+          },
+          feature3: {
+            title: '毎日のリワード',
+            description: '毎日のリワードを獲得し、クエストを完了し、独占的な実績を解除してください'
+          },
+          feature4: {
+            title: '定期的な更新',
+            description: '毎週新しいコンテンツ、エキサイティングなイベント、改善がリリースされます'
+          },
+          gameplay: {
+            title: '遊び方',
+            description: 'ー番目のキャラクターを作成して旅を始めましょう。キャラクターをレベルアップし、魔法の世界を探索してください。',
+            point1: '多様な職業でキャラクターを構築してください',
+            point2: '各職業には独自のスキルとプレイ戦略があります',
+            point3: 'グローバルマーケットプレイスで他のプレイヤーと交流してください'
+          },
+          imagePlaceholder: 'ゲームプレイ画像が近日公開予定',
+          community: {
+            title: 'コミュニティに参加する',
+            subtitle: '他のプレイヤーと繋がり、ヒントを共有し、一緒に進捗を遂行してください',
+            joinCommunity: 'コミュニティに参加',
+            discord: 'Discord'
+          }
+        },
+        story: {
+          title: 'ストーリー'
+        },
+        news: {
+          title: 'ニュース'
+        }
       }
     },
     de: {
       common: {
         welcome: 'Willkommen bei Konomi',
-        language: 'Sprache',
+        languages: 'Sprachen',
         home: 'Startseite',
         products: 'Produkte',
         cart: 'Warenkorb',
@@ -698,13 +872,15 @@ export default defineI18nConfig(() => ({
         login: 'Anmelden',
         signup: 'Registrieren',
         addToCart: 'In den Warenkorb',
-        processing: 'Wird bearbeitet...'
+        processing: 'Wird bearbeitet...',
+        backToFirstPage: 'Zurück zur ersten Seite',
+        entertainment: 'Unterhaltung - Nachrichten - Gemeinschaft'
       },
       nav: {
         home: 'Startseite',
         products: 'Produkte',
         about: 'Über',
-        contact: 'Kontakt'
+        contact: 'Kontakt',
       },
       footer: {
         contact: 'Kontakt',
@@ -727,7 +903,7 @@ export default defineI18nConfig(() => ({
         privacy: 'Datenschutzrichtlinie',
         cookies: 'Cookie-Richtlinie',
         about: 'Über uns',
-        copyright: 'Copyright © 2024 Konomi Tea. Alle Rechte vorbehalten.'
+        copyright: 'Copyright © 2025 Konomi Tea. Alle Rechte vorbehalten.'
       },
       auth: {
         signin: 'Anmelden',
@@ -912,7 +1088,64 @@ export default defineI18nConfig(() => ({
           description: 'Werden Sie Konomi Tea Mitglied für exklusive Vorteile und frühzeitigen Zugriff auf neue Mischungen. Melden Sie sich an, um auf Ihr Konto zuzugreifen, oder erstellen Sie ein neues Konto.',
           noAccount: 'Noch kein Konto? Registrieren Sie sich noch heute!'
         }
+      },
+      entertainment: {
+        title: 'Unterhaltung, Nachrichten-Ecke und Gemeinschaft',
+        subtitle: 'Entdecken Sie eine erstaunliche Welt der Unterhaltung und Spiele',
+        comingSoon: 'Demnächst verfügbar',
+        game: {
+          title: 'Spiel',
+          subtitle: 'Erleben Sie ein aufregendes Rollenspiel wie kein anderes',
+          badge: 'Neues Spiel',
+          description: 'Konomi World ist ein fesselndes Rollenspiel, in dem Sie die Hauptfigur verkörpern können, um Ihre eigene magische, mysteriöse Welt zu erleben, mit anderen Spielern zu handeln und zu konkurrieren, um der Top-Held auf der Bestenliste zu werden.',
+          playCTA: 'Jetzt herunterladen',
+          learnMore: 'Weitere Informationen',
+          players: 'Spieler',
+          rating: 'Bewertung',
+          uptime: 'Verfügbarkeit',
+          features: {
+            title: 'Hauptmerkmale',
+            subtitle: 'Entdecken Sie, was das Konomi World Game einzigartig macht'
+          },
+          feature1: {
+            title: 'Tiefe Strategie',
+            description: 'Planen Sie strategisch, verwalten Sie Ressourcen und treffen Sie kluge Entscheidungen, um erfolgreich zu sein'
+          },
+          feature2: {
+            title: 'Multiplayer-Spaß',
+            description: 'Interagieren Sie mit Tausenden von anderen Spielern, bilden Sie Allianzen und nehmen Sie an kollektiven Ereignissen teil'
+          },
+          feature3: {
+            title: 'Tägliche Belohnungen',
+            description: 'Verdienen Sie tägliche Belohnungen, schließen Sie Quests ab und schalten Sie exklusive Erfolge frei'
+          },
+          feature4: {
+            title: 'Regelmäßige Updates',
+            description: 'Wöchentlich werden neue Inhalte, aufregende Ereignisse und Verbesserungen veröffentlicht'
+          },
+          gameplay: {
+            title: 'Wie man spielt',
+            description: 'Beginnen Sie Ihre Reise, indem Sie Ihren ersten Charakter erstellen. Leveln Sie Ihren Charakter und erkunden Sie die magische Welt.',
+            point1: 'Bauen Sie Charaktere mit verschiedenen Berufen auf',
+            point2: 'Jeder Beruf hat seine eigenen einzigartigen Fähigkeiten und Spielstrategien',
+            point3: 'Interagieren Sie mit anderen Spielern auf dem globalen Marktplatz'
+          },
+          imagePlaceholder: 'Gameplay-Bild folgt in Kürze',
+          community: {
+            title: 'Treten Sie unserer Community bei',
+            subtitle: 'Verbinden Sie sich mit anderen Spielern, teilen Sie Tipps und arbeiten Sie zusammen, um voranzukommen',
+            joinCommunity: 'Community beitreten',
+            discord: 'Discord'
+          }
+        },
+        story: {
+          title: 'Geschichte'
+        },
+        news: {
+          title: 'Nachrichten'
+        }
       }
     }
   },
 }))
+

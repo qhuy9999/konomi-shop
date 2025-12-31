@@ -352,7 +352,7 @@ watch(
                         to="#"
                         variant="accent"
                         size="sm"
-                        icon="plus"
+                        icon="i-custom-cart-plus-fill"
                       />
                     </div>
                   </div>
@@ -371,6 +371,15 @@ watch(
         <p class="text-neutral-500 text-sm md:text-base">
           Không có sản phẩm nào trong danh mục này
         </p>
+      </div>
+      <div class="flex justify-center my-6 md:my-12">
+        <Button
+          :label="$t('common.backToFirstPage')"
+          :to="`${locale === 'vi' ? '' : `/${locale}`}/`"
+          variant="secondaryV1"
+          size="sm"
+          icon="i-custom-chevron-double-left"
+        />
       </div>
     </main>
   </section>

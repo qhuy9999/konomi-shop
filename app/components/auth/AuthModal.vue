@@ -1,9 +1,7 @@
 <script setup lang="ts">
-import { reactive, computed } from "vue";
 import { useAuthStore } from "@/stores/auth";
 import { useSessionStore } from "@/stores/session";
 import { useToastStore } from "@/stores/toast";
-import { useI18n } from "vue-i18n";
 
 // ============ Stores ============
 const authStore = useAuthStore();
@@ -665,7 +663,7 @@ const toggleAddressFields = () => {
           <div class="page-content">
             <!-- hình decor -->
             <NuxtImg
-              src="/images/contact.jpg"
+              src="/images/contact-bg-1.jpg"
               alt="Contact us Konomi Shop"
               class="absolute inset-0 w-full h-full opacity-8 -z-10 object-cover"
             />
@@ -821,7 +819,7 @@ const toggleAddressFields = () => {
           <div class="page-content">
             <!-- hình decor -->
             <NuxtImg
-              src="/images/contact.jpg"
+              src="/images/contact-bg-1.jpg"
               alt="Contact us Konomi Shop"
               class="absolute inset-0 w-full h-full opacity-8 -z-10 object-cover"
             />
@@ -1161,7 +1159,7 @@ const toggleAddressFields = () => {
           <div class="page-content">
             <!-- hình decor -->
             <NuxtImg
-              src="/images/contact.jpg"
+              src="/images/contact-bg-1.jpg"
               alt="Contact us Konomi Shop"
               class="absolute inset-0 w-full h-full opacity-8 -z-10 object-cover"
             />
@@ -1271,7 +1269,7 @@ const toggleAddressFields = () => {
           <div class="page-content">
             <!-- hình decor -->
             <NuxtImg
-              src="/images/contact.jpg"
+              src="/images/contact-bg-1.jpg"
               alt="Contact us Konomi Shop"
               class="absolute inset-0 w-full h-full opacity-8 -z-10 object-cover"
             />
@@ -1359,7 +1357,7 @@ const toggleAddressFields = () => {
           <div class="page-content">
             <!-- hình decor -->
             <NuxtImg
-              src="/images/contact.jpg"
+              src="/images/contact-bg-1.jpg"
               alt="Contact us Konomi Shop"
               class="absolute inset-0 w-full h-full opacity-5 -z-10 object-cover"
             />
@@ -1484,7 +1482,7 @@ const toggleAddressFields = () => {
           <div class="page-content">
             <!-- hình decor -->
             <NuxtImg
-              src="/images/contact.jpg"
+              src="/images/contact-bg-1.jpg"
               alt="Contact us Konomi Shop"
               class="absolute inset-0 w-full h-full opacity-8 -z-10 object-cover"
             />

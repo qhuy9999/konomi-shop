@@ -43,7 +43,7 @@ const selectLanguage = (code: LanguageCode) => {
 
 <template>
   <div class="relative inline-block">
-    <UButton 
+    <!-- <UButton 
       :label="currentLanguage?.name"
       variant="soft"
       @click="isOpen = !isOpen"
@@ -52,15 +52,29 @@ const selectLanguage = (code: LanguageCode) => {
       <template #leading>
         <span class="text-lg">{{ currentLanguage?.icon }}</span>
       </template>
-    </UButton>
+    </UButton> -->
 
     <!-- Mobile: Icon only button -->
-    <button
-      @click="isOpen = !isOpen"
-      class="md:hidden bg-primary-100 p-2 text-primary-625 hover:bg-primary-150 border-primary-700 rounded-lg transition-colors"
-    >
-      <UIcon name="i-lucide-languages" class="w-5 h-5" />
-    </button>
+    <!-- <div class="relative">
+      <UTooltip :text="$t('common.languages') || 'Languages'" :shortcuts="[]" :popper="{ placement: 'bottom' }">
+        <button
+          @click="isOpen = !isOpen"
+          class="bg-primary-100 p-2 text-primary-625 hover:bg-primary-150 border-primary-700 rounded-lg transition-colors"
+        >
+          <UIcon name="i-lucide-languages" class="w-5 h-5" />
+        </button>
+      </UTooltip>
+    </div> -->
+
+    <UTooltip :delay-duration="0" :text="$t('common.languages') || 'Languages'" :shortcuts="[]" :popper="{ placement: 'bottom' }">
+      <Button
+        variant="tertiary"
+        class="language-button border-primary-700 md:hidden absolute left-0 w-max"
+        @click="isOpen = !isOpen"
+        icon="i-lucide-languages"
+        size="lg"
+      />
+    </UTooltip>
     
     <Transition
       enter-active-class="transition ease-out duration-100"

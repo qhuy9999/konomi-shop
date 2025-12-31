@@ -1,9 +1,9 @@
 <script setup lang="ts">
-type Variant = "primary" | "secondary" | "accent";
+type Variant = "primary" | "secondary" | "accent" | "secondaryV1" | "tertiary";
 type Size = "sm" | "md" | "lg";
 
 interface Props {
-  label: string;
+  label?: string;
   to?: string;
   icon?: string;
   variant?: Variant;
@@ -16,16 +16,9 @@ const appConfig = useAppConfig();
 const props = withDefaults(defineProps<Props>(), {
   variant: "primary",
   size: "md",
-  icon: "arrowRight",
+  icon: "i-custom-chevron-double-right",
   disabled: false,
   to: undefined,
-});
-
-// Resolve icon from app config
-const resolvedIcon = computed(() => {
-  if (!props.icon) return undefined;
-  // If icon exists in app config, use it; otherwise return icon as-is (might be a full icon class)
-  return appConfig.ui.icons[props.icon as keyof typeof appConfig.ui.icons] || props.icon;
 });
 
 const emit = defineEmits<{
@@ -40,6 +33,10 @@ const variantClasses: Record<Variant, string> = {
     "bg-neutral-200 hover:bg-neutral-300 text-neutral-950 border-neutral-200 hover:border-neutral-300",
   accent:
     "bg-accent-400 hover:bg-accent-400/80 text-primary-850 border-primary-700 hover:text-primary-800",
+  secondaryV1:
+    "bg-neutral-100 hover:bg-neutral-200 text-neutral-850 border-neutral-100 hover:border-neutral-200",
+  tertiary:
+    "bg-primary-100 hover:bg-primary-150 border-primary-700 rounded-lg transition-colors",
 };
 
 // Size styles
@@ -61,12 +58,17 @@ const iconColorClasses: Record<Variant, string> = {
   primary: "text-accent-200", // Vàng
   secondary: "text-neutral-950", // Xám tối
   accent: "text-primary-800 hover:text-primary-800", // Xanh tối
+  secondaryV1: "text-neutral-850", // Nâu nhạt,
+  tertiary: "text-primary-625", // Xanh nhạt
 };
 
 const buttonClass = computed(() => {
+  // Only apply padding from sizeClasses when there's a label
+  const sizeClass = props.label ? sizeClasses[props.size] : 'gap-0 p-2';
+  
   return `
     relative
-    flex items-center justify-center gap-2 
+    flex items-center justify-center
     font-medium tracking-wider
     border
     transition-all duration-300 ease-out
@@ -74,8 +76,8 @@ const buttonClass = computed(() => {
     active:scale-95
     w-fit
     overflow-hidden
+    ${sizeClass}
     ${variantClasses[props.variant]}
-    ${sizeClasses[props.size]}
     ${
       props.disabled
         ? "opacity-50 cursor-not-allowed hover:scale-100"
@@ -83,18 +85,25 @@ const buttonClass = computed(() => {
     }
   `;
 });
+
+// Icon class - full size when no label, normal size when has label
+const iconClass = computed(() => {
+  if (!props.label) {
+    return "w-7 h-7";
+  }
+  return iconSizeClasses[props.size];
+});
 </script>
 
 <template>
-  <!-- If has 'to' prop, render as NuxtLink -->
   <NuxtLink
     v-if="props.to"
     :to="props.to"
     :class="buttonClass"
     :aria-disabled="disabled"
   >
-    <span>{{ label }}</span>
-    <UIcon v-if="resolvedIcon" :name="resolvedIcon" :class="iconColorClasses[props.variant]" />
+    <span v-if="label">{{ label }}</span>
+    <UIcon v-if="icon" :name="icon" :class="[iconColorClasses[props.variant], iconClass]" />
   </NuxtLink>
 
   <!-- Otherwise render as button -->
@@ -105,8 +114,8 @@ const buttonClass = computed(() => {
     :disabled="disabled"
     @click="emit('click', $event)"
   >
-    <span>{{ label }}</span>
-    <UIcon v-if="resolvedIcon" :name="resolvedIcon" :class="iconColorClasses[props.variant]" />
+    <span v-if="label">{{ label }}</span>
+    <UIcon v-if="icon" :name="icon" :class="[iconColorClasses[props.variant], iconClass]" />
   </button>
 </template>
 

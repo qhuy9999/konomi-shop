@@ -34,7 +34,7 @@ const handleSignUp = () => {
         <!-- thông tin liên hệ -->
         <div
           class="flex h-[515px] flex-col items-center justify-center flex-1 w-full px-10 py-20 border border-dotted border-p-600 gap-9"
-        >
+        > 
           <!-- tiêu đề -->
           <div>
             <h2 data-animate-sub-heading class="sub_heading">{{ $t('contact.mainHeading') }}</h2>
@@ -104,7 +104,7 @@ const handleSignUp = () => {
 
           <!-- hình decor -->
           <NuxtImg
-            src="/images/contact.jpg"
+            src="/images/contact-bg-1.jpg"
             alt="Contact us Konomi Shop"
             class="absolute inset-0 w-full h-full opacity-10 -z-10 object-cover"
           />

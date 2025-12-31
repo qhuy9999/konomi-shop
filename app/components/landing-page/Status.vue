@@ -75,7 +75,7 @@ const formatCounter = (counter: any) => {
       data-counter
     >
       <div v-for="(counter, idx) in counterValues" :key="idx" class="stats-item">
-        <h1 class="counter">{{ formatCounter(counter) }}</h1>
+        <h1>{{ formatCounter(counter) }}</h1>
         <h2>{{ counter.label }}</h2>
       </div>
 
@@ -124,7 +124,7 @@ const formatCounter = (counter: any) => {
   }
 
   h2 {
-    @apply mt-2 text-xs text-center lg:text-base text-accent-100;
+    @apply mt-2 text-xs text-accent-100 text-center lg:text-base;
   }
 }
 </style>

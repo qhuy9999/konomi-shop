@@ -86,7 +86,7 @@ const tabs = computed(() => [
                     :to="getProductLink('peppermintTea')"
                     variant="accent"
                     size="md"
-                    icon="i-lucide-arrow-right"
+                    icon="i-custom-chevron-double-right"
                     data-animate-button
                   />
                 </div>
