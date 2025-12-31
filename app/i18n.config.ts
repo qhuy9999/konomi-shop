@@ -236,7 +236,8 @@ export default defineI18nConfig(() => ({
         subtitle: 'Khám phá thế giới giải trí và tin tức tuyệt vời',
         comingSoon: 'Sắp ra mắt',
         game: {
-          title: 'Trò Chơi',
+          type: 'Trò Chơi',
+          title: 'Thế Giới Konomi',
           subtitle: 'Trải nghiệm thú vị với trò chơi nhập vai độc đáo',
           badge: 'Trò chơi mới',
           description: 'Trò chơi Konomi World là một trò chơi nhập vai hấp dẫn nơi bạn có thể hóa thân nhân vật chính để trải nghiệm thế giới nhiệm màu, huyền bí của riêng mình, giao dịch với người chơi khác và cạnh tranh để trở thành anh hùng đứng đầu bảng xếp hạng.',
@@ -281,9 +282,11 @@ export default defineI18nConfig(() => ({
           }
         },
         story: {
+          type: 'Câu Chuyện',
           title: 'Câu Chuyện'
         },
         news: {
+          type: 'Tin Tức',
           title: 'Tin Tức'
         }
       }
@@ -522,7 +525,8 @@ export default defineI18nConfig(() => ({
         subtitle: 'Discover an amazing world of entertainment and games',
         comingSoon: 'Coming Soon',
         game: {
-          title: 'Game',
+          type: 'Game',
+          title: 'Konomi World',
           subtitle: 'Experience an exciting role-playing game like no other',
           badge: 'New Game',
           description: 'Konomi World is an engaging role-playing game where you can embody the main character to experience your own magical, mysterious world, trade with other players, and compete to become the top hero on the leaderboard.',
@@ -567,9 +571,11 @@ export default defineI18nConfig(() => ({
           }
         },
         story: {
+          type: 'Story',
           title: 'Story'
         },
         news: {
+          type: 'News',
           title: 'News'
         }
       }
@@ -808,7 +814,8 @@ export default defineI18nConfig(() => ({
         subtitle: '素晴らしいエンターテインメントとゲームの世界を発見してください',
         comingSoon: '近日公開予定',
         game: {
-          title: 'ゲーム',
+          type: 'ゲーム',
+          title: 'コノミワールド',
           subtitle: '他に類を見ないエキサイティングなロールプレイングゲームを体験してください',
           badge: '新しいゲーム',
           description: 'Konomi Worldは魅力的なロールプレイングゲームで、主人公になりきって自分だけの魔法の神秘的な世界を体験し、他のプレイヤーと取引し、リーダーボードでトップヒーローになるために競い合うことができます。',
@@ -853,9 +860,11 @@ export default defineI18nConfig(() => ({
           }
         },
         story: {
+          type: 'ストーリー',
           title: 'ストーリー'
         },
         news: {
+          type: 'ニュース',
           title: 'ニュース'
         }
       }
@@ -1094,7 +1103,8 @@ export default defineI18nConfig(() => ({
         subtitle: 'Entdecken Sie eine erstaunliche Welt der Unterhaltung und Spiele',
         comingSoon: 'Demnächst verfügbar',
         game: {
-          title: 'Spiel',
+          type: 'Spiel',
+          title: 'Konomi World',
           subtitle: 'Erleben Sie ein aufregendes Rollenspiel wie kein anderes',
           badge: 'Neues Spiel',
           description: 'Konomi World ist ein fesselndes Rollenspiel, in dem Sie die Hauptfigur verkörpern können, um Ihre eigene magische, mysteriöse Welt zu erleben, mit anderen Spielern zu handeln und zu konkurrieren, um der Top-Held auf der Bestenliste zu werden.',
@@ -1139,9 +1149,11 @@ export default defineI18nConfig(() => ({
           }
         },
         story: {
+          type: 'Geschichte',
           title: 'Geschichte'
         },
         news: {
+          type: 'Nachrichten',
           title: 'Nachrichten'
         }
       }

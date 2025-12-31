@@ -9,16 +9,19 @@ const { t, locale } = useI18n();
 const sections = [
   {
     id: "game",
+    type: "entertainment.game.type",
     title: "entertainment.game.title",
     icon: "i-custom-controller",
   },
   {
     id: "news",
+    type: "entertainment.news.type",
     title: "entertainment.news.title",
     icon: "i-custom-newspaper",
   },
   {
     id: "story",
+    type: "entertainment.story.type",
     title: "entertainment.story.title",
     icon: "i-custom-file-earmark-text-fill",
   },
@@ -67,7 +70,7 @@ const selectSection = (sectionId: string) => {
             ]"
           >
             <UIcon :name="section.icon" class="w-5 h-5" />
-            <span class="hidden md:inline">{{ t(section.title) }}</span>
+            <span class="hidden md:inline">{{ t(section.type) }}</span>
           </button>
         </UTooltip>
       </div>

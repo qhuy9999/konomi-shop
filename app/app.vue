@@ -1,6 +1,18 @@
 <template>
   <UApp>
-      <!-- Toast Notifications -->
+    <!-- Preload common icons in hidden div -->
+    <div class="hidden">
+      <UIcon name="i-lucide-menu" />
+      <UIcon name="i-lucide-x" />
+      <UIcon name="i-lucide-chevron-down" />
+      <UIcon name="i-lucide-user" />
+      <UIcon name="i-lucide-languages" />
+      <UIcon name="i-custom-controller" />
+      <UIcon name="i-custom-chevron-double-right" />
+      <UIcon name="i-custom-chevron-double-left" />
+    </div>
+
+    <!-- Toast Notifications -->
     <ToastNotification />
 
     <!-- OTP Verification Modal: Lazy loaded (only shown conditionally) -->

@@ -1,12 +1,13 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
-  devtools: { enabled: true },  // ✅ Keep this for Nuxt DevTools
-  modules: ["@pinia/nuxt", "@nuxt/ui", "@nuxt/image", "@nuxtjs/i18n"],
+  devtools: { enabled: true },
+  modules: ["@pinia/nuxt", "@nuxt/ui", "@nuxt/image", "@nuxtjs/i18n", "@nuxt/icon"],
   css: ["@/assets/css/main.css"],
 
   icon: {
     mode: "svg",
+    size: "1em",
     customCollections: [
       {
         prefix: "custom",
@@ -61,7 +62,9 @@ export default defineNuxtConfig({
           content: "https://cdn.example.com/og-image.png",
         },
       ],
-      link: [{ rel: "canonical", href: "https://example.com/page-demo" }],
+      link: [
+        { rel: "canonical", href: "https://example.com/page-demo" },
+      ],
     },
   },
 

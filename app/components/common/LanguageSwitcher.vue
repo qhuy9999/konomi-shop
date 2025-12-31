@@ -69,7 +69,7 @@ const selectLanguage = (code: LanguageCode) => {
     <UTooltip :delay-duration="0" :text="$t('common.languages') || 'Languages'" :shortcuts="[]" :popper="{ placement: 'bottom' }">
       <Button
         variant="tertiary"
-        class="language-button border-primary-700 md:hidden absolute left-0 w-max"
+        class="language-button border-primary-700 relative"
         @click="isOpen = !isOpen"
         icon="i-lucide-languages"
         size="lg"
@@ -86,7 +86,7 @@ const selectLanguage = (code: LanguageCode) => {
     >
       <div
         v-if="isOpen"
-        class="absolute left-5 right-3 md:top-full md:right-0 md:bottom-auto md:mt-2 w-max bg-neutral-100 border border-primary-700 rounded-md z-50 overflow-hidden"
+        class="absolute top-full right-0 mt-2 w-max bg-neutral-100 border border-primary-700 rounded-md z-50 overflow-hidden"
       >
         <button
           v-for="lang in languages"
