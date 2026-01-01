@@ -16,7 +16,8 @@ export default defineI18nConfig(() => ({
         addToCart: 'Thêm vào giỏ',
         processing: 'Đang xử lý...',
         backToFirstPage: 'Quay về trang đầu tiên',
-        entertainment: 'Giải Trí-Tin Tức-Chia Sẻ'
+        entertainment: 'Giải Trí-Tin Tức-Chia Sẻ',
+        all: 'Tất cả'
       },
       nav: {
         home: 'Trang Chủ',
@@ -305,7 +306,8 @@ export default defineI18nConfig(() => ({
         addToCart: 'Add to Cart',
         processing: 'Processing...',
         backToFirstPage: 'Back to First Page',
-        entertainment: 'Entertainment-News-Sharing'
+        entertainment: 'Entertainment-News-Sharing',
+        all: 'All'
       },
       nav: {
         home: 'Home',
@@ -594,7 +596,8 @@ export default defineI18nConfig(() => ({
         addToCart: 'カートに追加',
         processing: '処理中...',
         backToFirstPage: '最初のページに戻る',
-        entertainment: 'エンターテインメント-ニュース-共有'
+        entertainment: 'エンターテインメント-ニュース-共有',
+        all: 'すべて'
       },
       nav: {
         home: 'ホーム',
@@ -883,7 +886,8 @@ export default defineI18nConfig(() => ({
         addToCart: 'In den Warenkorb',
         processing: 'Wird bearbeitet...',
         backToFirstPage: 'Zurück zur ersten Seite',
-        entertainment: 'Unterhaltung - Nachrichten - Gemeinschaft'
+        entertainment: 'Unterhaltung - Nachrichten - Gemeinschaft',
+        all: 'Alle'
       },
       nav: {
         home: 'Startseite',

@@ -40,14 +40,13 @@ const handleTabClick = (tabId: string) => {
           `variant-${variant}`,
         ]"
         @click="handleTabClick(tab.id)"
-        :title="tab.label"
       >
         <UIcon v-if="tab.icon" :name="tab.icon" class="w-5 h-5" />
-        <span class="hidden md:inline truncate">{{ tab.label }}</span>
-        <span v-if="tab.labelShort" class="md:hidden truncate">{{
+        <span class="hidden md:inline truncate" :title="tab.label">{{ tab.label }}</span>
+        <span v-if="tab.labelShort" class="md:hidden truncate" :title="tab.label">{{
           tab.labelShort
         }}</span>
-        <span v-else class="md:hidden truncate">{{ tab.label }}</span>
+        <span v-else class="md:hidden truncate" :title="tab.label">{{ tab.label }}</span>
       </button>
     </div>
     <!-- Divider -->
@@ -68,7 +67,11 @@ const handleTabClick = (tabId: string) => {
 
 @media (max-width: 412px) {
   .tabs-nav {
-    @apply max-w-70 mx-auto h-23;
+    @apply gap-1 px-1;
+  }
+  
+  .tab-button {
+    @apply flex-1 min-w-0 px-1;
   }
 }
 
@@ -81,12 +84,11 @@ const handleTabClick = (tabId: string) => {
   @apply cursor-pointer hover:bg-primary-700;
   @apply border-0;
   @apply py-1.5 md:py-3;
-  flex-shrink: 0; /* Prevent shrinking below content size */
 
   /* Active state */
   &.active {
     @apply bg-primary-675 shadow-md text-accent-175;
-    @apply hover:bg-primary-700 ring-2 ring-offset-3 ring-primary-525;
+    @apply hover:bg-primary-700 ring-2 ring-offset-1 ring-primary-525;
   }
 
   /* Variant: underline */

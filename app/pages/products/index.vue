@@ -157,6 +157,11 @@ const createShortLabel = (fullLabel: string): string => {
 
 const filters: FilterTab[] = [
   {
+    label: t("common.all"),
+    labelShort: t("common.all"),
+    value: "",
+  },
+  {
     label: t("product.tabs.peppermintTea"),
     labelShort: "",
     value: "peppermintTea",
@@ -196,7 +201,7 @@ const getLocalePrefix = (): string => {
 // Computed - Transform filters to ButtonTab format
 const filterTabs = computed(() =>
   filters.map((f) => ({
-    id: f.value || "all",
+    id: f.value || "all", // Giữ nguyên logic này để map empty string thành "all"
     label: f.label,
     labelShort: f.labelShort,
   }))
@@ -204,10 +209,13 @@ const filterTabs = computed(() =>
 
 // Computed - Filtered products by category
 const filteredProducts = computed(() => {
-  if (!activeCategory.value) return productsByCategory;
-  return productsByCategory.filter(
+  if (!activeCategory.value) {
+    return productsByCategory;
+  }
+  const filtered = productsByCategory.filter(
     (item) => item.category === activeCategory.value
   );
+  return filtered.length > 0 ? filtered : productsByCategory;
 });
 
 onMounted(() => {
@@ -258,7 +266,7 @@ watch(
 </script>
 
 <template>
-  <section id="products">
+  <section id="product-list">
     <main class="container py-0">
       <!-- banner -->
       <NuxtImg
