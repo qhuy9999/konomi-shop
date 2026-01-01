@@ -77,7 +77,7 @@ const selectSection = (sectionId: string) => {
     </div>
 
     <!-- Content -->
-    <div class="container py-12">
+    <div class="container py-0">
       <!-- Game Section -->
       <section v-if="activeSection === 'game'">
         <EntertainmentGame />
