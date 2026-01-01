@@ -53,7 +53,7 @@ const selectSection = (sectionId: string) => {
 
     <!-- Section Navigation -->
     <div class="container py-8">
-      <div class="flex gap-4 overflow-x-auto pb-4 md:pb-0">
+      <div class="flex gap-4 overflow-x-auto md:pb-0">
         <UTooltip
           v-for="section in sections"
           :key="section.id"
@@ -111,7 +111,7 @@ const selectSection = (sectionId: string) => {
         </div>
       </section>
     </div>
-    <div class="flex justify-center mb-6 md:my-12">
+    <div class="flex justify-center my-6 md:my-12">
       <Button
         :label="$t('common.backToFirstPage')"
         :to="`${locale === 'vi' ? '' : `/${locale}`}/`"
