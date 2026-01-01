@@ -119,6 +119,38 @@ watch(
   }
 );
 
+// Watch hash changes to scroll to correct section
+watch(
+  () => route.hash,
+  (newHash) => {
+    if (newHash) {
+      // Scroll to section with offset for header
+      nextTick(() => {
+        const targetId = newHash.replace("#", "");
+        const element = document.getElementById(targetId);
+
+        if (element) {
+          const headerHeight = 80;
+          const elementPosition =
+            element.getBoundingClientRect().top + window.scrollY;
+          window.scrollTo({
+            top: elementPosition - headerHeight,
+            behavior: "smooth",
+          });
+
+          // Keep skip flag active during scroll
+          skipObserverUpdate.value = true;
+
+          // Clear skip flag after scroll completes
+          setTimeout(() => {
+            skipObserverUpdate.value = false;
+          }, 500);
+        }
+      });
+    }
+  }
+);
+
 // Handle home click - navigate to home and scroll to top
 const handleHomeClick = (e: MouseEvent) => {
   e.preventDefault();
