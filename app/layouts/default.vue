@@ -19,6 +19,7 @@ const currentUser = computed(() => authStore.currentUser);
 // Mobile menu state
 const mobileMenuOpen = ref(false);
 const userMenuOpen = ref(false);
+const skipObserverUpdate = ref(false); // Skip observer hash updates
 
 // Navigation links - include locale prefix
 const navLinks = computed(() => {
@@ -61,12 +62,27 @@ const observeSections = () => {
 
   observer = new IntersectionObserver(
     (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          // Update URL hash to match scrolled section
-          router.push({ hash: `#${entry.target.id}` }).catch(() => {});
+      // Skip observer updates when navigating to home
+      if (skipObserverUpdate.value) {
+        return;
+      }
+
+      // Find the section closest to the top that is intersecting
+      const intersectingEntries = entries.filter(
+        (entry) => entry.isIntersecting
+      );
+
+      if (intersectingEntries.length > 0) {
+        // Sort by distance from top - pick the one closest to top
+        const topSection = intersectingEntries.sort(
+          (a, b) =>
+            a.boundingClientRect.top - b.boundingClientRect.top
+        )[0];
+
+        if (topSection) {
+          router.push({ hash: `#${topSection.target.id}` }).catch(() => {});
         }
-      });
+      }
     },
     { threshold: 0.3 }
   );
@@ -109,6 +125,9 @@ const handleHomeClick = (e: MouseEvent) => {
   const localePrefix = locale.value === "vi" ? "" : `/${locale.value}`;
   const homePath = `${localePrefix}/`;
 
+  // Set skip flag to prevent observer auto-hash update
+  skipObserverUpdate.value = true;
+
   // Navigate to home first
   router
     .push(homePath)
@@ -116,11 +135,21 @@ const handleHomeClick = (e: MouseEvent) => {
       // After navigation, scroll to top smoothly
       nextTick(() => {
         window.scrollTo({ top: 0, behavior: "smooth" });
+
+        // Clear skip flag after scroll completes
+        setTimeout(() => {
+          skipObserverUpdate.value = false;
+        }, 500);
       });
     })
     .catch(() => {
       // If already on home page, just scroll
       window.scrollTo({ top: 0, behavior: "smooth" });
+
+      // Clear skip flag after scroll completes
+      setTimeout(() => {
+        skipObserverUpdate.value = false;
+      }, 500);
     });
 };
 
