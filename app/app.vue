@@ -1,12 +1,16 @@
 <template>
   <UApp>
-    <!-- Preload common icons in hidden div -->
-    <div class="hidden">
+    <!-- Preload common icons - hidden but rendered for caching -->
+    <div class="sr-only" aria-hidden="true">
       <UIcon name="i-lucide-menu" />
       <UIcon name="i-lucide-x" />
       <UIcon name="i-lucide-chevron-down" />
       <UIcon name="i-lucide-user" />
       <UIcon name="i-lucide-languages" />
+      <UIcon name="i-lucide-check" />
+      <UIcon name="i-lucide-shopping-bag" />
+      <UIcon name="i-lucide-settings" />
+      <UIcon name="i-lucide-log-out" />
       <UIcon name="i-custom-controller" />
       <UIcon name="i-custom-chevron-double-right" />
       <UIcon name="i-custom-chevron-double-left" />
