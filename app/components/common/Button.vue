@@ -103,7 +103,9 @@ const iconClass = computed(() => {
     :aria-disabled="disabled"
   >
     <span v-if="label">{{ label }}</span>
-    <UIcon v-if="icon" :name="icon" :class="[iconColorClasses[props.variant], iconClass]" />
+    <ClientOnly> 
+      <UIcon v-if="icon" :name="icon" :class="[iconColorClasses[props.variant], iconClass]" />
+    </ClientOnly>
   </NuxtLink>
 
   <!-- Otherwise render as button -->
@@ -115,7 +117,9 @@ const iconClass = computed(() => {
     @click="emit('click', $event)"
   >
     <span v-if="label">{{ label }}</span>
-    <UIcon v-if="icon" :name="icon" :class="[iconColorClasses[props.variant], iconClass]" />
+    <ClientOnly> 
+      <UIcon v-if="icon" :name="icon" :class="[iconColorClasses[props.variant], iconClass]" />
+    </ClientOnly>
   </button>
 </template>
 

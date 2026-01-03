@@ -41,7 +41,9 @@ const handleTabClick = (tabId: string) => {
         ]"
         @click="handleTabClick(tab.id)"
       >
-        <i v-if="tab.icon" :class="[tab.icon, 'w-5 h-5']" />
+        <ClientOnly> 
+          <UIcon v-if="tab.icon" :name="tab.icon" class="w-5 h-5" />
+        </ClientOnly>
         <span class="hidden md:inline truncate" :title="tab.label">{{ tab.label }}</span>
         <span v-if="tab.labelShort" class="md:hidden truncate" :title="tab.label">{{
           tab.labelShort
