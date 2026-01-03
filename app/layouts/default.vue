@@ -566,25 +566,25 @@ const handleLogout = async () => {
                 <a
                   href="tel:+84123456789"
                   class="text-primary-600 hover:text-neutral-700"
-                  >{{ $t("footer.hotline") }}: +84 (0)123 456 789</a
+                  >{{ $t("footer.hotline") }}: {{ $t('contact.phone') }}</a
                 >
               </li>
               <li>
                 <a
                   href="mailto:konomi@email.com"
                   class="text-primary-600 hover:text-neutral-700"
-                  >{{ $t("footer.email") }}: konomi@email.com</a
+                  >{{ $t("footer.email") }}: {{ $t('contact.email') }}</a
                 >
               </li>
               <li>
                 <a href="#" class="text-primary-600 hover:text-neutral-700"
-                  >{{ $t("footer.office") }}: 123 ABC Street, IOP City</a
+                  >{{ $t("footer.office") }}: {{ $t('contact.address') }}</a
                 >
               </li>
               <li>
-                <a href="#" class="text-primary-600 hover:text-neutral-700"
-                  >{{ $t("footer.hours") }}: 8:00 - 22:00</a
-                >
+                <p class="text-primary-600">
+                  {{ $t("footer.hours") }}: {{ $t('contact.hours') }}
+                </p>
               </li>
             </ul>
           </div>

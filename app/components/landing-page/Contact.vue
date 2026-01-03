@@ -45,7 +45,7 @@ const handleSignUp = () => {
           <div data-animate-description class="contact-info">
             <div>
               <UIcon name="i-lucide-building-2" class="w-4 h-4 text-accent-100" />
-              <h1>{{ $t('common.home') }}</h1>
+              <h1>{{ $t('footer.address') }}</h1>
             </div>
 
             <p>{{ $t('contact.address') }}</p>
@@ -55,10 +55,10 @@ const handleSignUp = () => {
           <div data-animate-description class="contact-info">
             <div>
               <UIcon name="i-lucide-mail" class="w-4 h-4 text-accent-100" />
-              <h1>{{ $t('common.account') }}</h1>
+              <h1>{{ $t('footer.email') }}</h1>
             </div>
 
-            <p>konomi@email.com</p>
+            <p>{{ $t('contact.email') }}</p>
           </div>
 
           <!-- số điện thoại -->

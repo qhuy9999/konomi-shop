@@ -28,6 +28,7 @@ export default defineI18nConfig(() => ({
       footer: {
         contact: 'Liên hệ',
         hotline: 'Hotline',
+        address: 'Địa chỉ',
         email: 'Email',
         office: 'Văn phòng',
         hours: 'Giờ làm việc',
@@ -223,8 +224,10 @@ export default defineI18nConfig(() => ({
       contact: {
         mainHeading: 'Có câu hỏi?',
         subheading: 'Liên hệ Konomi Tea tại',
-        address: '123 Tea Lane, Quận Premium, Thành phố Espresso',
+        email: 'konomi@support.vn',
+        address: '123 Konomi Shop, Quận Premium, Thành phố Espresso',
         phone: '(+0) 123 456 789',
+        hours: '8:00 - 22:00',
         community: {
           title: 'Tham gia cộng đồng',
           subtitle: 'Thành Viên Konomi Tea',
@@ -318,6 +321,7 @@ export default defineI18nConfig(() => ({
       footer: {
         contact: 'Contact',
         hotline: 'Hotline',
+        address: 'Address',
         email: 'Email',
         office: 'Office Address',
         hours: 'Business Hours',
@@ -513,8 +517,10 @@ export default defineI18nConfig(() => ({
       contact: {
         mainHeading: 'Have Questions?',
         subheading: 'Contact Konomi Tea at',
-        address: '123 Tea Lane, Premium District, Espresso City',
+        email: 'konomi@support.com',
+        address: '123 Konomi Shop, Premium District, Espresso City',
         phone: '(+0) 123 456 789',
+        hours: '8:00 AM - 10:00 PM',
         community: {
           title: 'Join Our Community',
           subtitle: 'Konomi Tea Member',
@@ -608,6 +614,7 @@ export default defineI18nConfig(() => ({
       footer: {
         contact: 'お問い合わせ',
         hotline: 'ホットライン',
+        address: '住所',
         email: 'メール',
         office: '事務所',
         hours: '営業時間',
@@ -803,8 +810,10 @@ export default defineI18nConfig(() => ({
       contact: {
         mainHeading: 'ご質問はありますか？',
         subheading: 'コノミお茶にお問い合わせください',
-        address: '123 Tea Lane、プレミアム地区、エスプレッソ市',
+        email: 'konomi@support.jp',
+        address: 'エスプレッソ市 プレミアム区 コノミショップ123',
         phone: '(+0) 123 456 789',
+        hours: '午前8時〜午後10時',
         community: {
           title: 'コミュニティに参加',
           subtitle: 'コノミお茶メンバー',
@@ -898,6 +907,7 @@ export default defineI18nConfig(() => ({
       footer: {
         contact: 'Kontakt',
         hotline: 'Hotline',
+        address: 'Adresse',
         email: 'E-Mail',
         office: 'Büro',
         hours: 'Geschäftszeiten',
@@ -1093,8 +1103,10 @@ export default defineI18nConfig(() => ({
       contact: {
         mainHeading: 'Haben Sie Fragen?',
         subheading: 'Kontaktieren Sie Konomi Tea unter',
-        address: '123 Tea Lane, Premiumviertel, Espresso-Stadt',
+        email: 'konomi@support.de',
+        address: '123 Konomi Shop, Premiumviertel, Espresso-Stadt',
         phone: '(+0) 123 456 789',
+        hours: '8:00 - 22:00 Uhr',
         community: {
           title: 'Treten Sie unserer Gemeinschaft bei',
           subtitle: 'Konomi Tea Mitglied',
