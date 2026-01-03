@@ -288,7 +288,7 @@ watch(
         </div>
         <p
           data-animate="description"
-          class="max-w-lg mt-2 text-xs text-neutral-950"
+          class="mt-2 text-md"
         >
           {{ $t("product.featured.description") }}
         </p>
