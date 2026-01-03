@@ -88,6 +88,7 @@ const tabs = computed(() => [
                     size="md"
                     icon="i-custom-chevron-double-right"
                     data-animate-button
+                    class="mt-2"
                   />
                 </div>
               </div>
@@ -118,8 +119,9 @@ const tabs = computed(() => [
                     :to="getProductLink('chamomileTea')"
                     variant="accent"
                     size="md"
-                    icon="i-lucide-arrow-right"
+                    icon="i-custom-chevron-double-right"
                     data-animate-button
+                    class="mt-2"
                   />
                 </div>
               </div>
@@ -151,8 +153,9 @@ const tabs = computed(() => [
                     :to="getProductLink('lemonGinger')"
                     variant="accent"
                     size="md"
-                    icon="i-lucide-arrow-right"
+                    icon="i-custom-chevron-double-right"
                     data-animate-button
+                    class="mt-2"
                   />
                 </div>
               </div>
@@ -184,8 +187,9 @@ const tabs = computed(() => [
                     :to="getProductLink('earlGrey')"
                     variant="accent"
                     size="md"
-                    icon="i-lucide-arrow-right"
+                    icon="i-custom-chevron-double-right"
                     data-animate-button
+                    class="mt-2"
                   />
                 </div>
               </div>

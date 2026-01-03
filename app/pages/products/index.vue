@@ -277,7 +277,7 @@ watch(
       />
 
       <!-- tiêu đề -->
-      <div class="mt-4 md:mt-9">
+      <div class="my-6 md:mt-9">
         <div>
           <h2 class="sub_heading" data-animate="subHeading">
             {{ $t("product.subheading") }}
@@ -288,7 +288,7 @@ watch(
         </div>
         <p
           data-animate="description"
-          class="max-w-lg mt-2 text-xs text-neutral-500"
+          class="max-w-lg mt-2 text-xs text-neutral-950"
         >
           {{ $t("product.featured.description") }}
         </p>
