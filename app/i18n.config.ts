@@ -224,7 +224,7 @@ export default defineI18nConfig(() => ({
       contact: {
         mainHeading: 'Có câu hỏi?',
         subheading: 'Liên hệ Konomi Tea tại',
-        email: 'konomi@support.vn',
+        email: 'konomi-email',
         address: '123 Konomi Shop, Quận Premium, Thành phố Espresso',
         phone: '(+0) 123 456 789',
         hours: '8:00 - 22:00',
@@ -517,7 +517,7 @@ export default defineI18nConfig(() => ({
       contact: {
         mainHeading: 'Have Questions?',
         subheading: 'Contact Konomi Tea at',
-        email: 'konomi@support.com',
+        email: 'konomi-email',
         address: '123 Konomi Shop, Premium District, Espresso City',
         phone: '(+0) 123 456 789',
         hours: '8:00 AM - 10:00 PM',
@@ -810,7 +810,7 @@ export default defineI18nConfig(() => ({
       contact: {
         mainHeading: 'ご質問はありますか？',
         subheading: 'コノミお茶にお問い合わせください',
-        email: 'konomi@support.jp',
+        email: 'konomi-email',
         address: 'エスプレッソ市 プレミアム区 コノミショップ123',
         phone: '(+0) 123 456 789',
         hours: '午前8時〜午後10時',
@@ -1103,7 +1103,7 @@ export default defineI18nConfig(() => ({
       contact: {
         mainHeading: 'Haben Sie Fragen?',
         subheading: 'Kontaktieren Sie Konomi Tea unter',
-        email: 'konomi@support.de',
+        email: 'konomi-email',
         address: '123 Konomi Shop, Premiumviertel, Espresso-Stadt',
         phone: '(+0) 123 456 789',
         hours: '8:00 - 22:00 Uhr',
